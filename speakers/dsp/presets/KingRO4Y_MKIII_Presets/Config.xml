@@ -1,0 +1,4044 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="495">
+  <sheetsize width="1500" height="1500"/>
+  <microphonecorrectionenabled value="false"/>
+  <selectedgroupid value="3"/>
+  <device productnr="22" buildnr="4" procsamplingrate="93750" selectedpreset="1" gainlowered="false" fusionamp="0">
+    <preset index="1">
+      <processobj id="8" title="NC502MP ch1" processtype="ptImpulse" groupid="1" posx="100" posy="70" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="9" title="" connectedTo="10"/>
+        </sinks>
+        <filename value=""/>
+        <options>
+          <meassamplingrate value="48000"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.125"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="L26RO4Y"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="true"/>
+      </processobj>
+      <processobj id="61" title="NC502MP ch2" processtype="ptImpulse" groupid="2" posx="100" posy="185" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="62" title="" connectedTo="63"/>
+        </sinks>
+        <filename value=""/>
+        <options>
+          <meassamplingrate value="48000"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.125"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="C18EN002/A Midrange"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="true"/>
+      </processobj>
+      <processobj id="114" title="NC100HF" processtype="ptImpulse" groupid="3" posx="100" posy="300" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="115" title="" connectedTo="116"/>
+        </sinks>
+        <filename value=""/>
+        <options>
+          <meassamplingrate value="44100"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.125"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="C18EN002/A Tweeter"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="true"/>
+      </processobj>
+      <processobj id="0" title="Input 1" processtype="ptIO" groupid="-1" posx="0" posy="170" enabled="false">
+        <sources count="0"/>
+        <sinks count="3">
+          <sink id="673" title="" connectedTo="10"/>
+          <sink id="674" title="" connectedTo="63"/>
+          <sink id="675" title="" connectedTo="116"/>
+        </sinks>
+      </processobj>
+      <processobj id="4" title="Output 1" processtype="ptIO" groupid="-1" posx="1050" posy="170" enabled="false">
+        <sources count="3">
+          <source id="5" title="" connectedTo="58"/>
+          <source id="6" title="" connectedTo="111"/>
+          <source id="7" title="" connectedTo="164"/>
+        </sources>
+        <sinks count="0"/>
+      </processobj>
+      <processobj id="10" title="BQ 1" processtype="ptBiQuad" groupid="1" posx="150" posy="100" enabled="true">
+        <sources count="1">
+          <source id="11" title="" connectedTo="0"/>
+        </sources>
+        <sinks count="1">
+          <sink id="12" title="" connectedTo="13"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="35.3320693969727"/>
+        <f2 value="86.8966522216797"/>
+        <gain value="-1.13"/>
+        <q1 value="4.4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999962617741355"/>
+        <b0 value="0.999962617741355"/>
+        <b1 value="-1.99938161796504"/>
+        <b2 value="0.999424605822815"/>
+        <a1 value="1.99938163229975"/>
+        <a2 value="-0.999387237898877"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="13" title="BQ 2" processtype="ptBiQuad" groupid="1" posx="200" posy="100" enabled="true">
+        <sources count="1">
+          <source id="14" title="" connectedTo="10"/>
+        </sources>
+        <sinks count="1">
+          <sink id="15" title="" connectedTo="16"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="62.5871238708496"/>
+        <f2 value="101.152503967285"/>
+        <gain value="2.69"/>
+        <q1 value="3.48"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00021875140042"/>
+        <b0 value="1.00021875140042"/>
+        <b1 value="-1.9987779961046"/>
+        <b2 value="0.998576828993595"/>
+        <a1 value="1.99877778860913"/>
+        <a2 value="-0.998795372898553"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="16" title="BQ 3" processtype="ptBiQuad" groupid="1" posx="250" posy="100" enabled="true">
+        <sources count="1">
+          <source id="17" title="" connectedTo="13"/>
+        </sources>
+        <sinks count="1">
+          <sink id="18" title="" connectedTo="19"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="174.413284301758"/>
+        <f2 value="98.9934005737305"/>
+        <gain value="1.89"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00070984092826"/>
+        <b0 value="1.00070984092826"/>
+        <b1 value="-1.99403925587124"/>
+        <b2 value="0.993465654376244"/>
+        <a1 value="1.99403616202394"/>
+        <a2 value="-0.994172401457304"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="19" title="BQ 4" processtype="ptBiQuad" groupid="1" posx="300" posy="100" enabled="true">
+        <sources count="1">
+          <source id="20" title="" connectedTo="16"/>
+        </sources>
+        <sinks count="1">
+          <sink id="21" title="" connectedTo="22"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="17"/>
+        <f2 value="19.8780975341797"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999186511174334"/>
+        <b0 value="0.999186511174334"/>
+        <b1 value="-1.99837302234867"/>
+        <b2 value="0.999186511174334"/>
+        <a1 value="1.99837238263603"/>
+        <a2 value="-0.998373679700577"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="22" title="BQ 5" processtype="ptBiQuad" groupid="1" posx="350" posy="100" enabled="true">
+        <sources count="1">
+          <source id="23" title="" connectedTo="19"/>
+        </sources>
+        <sinks count="1">
+          <sink id="24" title="" connectedTo="25"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="27.4199562072754"/>
+        <f2 value="80.963264465332"/>
+        <gain value="4.24"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00057816367173"/>
+        <b0 value="1.00057816367173"/>
+        <b1 value="-1.99816154042387"/>
+        <b2 value="0.997586750802678"/>
+        <a1 value="1.99816061038828"/>
+        <a2 value="-0.998163984438829"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="25" title="BQ 6" processtype="ptBiQuad" groupid="1" posx="400" posy="100" enabled="false">
+        <sources count="1">
+          <source id="26" title="" connectedTo="22"/>
+        </sources>
+        <sinks count="1">
+          <sink id="27" title="" connectedTo="28"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="136.899993896484"/>
+        <f2 value="99.5288162231445"/>
+        <gain value="-3"/>
+        <q1 value="0.5"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="28" title="BQ 7" processtype="ptBiQuad" groupid="1" posx="450" posy="100" enabled="true">
+        <sources count="1">
+          <source id="29" title="" connectedTo="25"/>
+        </sources>
+        <sinks count="1">
+          <sink id="30" title="" connectedTo="31"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="51.819580078125"/>
+        <f2 value="65.4000015258789"/>
+        <gain value="-3.45"/>
+        <q1 value="2"/>
+        <q2 value="0.1"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999576844519581"/>
+        <b0 value="0.999576844519581"/>
+        <b1 value="-1.99740739321623"/>
+        <b2 value="0.997842594719795"/>
+        <a1 value="1.99740800181655"/>
+        <a2 value="-0.997420047839703"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="31" title="BQ 8" processtype="ptBiQuad" groupid="1" posx="500" posy="100" enabled="true">
+        <sources count="1">
+          <source id="32" title="" connectedTo="28"/>
+        </sources>
+        <sinks count="1">
+          <sink id="33" title="" connectedTo="34"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="58.3486976623535"/>
+        <f2 value="146.950820922852"/>
+        <gain value="-0.68"/>
+        <q1 value="4.08"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999960981159199"/>
+        <b0 value="0.999960981159199"/>
+        <b1 value="-1.99894870192733"/>
+        <b2 value="0.999003005362074"/>
+        <a1 value="1.99894872785453"/>
+        <a2 value="-0.998964012448474"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="34" title="BQ 9" processtype="ptBiQuad" groupid="1" posx="550" posy="100" enabled="true">
+        <sources count="1">
+          <source id="35" title="" connectedTo="31"/>
+        </sources>
+        <sinks count="1">
+          <sink id="36" title="" connectedTo="37"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="53"/>
+        <f2 value="598.529052734375"/>
+        <gain value="5.25"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00026999741825"/>
+        <b0 value="1.00026999741825"/>
+        <b1 value="-1.99845875537783"/>
+        <b2 value="0.998205814346977"/>
+        <a1 value="1.99846487949158"/>
+        <a2 value="-0.99847419887224"/>
+        <shelfhl value="stLowShelf"/>
+      </processobj>
+      <processobj id="37" title="BQ 10" processtype="ptBiQuad" groupid="1" posx="600" posy="100" enabled="true">
+        <sources count="1">
+          <source id="38" title="" connectedTo="34"/>
+        </sources>
+        <sinks count="1">
+          <sink id="39" title="" connectedTo="40"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="46.5202293395996"/>
+        <f2 value="44.3157806396484"/>
+        <gain value="-0.84"/>
+        <q1 value="4.24"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999962672860851"/>
+        <b0 value="0.999962672860851"/>
+        <b1 value="-1.99918059272974"/>
+        <b2 value="0.999227636699883"/>
+        <a1 value="1.99918061194377"/>
+        <a2 value="-0.999190328774763"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="40" title="BQ 11" processtype="ptBiQuad" groupid="1" posx="650" posy="100" enabled="true">
+        <sources count="1">
+          <source id="41" title="" connectedTo="37"/>
+        </sources>
+        <sinks count="1">
+          <sink id="42" title="" connectedTo="43"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="17.2561817169189"/>
+        <f2 value="17.2561817169189"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="43" title="BQ 12" processtype="ptBiQuad" groupid="1" posx="700" posy="100" enabled="true">
+        <sources count="1">
+          <source id="44" title="" connectedTo="40"/>
+        </sources>
+        <sinks count="1">
+          <sink id="45" title="" connectedTo="46"/>
+        </sinks>
+        <filtertype value="ftLowPass1"/>
+        <f1 value="215"/>
+        <f2 value="524.859436035156"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="1"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1350.88484104361"/>
+        <zconst value="0.0142954117585464"/>
+        <b0 value="0.0142954117585464"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0.985693880799583"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="46" title="BQ 13" processtype="ptBiQuad" groupid="1" posx="750" posy="100" enabled="true">
+        <sources count="1">
+          <source id="47" title="" connectedTo="43"/>
+        </sources>
+        <sinks count="1">
+          <sink id="48" title="" connectedTo="49"/>
+        </sinks>
+        <filtertype value="ftLowPass2"/>
+        <f1 value="215"/>
+        <f2 value="136.916870117188"/>
+        <gain value="0"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1824889.85376142"/>
+        <zconst value="0.000205831114773068"/>
+        <b0 value="0.000205831114773068"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="1.98548774122438"/>
+        <a2 value="-0.985693880799583"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="49" title="BQ 14" processtype="ptBiQuad" groupid="1" posx="800" posy="100" enabled="false">
+        <sources count="1">
+          <source id="50" title="" connectedTo="46"/>
+        </sources>
+        <sinks count="1">
+          <sink id="51" title="" connectedTo="52"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="1000"/>
+        <f2 value="1000"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="52" title="BQ 15" processtype="ptBiQuad" groupid="1" posx="850" posy="100" enabled="false">
+        <sources count="1">
+          <source id="53" title="" connectedTo="49"/>
+        </sources>
+        <sinks count="1">
+          <sink id="54" title="" connectedTo="55"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="1000"/>
+        <f2 value="1000"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="55" title="Delay 1" processtype="ptDelay" groupid="1" posx="900" posy="100" enabled="true">
+        <sources count="1">
+          <source id="57" title="" connectedTo="52"/>
+        </sources>
+        <sinks count="1">
+          <sink id="56" title="" connectedTo="58"/>
+        </sinks>
+        <delay value="0"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="58" title="Gain 1" processtype="ptGain" groupid="1" posx="950" posy="100" enabled="true">
+        <sources count="1">
+          <source id="60" title="" connectedTo="55"/>
+        </sources>
+        <sinks count="1">
+          <sink id="59" title="" connectedTo="4"/>
+        </sinks>
+        <gain value="0.5"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+      <processobj id="63" title="BQ 1" processtype="ptBiQuad" groupid="2" posx="150" posy="215" enabled="true">
+        <sources count="1">
+          <source id="64" title="" connectedTo="0"/>
+        </sources>
+        <sinks count="1">
+          <sink id="65" title="" connectedTo="66"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="215"/>
+        <f2 value="145.473587036133"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.989861202511463"/>
+        <b0 value="0.989861202511463"/>
+        <b1 value="-1.97972240502293"/>
+        <b2 value="0.989861202511463"/>
+        <a1 value="1.97961966315192"/>
+        <a2 value="-0.979825189926254"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="66" title="BQ 2" processtype="ptBiQuad" groupid="2" posx="200" posy="215" enabled="true">
+        <sources count="1">
+          <source id="67" title="" connectedTo="63"/>
+        </sources>
+        <sinks count="1">
+          <sink id="68" title="" connectedTo="69"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="509.189453125"/>
+        <f2 value="45.5176391601563"/>
+        <gain value="-1.8"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999215485726095"/>
+        <b0 value="0.999215485726095"/>
+        <b1 value="-1.9904746963723"/>
+        <b2 value="0.992418820110211"/>
+        <a1 value="1.99047866509198"/>
+        <a2 value="-0.991638274554942"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="69" title="BQ 3" processtype="ptBiQuad" groupid="2" posx="250" posy="215" enabled="true">
+        <sources count="1">
+          <source id="70" title="" connectedTo="66"/>
+        </sources>
+        <sinks count="1">
+          <sink id="71" title="" connectedTo="72"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="869.833679199219"/>
+        <f2 value="55.7104949951172"/>
+        <gain value="-3"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.988186585630765"/>
+        <b0 value="0.988186585630765"/>
+        <b1 value="-1.91715063757071"/>
+        <b2 value="0.932225482136322"/>
+        <a1 value="1.91769142177091"/>
+        <a2 value="-0.920952851554005"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="72" title="BQ 4" processtype="ptBiQuad" groupid="2" posx="300" posy="215" enabled="true">
+        <sources count="1">
+          <source id="73" title="" connectedTo="69"/>
+        </sources>
+        <sinks count="1">
+          <sink id="74" title="" connectedTo="75"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="215"/>
+        <f2 value="108.526573181152"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.989861202511463"/>
+        <b0 value="0.989861202511463"/>
+        <b1 value="-1.97972240502293"/>
+        <b2 value="0.989861202511463"/>
+        <a1 value="1.97961966315192"/>
+        <a2 value="-0.979825189926254"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="75" title="BQ 5" processtype="ptBiQuad" groupid="2" posx="350" posy="215" enabled="true">
+        <sources count="1">
+          <source id="76" title="" connectedTo="72"/>
+        </sources>
+        <sinks count="1">
+          <sink id="77" title="" connectedTo="78"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="600"/>
+        <f2 value="552.054931640625"/>
+        <gain value="-0.5"/>
+        <q1 value="1.5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999209725168282"/>
+        <b0 value="0.999209725168282"/>
+        <b1 value="-1.97039417141299"/>
+        <b2 value="0.972778523922241"/>
+        <a1 value="1.97040857404442"/>
+        <a2 value="-0.972002651716719"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="78" title="BQ 6" processtype="ptBiQuad" groupid="2" posx="400" posy="215" enabled="true">
+        <sources count="1">
+          <source id="79" title="" connectedTo="75"/>
+        </sources>
+        <sinks count="1">
+          <sink id="80" title="" connectedTo="81"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1131.1513671875"/>
+        <f2 value="648.91552734375"/>
+        <gain value="-3.65"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.993457295194611"/>
+        <b0 value="0.993457295194611"/>
+        <b1 value="-1.95648891717654"/>
+        <b2 value="0.968667012783438"/>
+        <a1 value="1.95662638540149"/>
+        <a2 value="-0.962261776025268"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="81" title="BQ 7" processtype="ptBiQuad" groupid="2" posx="450" posy="215" enabled="true">
+        <sources count="1">
+          <source id="82" title="" connectedTo="78"/>
+        </sources>
+        <sinks count="1">
+          <sink id="83" title="" connectedTo="84"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1991.77893066406"/>
+        <f2 value="1086.34875488281"/>
+        <gain value="-6.24"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.982759404425728"/>
+        <b0 value="0.98275940442572"/>
+        <b1 value="-1.91606493652414"/>
+        <b2 value="0.950503417555341"/>
+        <a1 value="1.91663987126865"/>
+        <a2 value="-0.933837754418479"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="84" title="BQ 8" processtype="ptBiQuad" groupid="2" posx="500" posy="215" enabled="true">
+        <sources count="1">
+          <source id="85" title="" connectedTo="81"/>
+        </sources>
+        <sinks count="1">
+          <sink id="86" title="" connectedTo="87"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="5638.85888671875"/>
+        <f2 value="7791.173828125"/>
+        <gain value="-14.68"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.771354192228638"/>
+        <b0 value="0.771354192228638"/>
+        <b1 value="-1.34912461018656"/>
+        <b2 value="0.680055453916675"/>
+        <a1 value="1.40292901776038"/>
+        <a2 value="-0.505212322293356"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="87" title="BQ 9" processtype="ptBiQuad" groupid="2" posx="550" posy="215" enabled="true">
+        <sources count="1">
+          <source id="88" title="" connectedTo="84"/>
+        </sources>
+        <sinks count="1">
+          <sink id="89" title="" connectedTo="90"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="545.299987792969"/>
+        <f2 value="420.252166748047"/>
+        <gain value="1"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00074189413964"/>
+        <b0 value="1.00074189413964"/>
+        <b1 value="-1.98657075945176"/>
+        <b2 value="0.987156251188986"/>
+        <a1 value="1.986564397078"/>
+        <a2 value="-0.987891782956784"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="90" title="BQ 10" processtype="ptBiQuad" groupid="2" posx="600" posy="215" enabled="true">
+        <sources count="1">
+          <source id="91" title="" connectedTo="87"/>
+        </sources>
+        <sinks count="1">
+          <sink id="92" title="" connectedTo="93"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="203.040985107422"/>
+        <f2 value="121.283744812012"/>
+        <gain value="-2.32"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.998960315479674"/>
+        <b0 value="0.998960315479674"/>
+        <b1 value="-1.99096245409382"/>
+        <b2 value="0.992186491320017"/>
+        <a1 value="1.9909678753866"/>
+        <a2 value="-0.991152228092239"/>
+        <shelfhl value="stLowShelf"/>
+      </processobj>
+      <processobj id="93" title="BQ 11" processtype="ptBiQuad" groupid="2" posx="650" posy="215" enabled="false">
+        <sources count="1">
+          <source id="94" title="" connectedTo="90"/>
+        </sources>
+        <sinks count="1">
+          <sink id="95" title="" connectedTo="96"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="200"/>
+        <f2 value="343.362335205078"/>
+        <gain value="-1"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="96" title="BQ 12" processtype="ptBiQuad" groupid="2" posx="700" posy="215" enabled="false">
+        <sources count="1">
+          <source id="97" title="" connectedTo="93"/>
+        </sources>
+        <sinks count="1">
+          <sink id="98" title="" connectedTo="99"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="2365.02001953125"/>
+        <f2 value="25.332820892334"/>
+        <gain value="0.76"/>
+        <q1 value="7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="99" title="BQ 13" processtype="ptBiQuad" groupid="2" posx="750" posy="215" enabled="true">
+        <sources count="1">
+          <source id="100" title="" connectedTo="96"/>
+        </sources>
+        <sinks count="1">
+          <sink id="101" title="" connectedTo="102"/>
+        </sinks>
+        <filtertype value="ftLowPass1"/>
+        <f1 value="1880"/>
+        <f2 value="4206.71533203125"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="1"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="11812.3883774976"/>
+        <zconst value="0.118295568107538"/>
+        <b0 value="0.118295568107538"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0.881615896469965"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="102" title="BQ 14" processtype="ptBiQuad" groupid="2" posx="800" posy="215" enabled="true">
+        <sources count="1">
+          <source id="103" title="" connectedTo="99"/>
+        </sources>
+        <sinks count="1">
+          <sink id="104" title="" connectedTo="105"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="148.443054199219"/>
+        <f2 value="148.443054199219"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="105" title="BQ 15" processtype="ptBiQuad" groupid="2" posx="850" posy="215" enabled="true">
+        <sources count="1">
+          <source id="106" title="" connectedTo="102"/>
+        </sources>
+        <sinks count="1">
+          <sink id="107" title="" connectedTo="108"/>
+        </sinks>
+        <filtertype value="ftLowPass2"/>
+        <f1 value="1880"/>
+        <f2 value="5148.73388671875"/>
+        <gain value="0"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="139532519.180841"/>
+        <zconst value="0.0148742385035295"/>
+        <b0 value="0.0148742385035295"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="1.86671935855634"/>
+        <a2 value="-0.881615896469965"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="108" title="Delay 2" processtype="ptDelay" groupid="2" posx="900" posy="215" enabled="true">
+        <sources count="1">
+          <source id="110" title="" connectedTo="105"/>
+        </sources>
+        <sinks count="1">
+          <sink id="109" title="" connectedTo="111"/>
+        </sinks>
+        <delay value="96"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="111" title="Gain 2" processtype="ptGain" groupid="2" posx="950" posy="215" enabled="true">
+        <sources count="1">
+          <source id="113" title="" connectedTo="108"/>
+        </sources>
+        <sinks count="1">
+          <sink id="112" title="" connectedTo="4"/>
+        </sinks>
+        <gain value="2"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+      <processobj id="116" title="BQ 1" processtype="ptBiQuad" groupid="3" posx="150" posy="330" enabled="true">
+        <sources count="1">
+          <source id="117" title="" connectedTo="0"/>
+        </sources>
+        <sinks count="1">
+          <sink id="118" title="" connectedTo="119"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="5307.1826171875"/>
+        <f2 value="552.054931640625"/>
+        <gain value="9"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="2.81838293126445"/>
+        <zconst value="2.55305296784882"/>
+        <b0 value="2.55305296784882"/>
+        <b1 value="-4.32601552871151"/>
+        <b2 value="1.94016059221101"/>
+        <a1 value="1.4635396802907"/>
+        <a2 value="-0.630738559909863"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="119" title="BQ 2" processtype="ptBiQuad" groupid="3" posx="200" posy="330" enabled="true">
+        <sources count="1">
+          <source id="120" title="" connectedTo="116"/>
+        </sources>
+        <sinks count="1">
+          <sink id="121" title="" connectedTo="122"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="7635.318359375"/>
+        <f2 value="1012.17175292969"/>
+        <gain value="-1.21"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.987720669991403"/>
+        <b0 value="0.987720669991403"/>
+        <b1 value="-1.58789931260734"/>
+        <b2 value="0.832826457174705"/>
+        <a1 value="1.58930572715334"/>
+        <a2 value="-0.821953457016102"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="122" title="BQ 3" processtype="ptBiQuad" groupid="3" posx="250" posy="330" enabled="false">
+        <sources count="1">
+          <source id="123" title="" connectedTo="119"/>
+        </sources>
+        <sinks count="1">
+          <sink id="124" title="" connectedTo="125"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="1880"/>
+        <f2 value="563.32373046875"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.915081496949756"/>
+        <b0 value="0.915081496949756"/>
+        <b1 value="-1.83016299389951"/>
+        <b2 value="0.915081496949756"/>
+        <a1 value="1.82286432925247"/>
+        <a2 value="-0.837391888666751"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="125" title="BQ 4" processtype="ptBiQuad" groupid="3" posx="300" posy="330" enabled="true">
+        <sources count="1">
+          <source id="126" title="" connectedTo="122"/>
+        </sources>
+        <sinks count="1">
+          <sink id="127" title="" connectedTo="128"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="9440.0068359375"/>
+        <f2 value="80.963264465332"/>
+        <gain value="1.59"/>
+        <q1 value="7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00896534687561"/>
+        <b0 value="1.00896534687561"/>
+        <b1 value="-1.54402667015656"/>
+        <b2 value="0.905187780381308"/>
+        <a1 value="1.54345544614643"/>
+        <a2 value="-0.913581956562893"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="128" title="BQ 5" processtype="ptBiQuad" groupid="3" posx="350" posy="330" enabled="true">
+        <sources count="1">
+          <source id="129" title="" connectedTo="125"/>
+        </sources>
+        <sinks count="1">
+          <sink id="130" title="" connectedTo="131"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="21835.59765625"/>
+        <f2 value="211.414688110352"/>
+        <gain value="-6.46"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.862085695357769"/>
+        <b0 value="0.862085695357769"/>
+        <b1 value="-0.170459108982396"/>
+        <b2 value="0.643336245587464"/>
+        <a1 value="0.205293516585944"/>
+        <a2 value="-0.540236140747169"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="131" title="BQ 6" processtype="ptBiQuad" groupid="3" posx="400" posy="330" enabled="true">
+        <sources count="1">
+          <source id="132" title="" connectedTo="128"/>
+        </sources>
+        <sinks count="1">
+          <sink id="133" title="" connectedTo="134"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="3202.36474609375"/>
+        <f2 value="53.5039138793945"/>
+        <gain value="-6.08"/>
+        <q1 value="0.8"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="0.496592321450336"/>
+        <zconst value="0.520898878706843"/>
+        <b0 value="0.520898878706843"/>
+        <b1 value="-0.870318591280796"/>
+        <b2 value="0.37840638634307"/>
+        <a1 value="1.76936117315721"/>
+        <a2 value="-0.798347831546356"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="134" title="BQ 7" processtype="ptBiQuad" groupid="3" posx="450" posy="330" enabled="true">
+        <sources count="1">
+          <source id="135" title="" connectedTo="131"/>
+        </sources>
+        <sinks count="1">
+          <sink id="136" title="" connectedTo="137"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="12275.998046875"/>
+        <f2 value="310.365905761719"/>
+        <gain value="4.42"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1.66341265037017"/>
+        <zconst value="1.433148144331"/>
+        <b0 value="1.433148144331"/>
+        <b1 value="-1.49346377242887"/>
+        <b2 value="0.509119917999689"/>
+        <a1 value="0.814406466386594"/>
+        <a2 value="-0.263209870201923"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="137" title="BQ 8" processtype="ptBiQuad" groupid="3" posx="500" posy="330" enabled="true">
+        <sources count="1">
+          <source id="138" title="" connectedTo="134"/>
+        </sources>
+        <sinks count="1">
+          <sink id="139" title="" connectedTo="140"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="14284.8203125"/>
+        <f2 value="16791.15625"/>
+        <gain value="1.52"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.02909821703931"/>
+        <b0 value="1.02909821703931"/>
+        <b1 value="-1.0060758128409"/>
+        <b2 value="0.703650612723624"/>
+        <a1 value="1.00010965900899"/>
+        <a2 value="-0.726784005959891"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="140" title="BQ 9" processtype="ptBiQuad" groupid="3" posx="550" posy="330" enabled="true">
+        <sources count="1">
+          <source id="141" title="" connectedTo="137"/>
+        </sources>
+        <sinks count="1">
+          <sink id="142" title="" connectedTo="143"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2285"/>
+        <f2 value="2724.36279296875"/>
+        <gain value="1.5"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00714134914037"/>
+        <b0 value="1.00714134914037"/>
+        <b1 value="-1.90414169835923"/>
+        <b2 value="0.919533378810258"/>
+        <a1 value="1.90375403524525"/>
+        <a2 value="-0.92628706688466"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="143" title="BQ 10" processtype="ptBiQuad" groupid="3" posx="600" posy="330" enabled="true">
+        <sources count="1">
+          <source id="144" title="" connectedTo="140"/>
+        </sources>
+        <sinks count="1">
+          <sink id="145" title="" connectedTo="146"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2827.10009765625"/>
+        <f2 value="2564.11645507813"/>
+        <gain value="-1"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.996197149174265"/>
+        <b0 value="0.996197149174265"/>
+        <b1 value="-1.89686780245208"/>
+        <b2 value="0.935225013561209"/>
+        <a1 value="1.89703378589238"/>
+        <a2 value="-0.931588144831766"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="146" title="BQ 11" processtype="ptBiQuad" groupid="3" posx="650" posy="330" enabled="true">
+        <sources count="1">
+          <source id="147" title="" connectedTo="143"/>
+        </sources>
+        <sinks count="1">
+          <sink id="148" title="" connectedTo="149"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1189.76184082031"/>
+        <f2 value="689.469970703125"/>
+        <gain value="-4.37"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.993532485896545"/>
+        <b0 value="0.993532485896545"/>
+        <b1 value="-1.9612040921583"/>
+        <b2 value="0.973922867388933"/>
+        <a1 value="1.96131708257796"/>
+        <a2 value="-0.967568343543511"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="149" title="BQ 12" processtype="ptBiQuad" groupid="3" posx="700" posy="330" enabled="true">
+        <sources count="1">
+          <source id="150" title="" connectedTo="146"/>
+        </sources>
+        <sinks count="1">
+          <sink id="151" title="" connectedTo="152"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1412.71240234375"/>
+        <f2 value="2365.02001953125"/>
+        <gain value="-1.38"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.997972848435092"/>
+        <b0 value="0.997972848435092"/>
+        <b1 value="-1.9637661888653"/>
+        <b2 value="0.974627987076483"/>
+        <a1 value="1.96380061541577"/>
+        <a2 value="-0.972635261992605"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="152" title="BQ 13" processtype="ptBiQuad" groupid="3" posx="750" posy="330" enabled="true">
+        <sources count="1">
+          <source id="153" title="" connectedTo="149"/>
+        </sources>
+        <sinks count="1">
+          <sink id="154" title="" connectedTo="155"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2000"/>
+        <f2 value="1782.27465820313"/>
+        <gain value="-2"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.996552826366508"/>
+        <b0 value="0.996552826366508"/>
+        <b1 value="-1.9491039096897"/>
+        <b2 value="0.970191905688351"/>
+        <a1 value="1.94917274586568"/>
+        <a2 value="-0.966813567952294"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="155" title="BQ 14" processtype="ptBiQuad" groupid="3" posx="800" posy="330" enabled="true">
+        <sources count="1">
+          <source id="156" title="" connectedTo="152"/>
+        </sources>
+        <sinks count="1">
+          <sink id="157" title="" connectedTo="158"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="4560.8525390625"/>
+        <f2 value="524.859436035156"/>
+        <gain value="0.84"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00383491500578"/>
+        <b0 value="1.00383491500578"/>
+        <b1 value="-1.83737260695967"/>
+        <b2 value="0.922793635406205"/>
+        <a1 value="1.83717309949195"/>
+        <a2 value="-0.926429047170615"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="158" title="BQ 15" processtype="ptBiQuad" groupid="3" posx="850" posy="330" enabled="true">
+        <sources count="1">
+          <source id="159" title="" connectedTo="155"/>
+        </sources>
+        <sinks count="1">
+          <sink id="160" title="" connectedTo="161"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="1880"/>
+        <f2 value="464.931121826172"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.915081496949756"/>
+        <b0 value="0.915081496949756"/>
+        <b1 value="-1.83016299389951"/>
+        <b2 value="0.915081496949756"/>
+        <a1 value="1.82286432925247"/>
+        <a2 value="-0.837391888666751"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="161" title="Delay 3" processtype="ptDelay" groupid="3" posx="900" posy="330" enabled="true">
+        <sources count="1">
+          <source id="163" title="" connectedTo="158"/>
+        </sources>
+        <sinks count="1">
+          <sink id="162" title="" connectedTo="164"/>
+        </sinks>
+        <delay value="21"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="164" title="Gain 3" processtype="ptGain" groupid="3" posx="950" posy="330" enabled="true">
+        <sources count="1">
+          <source id="166" title="" connectedTo="161"/>
+        </sources>
+        <sinks count="1">
+          <sink id="165" title="" connectedTo="4"/>
+        </sinks>
+        <gain value="3"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+    </preset>
+    <preset index="2">
+      <processobj id="175" title="NC502MP ch1" processtype="ptImpulse" groupid="1" posx="100" posy="70" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="176" title="" connectedTo="177"/>
+        </sinks>
+        <filename value=""/>
+        <options>
+          <meassamplingrate value="48000"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.042"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="L26RO4Y"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="true"/>
+      </processobj>
+      <processobj id="228" title="NC502MP ch2" processtype="ptImpulse" groupid="2" posx="100" posy="185" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="229" title="" connectedTo="230"/>
+        </sinks>
+        <filename value=""/>
+        <options>
+          <meassamplingrate value="48000"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.083"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="C18EN002/A Midrange"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="true"/>
+      </processobj>
+      <processobj id="281" title="NC100HF" processtype="ptImpulse" groupid="3" posx="100" posy="300" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="282" title="" connectedTo="283"/>
+        </sinks>
+        <filename value=""/>
+        <options>
+          <meassamplingrate value="48000"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.083"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="C18EN002/A Tweeter"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="true"/>
+      </processobj>
+      <processobj id="167" title="Input 2" processtype="ptIO" groupid="-1" posx="0" posy="170" enabled="false">
+        <sources count="0"/>
+        <sinks count="3">
+          <sink id="781" title="" connectedTo="177"/>
+          <sink id="782" title="" connectedTo="230"/>
+          <sink id="783" title="" connectedTo="283"/>
+        </sinks>
+      </processobj>
+      <processobj id="171" title="Output 2" processtype="ptIO" groupid="-1" posx="1050" posy="170" enabled="false">
+        <sources count="3">
+          <source id="172" title="" connectedTo="225"/>
+          <source id="173" title="" connectedTo="278"/>
+          <source id="174" title="" connectedTo="331"/>
+        </sources>
+        <sinks count="0"/>
+      </processobj>
+      <processobj id="177" title="BQ 1" processtype="ptBiQuad" groupid="1" posx="150" posy="100" enabled="true">
+        <sources count="1">
+          <source id="178" title="" connectedTo="167"/>
+        </sources>
+        <sinks count="1">
+          <sink id="179" title="" connectedTo="180"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="100"/>
+        <f2 value="86.8966522216797"/>
+        <gain value="0.7"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00014054886331"/>
+        <b0 value="1.58511594739778"/>
+        <b1 value="-3.16441369303433"/>
+        <b2 value="1.57936881592761"/>
+        <a1 value="1.99660973395589"/>
+        <a2 value="-0.996654576278014"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="180" title="BQ 2" processtype="ptBiQuad" groupid="1" posx="200" posy="100" enabled="true">
+        <sources count="1">
+          <source id="181" title="" connectedTo="177"/>
+        </sources>
+        <sinks count="1">
+          <sink id="182" title="" connectedTo="183"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="23.3657989501953"/>
+        <f2 value="33.6158256530762"/>
+        <gain value="2.52"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.0001624165081"/>
+        <b0 value="1.0001624165081"/>
+        <b1 value="-1.99791907980116"/>
+        <b2 value="0.997759495510919"/>
+        <a1 value="1.99791943157073"/>
+        <a2 value="-0.997921550549747"/>
+        <shelfhl value="stLowShelf"/>
+      </processobj>
+      <processobj id="183" title="BQ 3" processtype="ptBiQuad" groupid="1" posx="250" posy="100" enabled="true">
+        <sources count="1">
+          <source id="184" title="" connectedTo="180"/>
+        </sources>
+        <sinks count="1">
+          <sink id="185" title="" connectedTo="186"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="127.568054199219"/>
+        <f2 value="127.568054199219"/>
+        <gain value="0"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="186" title="BQ 4" processtype="ptBiQuad" groupid="1" posx="300" posy="100" enabled="true">
+        <sources count="1">
+          <source id="187" title="" connectedTo="183"/>
+        </sources>
+        <sinks count="1">
+          <sink id="188" title="" connectedTo="189"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="17"/>
+        <f2 value="19.8780975341797"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999186511174334"/>
+        <b0 value="0.999186511174334"/>
+        <b1 value="-1.99837302234867"/>
+        <b2 value="0.999186511174334"/>
+        <a1 value="1.99837238263603"/>
+        <a2 value="-0.998373679700577"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="189" title="BQ 5" processtype="ptBiQuad" groupid="1" posx="350" posy="100" enabled="true">
+        <sources count="1">
+          <source id="190" title="" connectedTo="186"/>
+        </sources>
+        <sinks count="1">
+          <sink id="191" title="" connectedTo="192"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="47.2999992370605"/>
+        <f2 value="80.963264465332"/>
+        <gain value="-1"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999903329846978"/>
+        <b0 value="0.999903329846978"/>
+        <b1 value="-1.99821298967515"/>
+        <b2 value="0.998319700273165"/>
+        <a1 value="1.99821309794845"/>
+        <a2 value="-0.998223138393446"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="192" title="BQ 6" processtype="ptBiQuad" groupid="1" posx="400" posy="100" enabled="false">
+        <sources count="1">
+          <source id="193" title="" connectedTo="189"/>
+        </sources>
+        <sinks count="1">
+          <sink id="194" title="" connectedTo="195"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="256.156036376953"/>
+        <f2 value="200.999893188477"/>
+        <gain value="-0.23"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="195" title="BQ 7" processtype="ptBiQuad" groupid="1" posx="450" posy="100" enabled="true">
+        <sources count="1">
+          <source id="196" title="" connectedTo="192"/>
+        </sources>
+        <sinks count="1">
+          <sink id="197" title="" connectedTo="198"/>
+        </sinks>
+        <filtertype value="ftAsymShelf"/>
+        <f1 value="36"/>
+        <f2 value="65.4000015258789"/>
+        <gain value="0.61"/>
+        <q1 value="0.4"/>
+        <q2 value="0.1"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="3.30027793177852"/>
+        <zconst value="3.23873995468312"/>
+        <b0 value="3.23873995468312"/>
+        <b1 value="-6.4579842929411"/>
+        <b2 value="3.21926313527398"/>
+        <a1 value="1.95709641913446"/>
+        <a2 value="-0.957115216149143"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="198" title="BQ 8" processtype="ptBiQuad" groupid="1" posx="500" posy="100" enabled="true">
+        <sources count="1">
+          <source id="199" title="" connectedTo="195"/>
+        </sources>
+        <sinks count="1">
+          <sink id="200" title="" connectedTo="201"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="167.576950073242"/>
+        <f2 value="146.950820922852"/>
+        <gain value="0.42"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00013898029849"/>
+        <b0 value="1.00013898029849"/>
+        <b1 value="-1.99427492908641"/>
+        <b2 value="0.994261731904282"/>
+        <a1 value="1.99427439715794"/>
+        <a2 value="-0.994400180274313"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="201" title="BQ 9" processtype="ptBiQuad" groupid="1" posx="550" posy="100" enabled="true">
+        <sources count="1">
+          <source id="202" title="" connectedTo="198"/>
+        </sources>
+        <sinks count="1">
+          <sink id="203" title="" connectedTo="204"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="54.0472259521484"/>
+        <f2 value="598.529052734375"/>
+        <gain value="9.5"/>
+        <q1 value="0.9"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00111536413704"/>
+        <b0 value="1.00111536413704"/>
+        <b1 value="-1.9969257647887"/>
+        <b2 value="0.995833036616689"/>
+        <a1 value="1.99693521119764"/>
+        <a2 value="-0.996942793463598"/>
+        <shelfhl value="stLowShelf"/>
+      </processobj>
+      <processobj id="204" title="BQ 10" processtype="ptBiQuad" groupid="1" posx="600" posy="100" enabled="false">
+        <sources count="1">
+          <source id="205" title="" connectedTo="201"/>
+        </sources>
+        <sinks count="1">
+          <sink id="206" title="" connectedTo="207"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="88.6704254150391"/>
+        <f2 value="668.885437011719"/>
+        <gain value="1.75"/>
+        <q1 value="1.2"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="207" title="BQ 11" processtype="ptBiQuad" groupid="1" posx="650" posy="100" enabled="false">
+        <sources count="1">
+          <source id="208" title="" connectedTo="204"/>
+        </sources>
+        <sinks count="1">
+          <sink id="209" title="" connectedTo="210"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="154.565063476563"/>
+        <f2 value="778.340637207031"/>
+        <gain value="-0.17"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="210" title="BQ 12" processtype="ptBiQuad" groupid="1" posx="700" posy="100" enabled="true">
+        <sources count="1">
+          <source id="211" title="" connectedTo="207"/>
+        </sources>
+        <sinks count="1">
+          <sink id="212" title="" connectedTo="213"/>
+        </sinks>
+        <filtertype value="ftLowPass2"/>
+        <f1 value="200"/>
+        <f2 value="524.859436035156"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1579136.7041743"/>
+        <zconst value="0.000177709195151432"/>
+        <b0 value="0.000177709195151432"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="1.98104145539713"/>
+        <a2 value="-0.981219430907556"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="213" title="BQ 13" processtype="ptBiQuad" groupid="1" posx="750" posy="100" enabled="true">
+        <sources count="1">
+          <source id="214" title="" connectedTo="210"/>
+        </sources>
+        <sinks count="1">
+          <sink id="215" title="" connectedTo="216"/>
+        </sinks>
+        <filtertype value="ftLowPass2"/>
+        <f1 value="200"/>
+        <f2 value="136.916870117188"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1579136.7041743"/>
+        <zconst value="0.000177709195151432"/>
+        <b0 value="0.000177709195151432"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="1.98104145539713"/>
+        <a2 value="-0.981219430907556"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="216" title="BQ 14" processtype="ptBiQuad" groupid="1" posx="800" posy="100" enabled="false">
+        <sources count="1">
+          <source id="217" title="" connectedTo="213"/>
+        </sources>
+        <sinks count="1">
+          <sink id="218" title="" connectedTo="219"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="1000"/>
+        <f2 value="1000"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="219" title="BQ 15" processtype="ptBiQuad" groupid="1" posx="850" posy="100" enabled="false">
+        <sources count="1">
+          <source id="220" title="" connectedTo="216"/>
+        </sources>
+        <sinks count="1">
+          <sink id="221" title="" connectedTo="222"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="1000"/>
+        <f2 value="1000"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="222" title="Delay 1" processtype="ptDelay" groupid="1" posx="900" posy="100" enabled="true">
+        <sources count="1">
+          <source id="224" title="" connectedTo="219"/>
+        </sources>
+        <sinks count="1">
+          <sink id="223" title="" connectedTo="225"/>
+        </sinks>
+        <delay value="0"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="225" title="Gain 1" processtype="ptGain" groupid="1" posx="950" posy="100" enabled="true">
+        <sources count="1">
+          <source id="227" title="" connectedTo="222"/>
+        </sources>
+        <sinks count="1">
+          <sink id="226" title="" connectedTo="171"/>
+        </sinks>
+        <gain value="4"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+      <processobj id="230" title="BQ 1" processtype="ptBiQuad" groupid="2" posx="150" posy="215" enabled="true">
+        <sources count="1">
+          <source id="231" title="" connectedTo="167"/>
+        </sources>
+        <sinks count="1">
+          <sink id="232" title="" connectedTo="233"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="200"/>
+        <f2 value="145.473587036133"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.990565212308599"/>
+        <b0 value="1.24704771781458"/>
+        <b1 value="-2.49409543562916"/>
+        <b2 value="1.24704771781458"/>
+        <a1 value="1.98104145539713"/>
+        <a2 value="-0.981219430907556"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="233" title="BQ 2" processtype="ptBiQuad" groupid="2" posx="200" posy="215" enabled="true">
+        <sources count="1">
+          <source id="234" title="" connectedTo="230"/>
+        </sources>
+        <sinks count="1">
+          <sink id="235" title="" connectedTo="236"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="509.189453125"/>
+        <f2 value="45.5176391601563"/>
+        <gain value="-1.8"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999215485726095"/>
+        <b0 value="0.999215485726095"/>
+        <b1 value="-1.9904746963723"/>
+        <b2 value="0.992418820110211"/>
+        <a1 value="1.99047866509198"/>
+        <a2 value="-0.991638274554942"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="236" title="BQ 3" processtype="ptBiQuad" groupid="2" posx="250" posy="215" enabled="true">
+        <sources count="1">
+          <source id="237" title="" connectedTo="233"/>
+        </sources>
+        <sinks count="1">
+          <sink id="238" title="" connectedTo="239"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="869.833679199219"/>
+        <f2 value="55.7104949951172"/>
+        <gain value="-3"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.988186585630765"/>
+        <b0 value="0.988186585630765"/>
+        <b1 value="-1.91715063757071"/>
+        <b2 value="0.932225482136322"/>
+        <a1 value="1.91769142177091"/>
+        <a2 value="-0.920952851554005"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="239" title="BQ 4" processtype="ptBiQuad" groupid="2" posx="300" posy="215" enabled="true">
+        <sources count="1">
+          <source id="240" title="" connectedTo="236"/>
+        </sources>
+        <sinks count="1">
+          <sink id="241" title="" connectedTo="242"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="200"/>
+        <f2 value="108.526573181152"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.990565212308599"/>
+        <b0 value="0.990565212308599"/>
+        <b1 value="-1.9811304246172"/>
+        <b2 value="0.990565212308599"/>
+        <a1 value="1.98104145539713"/>
+        <a2 value="-0.981219430907556"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="242" title="BQ 5" processtype="ptBiQuad" groupid="2" posx="350" posy="215" enabled="true">
+        <sources count="1">
+          <source id="243" title="" connectedTo="239"/>
+        </sources>
+        <sinks count="1">
+          <sink id="244" title="" connectedTo="245"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="600"/>
+        <f2 value="552.054931640625"/>
+        <gain value="-0.5"/>
+        <q1 value="1.5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999209725168282"/>
+        <b0 value="0.999209725168282"/>
+        <b1 value="-1.97039417141299"/>
+        <b2 value="0.972778523922241"/>
+        <a1 value="1.97040857404442"/>
+        <a2 value="-0.972002651716719"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="245" title="BQ 6" processtype="ptBiQuad" groupid="2" posx="400" posy="215" enabled="true">
+        <sources count="1">
+          <source id="246" title="" connectedTo="242"/>
+        </sources>
+        <sinks count="1">
+          <sink id="247" title="" connectedTo="248"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1131.1513671875"/>
+        <f2 value="648.91552734375"/>
+        <gain value="-3.65"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.993457295194611"/>
+        <b0 value="0.993457295194611"/>
+        <b1 value="-1.95648891717654"/>
+        <b2 value="0.968667012783438"/>
+        <a1 value="1.95662638540149"/>
+        <a2 value="-0.962261776025268"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="248" title="BQ 7" processtype="ptBiQuad" groupid="2" posx="450" posy="215" enabled="true">
+        <sources count="1">
+          <source id="249" title="" connectedTo="245"/>
+        </sources>
+        <sinks count="1">
+          <sink id="250" title="" connectedTo="251"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1991.77893066406"/>
+        <f2 value="1086.34875488281"/>
+        <gain value="-6.24"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.98275940442572"/>
+        <b0 value="0.98275940442572"/>
+        <b1 value="-1.91606493652414"/>
+        <b2 value="0.950503417555341"/>
+        <a1 value="1.91663987126865"/>
+        <a2 value="-0.933837754418479"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="251" title="BQ 8" processtype="ptBiQuad" groupid="2" posx="500" posy="215" enabled="true">
+        <sources count="1">
+          <source id="252" title="" connectedTo="248"/>
+        </sources>
+        <sinks count="1">
+          <sink id="253" title="" connectedTo="254"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="5638.85888671875"/>
+        <f2 value="7791.173828125"/>
+        <gain value="-14.68"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.771354192228638"/>
+        <b0 value="0.771354192228638"/>
+        <b1 value="-1.34912461018656"/>
+        <b2 value="0.680055453916675"/>
+        <a1 value="1.40292901776038"/>
+        <a2 value="-0.505212322293356"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="254" title="BQ 9" processtype="ptBiQuad" groupid="2" posx="550" posy="215" enabled="true">
+        <sources count="1">
+          <source id="255" title="" connectedTo="251"/>
+        </sources>
+        <sinks count="1">
+          <sink id="256" title="" connectedTo="257"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="545.299987792969"/>
+        <f2 value="420.252166748047"/>
+        <gain value="1"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00074189413964"/>
+        <b0 value="1.00074189413964"/>
+        <b1 value="-1.98657075945176"/>
+        <b2 value="0.987156251188986"/>
+        <a1 value="1.986564397078"/>
+        <a2 value="-0.987891782956784"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="257" title="BQ 10" processtype="ptBiQuad" groupid="2" posx="600" posy="215" enabled="true">
+        <sources count="1">
+          <source id="258" title="" connectedTo="254"/>
+        </sources>
+        <sinks count="1">
+          <sink id="259" title="" connectedTo="260"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="301.099761962891"/>
+        <f2 value="121.283744812012"/>
+        <gain value="-1.1"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999320328757459"/>
+        <b0 value="0.999320328757459"/>
+        <b1 value="-1.98820337212523"/>
+        <b2 value="0.98928793502646"/>
+        <a1 value="1.98820823296269"/>
+        <a2 value="-0.988613124620939"/>
+        <shelfhl value="stLowShelf"/>
+      </processobj>
+      <processobj id="260" title="BQ 11" processtype="ptBiQuad" groupid="2" posx="650" posy="215" enabled="true">
+        <sources count="1">
+          <source id="261" title="" connectedTo="257"/>
+        </sources>
+        <sinks count="1">
+          <sink id="262" title="" connectedTo="263"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="200"/>
+        <f2 value="343.362335205078"/>
+        <gain value="-1"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999795698248809"/>
+        <b0 value="0.999795698248809"/>
+        <b1 value="-1.99606732562231"/>
+        <b2 value="0.996450958002748"/>
+        <a1 value="1.99606780909026"/>
+        <a2 value="-0.996247139719484"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="263" title="BQ 12" processtype="ptBiQuad" groupid="2" posx="700" posy="215" enabled="false">
+        <sources count="1">
+          <source id="264" title="" connectedTo="260"/>
+        </sources>
+        <sinks count="1">
+          <sink id="265" title="" connectedTo="266"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="2365.02001953125"/>
+        <f2 value="25.332820892334"/>
+        <gain value="0.76"/>
+        <q1 value="7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="266" title="BQ 13" processtype="ptBiQuad" groupid="2" posx="750" posy="215" enabled="true">
+        <sources count="1">
+          <source id="267" title="" connectedTo="263"/>
+        </sources>
+        <sinks count="1">
+          <sink id="268" title="" connectedTo="269"/>
+        </sinks>
+        <filtertype value="ftLowPass1"/>
+        <f1 value="2100"/>
+        <f2 value="4206.71533203125"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="1"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="13194.6891450771"/>
+        <zconst value="0.131189596351759"/>
+        <b0 value="0.131189596351759"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0.868712237320139"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="269" title="BQ 14" processtype="ptBiQuad" groupid="2" posx="800" posy="215" enabled="true">
+        <sources count="1">
+          <source id="270" title="" connectedTo="266"/>
+        </sources>
+        <sinks count="1">
+          <sink id="271" title="" connectedTo="272"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="148.443054199219"/>
+        <f2 value="148.443054199219"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="272" title="BQ 15" processtype="ptBiQuad" groupid="2" posx="850" posy="215" enabled="true">
+        <sources count="1">
+          <source id="273" title="" connectedTo="269"/>
+        </sources>
+        <sinks count="1">
+          <sink id="274" title="" connectedTo="275"/>
+        </sinks>
+        <filtertype value="ftLowPass2"/>
+        <f1 value="2100"/>
+        <f2 value="5148.73388671875"/>
+        <gain value="0"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="174099821.635216"/>
+        <zconst value="0.0184197903504537"/>
+        <b0 value="0.0184197903504537"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="1.85026482936591"/>
+        <a2 value="-0.868712237320139"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="275" title="Delay 2" processtype="ptDelay" groupid="2" posx="900" posy="215" enabled="true">
+        <sources count="1">
+          <source id="277" title="" connectedTo="272"/>
+        </sources>
+        <sinks count="1">
+          <sink id="276" title="" connectedTo="278"/>
+        </sinks>
+        <delay value="96"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="278" title="Gain 2" processtype="ptGain" groupid="2" posx="950" posy="215" enabled="true">
+        <sources count="1">
+          <source id="280" title="" connectedTo="275"/>
+        </sources>
+        <sinks count="1">
+          <sink id="279" title="" connectedTo="171"/>
+        </sinks>
+        <gain value="2"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+      <processobj id="283" title="BQ 1" processtype="ptBiQuad" groupid="3" posx="150" posy="330" enabled="true">
+        <sources count="1">
+          <source id="284" title="" connectedTo="167"/>
+        </sources>
+        <sinks count="1">
+          <sink id="285" title="" connectedTo="286"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="5307.1826171875"/>
+        <f2 value="552.054931640625"/>
+        <gain value="9"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="2.81838293126445"/>
+        <zconst value="2.55305296784882"/>
+        <b0 value="3.606283170497"/>
+        <b1 value="-6.11065935292606"/>
+        <b2 value="2.74054967909557"/>
+        <a1 value="1.4635396802907"/>
+        <a2 value="-0.630738559909863"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="286" title="BQ 2" processtype="ptBiQuad" groupid="3" posx="200" posy="330" enabled="true">
+        <sources count="1">
+          <source id="287" title="" connectedTo="283"/>
+        </sources>
+        <sinks count="1">
+          <sink id="288" title="" connectedTo="289"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="7635.318359375"/>
+        <f2 value="1012.17175292969"/>
+        <gain value="-1.21"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.987720669991403"/>
+        <b0 value="0.987720669991403"/>
+        <b1 value="-1.58789931260734"/>
+        <b2 value="0.832826457174705"/>
+        <a1 value="1.58930572715334"/>
+        <a2 value="-0.821953457016102"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="289" title="BQ 3" processtype="ptBiQuad" groupid="3" posx="250" posy="330" enabled="false">
+        <sources count="1">
+          <source id="290" title="" connectedTo="286"/>
+        </sources>
+        <sinks count="1">
+          <sink id="291" title="" connectedTo="292"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="2100"/>
+        <f2 value="563.32373046875"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.905626599137297"/>
+        <b0 value="0.905626599137297"/>
+        <b1 value="-1.81125319827459"/>
+        <b2 value="0.905626599137297"/>
+        <a1 value="1.80224185349829"/>
+        <a2 value="-0.820181130991979"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="292" title="BQ 4" processtype="ptBiQuad" groupid="3" posx="300" posy="330" enabled="true">
+        <sources count="1">
+          <source id="293" title="" connectedTo="289"/>
+        </sources>
+        <sinks count="1">
+          <sink id="294" title="" connectedTo="295"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="9440.0068359375"/>
+        <f2 value="80.963264465332"/>
+        <gain value="1.59"/>
+        <q1 value="7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00896534687561"/>
+        <b0 value="1.00896534687561"/>
+        <b1 value="-1.54402667015656"/>
+        <b2 value="0.905187780381308"/>
+        <a1 value="1.54345544614643"/>
+        <a2 value="-0.913581956562893"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="295" title="BQ 5" processtype="ptBiQuad" groupid="3" posx="350" posy="330" enabled="true">
+        <sources count="1">
+          <source id="296" title="" connectedTo="292"/>
+        </sources>
+        <sinks count="1">
+          <sink id="297" title="" connectedTo="298"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="21835.59765625"/>
+        <f2 value="211.414688110352"/>
+        <gain value="-6.46"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.862085695357769"/>
+        <b0 value="0.862085695357769"/>
+        <b1 value="-0.170459108982396"/>
+        <b2 value="0.643336245587464"/>
+        <a1 value="0.205293516585944"/>
+        <a2 value="-0.540236140747169"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="298" title="BQ 6" processtype="ptBiQuad" groupid="3" posx="400" posy="330" enabled="true">
+        <sources count="1">
+          <source id="299" title="" connectedTo="295"/>
+        </sources>
+        <sinks count="1">
+          <sink id="300" title="" connectedTo="301"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="3202.36474609375"/>
+        <f2 value="53.5039138793945"/>
+        <gain value="-6.08"/>
+        <q1 value="0.8"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="0.496592321450336"/>
+        <zconst value="0.520898878706843"/>
+        <b0 value="0.520898878706843"/>
+        <b1 value="-0.870318591280796"/>
+        <b2 value="0.37840638634307"/>
+        <a1 value="1.76936117315721"/>
+        <a2 value="-0.798347831546356"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="301" title="BQ 7" processtype="ptBiQuad" groupid="3" posx="450" posy="330" enabled="true">
+        <sources count="1">
+          <source id="302" title="" connectedTo="298"/>
+        </sources>
+        <sinks count="1">
+          <sink id="303" title="" connectedTo="304"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="12275.998046875"/>
+        <f2 value="310.365905761719"/>
+        <gain value="4.42"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1.66341265037017"/>
+        <zconst value="1.433148144331"/>
+        <b0 value="1.433148144331"/>
+        <b1 value="-1.49346377242887"/>
+        <b2 value="0.509119917999689"/>
+        <a1 value="0.814406466386594"/>
+        <a2 value="-0.263209870201923"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="304" title="BQ 8" processtype="ptBiQuad" groupid="3" posx="500" posy="330" enabled="true">
+        <sources count="1">
+          <source id="305" title="" connectedTo="301"/>
+        </sources>
+        <sinks count="1">
+          <sink id="306" title="" connectedTo="307"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="14284.8203125"/>
+        <f2 value="16791.15625"/>
+        <gain value="1.52"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.02909821703931"/>
+        <b0 value="1.02909821703931"/>
+        <b1 value="-1.0060758128409"/>
+        <b2 value="0.703650612723624"/>
+        <a1 value="1.00010965900899"/>
+        <a2 value="-0.726784005959891"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="307" title="BQ 9" processtype="ptBiQuad" groupid="3" posx="550" posy="330" enabled="true">
+        <sources count="1">
+          <source id="308" title="" connectedTo="304"/>
+        </sources>
+        <sinks count="1">
+          <sink id="309" title="" connectedTo="310"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2285"/>
+        <f2 value="2724.36279296875"/>
+        <gain value="1.5"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00714134914037"/>
+        <b0 value="1.00714134914037"/>
+        <b1 value="-1.90414169835923"/>
+        <b2 value="0.919533378810258"/>
+        <a1 value="1.90375403524525"/>
+        <a2 value="-0.92628706688466"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="310" title="BQ 10" processtype="ptBiQuad" groupid="3" posx="600" posy="330" enabled="true">
+        <sources count="1">
+          <source id="311" title="" connectedTo="307"/>
+        </sources>
+        <sinks count="1">
+          <sink id="312" title="" connectedTo="313"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2827.10009765625"/>
+        <f2 value="2564.11645507813"/>
+        <gain value="-1"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.996197149174265"/>
+        <b0 value="0.996197149174265"/>
+        <b1 value="-1.89686780245208"/>
+        <b2 value="0.935225013561209"/>
+        <a1 value="1.89703378589238"/>
+        <a2 value="-0.931588144831766"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="313" title="BQ 11" processtype="ptBiQuad" groupid="3" posx="650" posy="330" enabled="true">
+        <sources count="1">
+          <source id="314" title="" connectedTo="310"/>
+        </sources>
+        <sinks count="1">
+          <sink id="315" title="" connectedTo="316"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1189.76184082031"/>
+        <f2 value="689.469970703125"/>
+        <gain value="-4.37"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.993532485896545"/>
+        <b0 value="0.993532485896545"/>
+        <b1 value="-1.9612040921583"/>
+        <b2 value="0.973922867388933"/>
+        <a1 value="1.96131708257796"/>
+        <a2 value="-0.967568343543511"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="316" title="BQ 12" processtype="ptBiQuad" groupid="3" posx="700" posy="330" enabled="true">
+        <sources count="1">
+          <source id="317" title="" connectedTo="313"/>
+        </sources>
+        <sinks count="1">
+          <sink id="318" title="" connectedTo="319"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1412.71240234375"/>
+        <f2 value="2365.02001953125"/>
+        <gain value="-1.38"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.997972848435092"/>
+        <b0 value="0.997972848435092"/>
+        <b1 value="-1.9637661888653"/>
+        <b2 value="0.974627987076483"/>
+        <a1 value="1.96380061541577"/>
+        <a2 value="-0.972635261992605"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="319" title="BQ 13" processtype="ptBiQuad" groupid="3" posx="750" posy="330" enabled="true">
+        <sources count="1">
+          <source id="320" title="" connectedTo="316"/>
+        </sources>
+        <sinks count="1">
+          <sink id="321" title="" connectedTo="322"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2000"/>
+        <f2 value="1782.27465820313"/>
+        <gain value="-2"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.996552826366508"/>
+        <b0 value="0.996552826366508"/>
+        <b1 value="-1.9491039096897"/>
+        <b2 value="0.970191905688351"/>
+        <a1 value="1.94917274586568"/>
+        <a2 value="-0.966813567952294"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="322" title="BQ 14" processtype="ptBiQuad" groupid="3" posx="800" posy="330" enabled="true">
+        <sources count="1">
+          <source id="323" title="" connectedTo="319"/>
+        </sources>
+        <sinks count="1">
+          <sink id="324" title="" connectedTo="325"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="4560.8525390625"/>
+        <f2 value="524.859436035156"/>
+        <gain value="0.84"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00383491500578"/>
+        <b0 value="1.00383491500578"/>
+        <b1 value="-1.83737260695967"/>
+        <b2 value="0.922793635406205"/>
+        <a1 value="1.83717309949195"/>
+        <a2 value="-0.926429047170615"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="325" title="BQ 15" processtype="ptBiQuad" groupid="3" posx="850" posy="330" enabled="true">
+        <sources count="1">
+          <source id="326" title="" connectedTo="322"/>
+        </sources>
+        <sinks count="1">
+          <sink id="327" title="" connectedTo="328"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="2100"/>
+        <f2 value="464.931121826172"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.905626599137297"/>
+        <b0 value="0.905626599137297"/>
+        <b1 value="-1.81125319827459"/>
+        <b2 value="0.905626599137297"/>
+        <a1 value="1.80224185349829"/>
+        <a2 value="-0.820181130991979"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="328" title="Delay 3" processtype="ptDelay" groupid="3" posx="900" posy="330" enabled="true">
+        <sources count="1">
+          <source id="330" title="" connectedTo="325"/>
+        </sources>
+        <sinks count="1">
+          <sink id="329" title="" connectedTo="331"/>
+        </sinks>
+        <delay value="21"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="331" title="Gain 3" processtype="ptGain" groupid="3" posx="950" posy="330" enabled="true">
+        <sources count="1">
+          <source id="333" title="" connectedTo="328"/>
+        </sources>
+        <sinks count="1">
+          <sink id="332" title="" connectedTo="171"/>
+        </sinks>
+        <gain value="3"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+    </preset>
+    <preset index="3">
+      <processobj id="342" title="NC502MP ch1" processtype="ptImpulse" groupid="1" posx="100" posy="70" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="343" title="" connectedTo="344"/>
+        </sinks>
+        <filename value="Woofer Impulse.txt"/>
+        <options>
+          <meassamplingrate value="48000"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.125"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="L26RO4Y"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="true"/>
+      </processobj>
+      <processobj id="395" title="NC502MP ch2" processtype="ptImpulse" groupid="2" posx="100" posy="185" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="396" title="" connectedTo="397"/>
+        </sinks>
+        <filename value="Coax Mid Impulse.txt"/>
+        <options>
+          <meassamplingrate value="48000"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.125"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="C18EN002/A Midrange"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="false"/>
+      </processobj>
+      <processobj id="448" title="NC100HF" processtype="ptImpulse" groupid="3" posx="100" posy="300" enabled="true">
+        <sources count="0"/>
+        <sinks count="1">
+          <sink id="449" title="" connectedTo="450"/>
+        </sinks>
+        <filename value="Coax Tweeter Impulse.txt"/>
+        <options>
+          <meassamplingrate value="48000"/>
+          <showsum value="false"/>
+          <smoothpostbw value="0.125"/>
+          <smoothbw value="0.0125"/>
+          <anechstart value="0"/>
+          <anechstop value="65535"/>
+          <anechstartcalc value="-1"/>
+          <glbanechstart value="-1"/>
+          <glbanechgroupid value="-1"/>
+          <zoomleft value="-1"/>
+          <zoomright value="-1"/>
+          <zoomtop value="-1"/>
+          <zoombottom value="-1"/>
+          <zoomuse value="false"/>
+        </options>
+        <description></description>
+        <useinsum value="true"/>
+        <impulsedata count="0"></impulsedata>
+        <outputname value="C18EN002/A Tweeter"/>
+        <applymiccorr value="false"/>
+        <graphshowmeasuredrespons value="false"/>
+        <graphshowsum value="false"/>
+      </processobj>
+      <processobj id="334" title="Input 3" processtype="ptIO" groupid="-1" posx="0" posy="170" enabled="false">
+        <sources count="0"/>
+        <sinks count="3">
+          <sink id="889" title="" connectedTo="344"/>
+          <sink id="890" title="" connectedTo="397"/>
+          <sink id="891" title="" connectedTo="450"/>
+        </sinks>
+      </processobj>
+      <processobj id="338" title="Output 3" processtype="ptIO" groupid="-1" posx="1050" posy="170" enabled="false">
+        <sources count="3">
+          <source id="339" title="" connectedTo="392"/>
+          <source id="340" title="" connectedTo="445"/>
+          <source id="341" title="" connectedTo="498"/>
+        </sources>
+        <sinks count="0"/>
+      </processobj>
+      <processobj id="344" title="BQ 1" processtype="ptBiQuad" groupid="1" posx="150" posy="100" enabled="true">
+        <sources count="1">
+          <source id="345" title="" connectedTo="334"/>
+        </sources>
+        <sinks count="1">
+          <sink id="346" title="" connectedTo="347"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="35.3320693969727"/>
+        <f2 value="86.8966522216797"/>
+        <gain value="-1.13"/>
+        <q1 value="4.4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999962617741355"/>
+        <b0 value="1.05921412788056"/>
+        <b1 value="-2.11785242688047"/>
+        <b2 value="1.05864423675166"/>
+        <a1 value="1.99938163229975"/>
+        <a2 value="-0.999387237898877"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="347" title="BQ 2" processtype="ptBiQuad" groupid="1" posx="200" posy="100" enabled="true">
+        <sources count="1">
+          <source id="348" title="" connectedTo="344"/>
+        </sources>
+        <sinks count="1">
+          <sink id="349" title="" connectedTo="350"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="62.5871238708496"/>
+        <f2 value="101.152503967285"/>
+        <gain value="2.69"/>
+        <q1 value="3.48"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00021875140042"/>
+        <b0 value="1.00021875140042"/>
+        <b1 value="-1.9987779961046"/>
+        <b2 value="0.998576828993595"/>
+        <a1 value="1.99877778860913"/>
+        <a2 value="-0.998795372898553"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="350" title="BQ 3" processtype="ptBiQuad" groupid="1" posx="250" posy="100" enabled="true">
+        <sources count="1">
+          <source id="351" title="" connectedTo="347"/>
+        </sources>
+        <sinks count="1">
+          <sink id="352" title="" connectedTo="353"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="174.413284301758"/>
+        <f2 value="98.9934005737305"/>
+        <gain value="1.89"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00070984092826"/>
+        <b0 value="1.00070984092826"/>
+        <b1 value="-1.99403925587124"/>
+        <b2 value="0.993465654376244"/>
+        <a1 value="1.99403616202394"/>
+        <a2 value="-0.994172401457304"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="353" title="BQ 4" processtype="ptBiQuad" groupid="1" posx="300" posy="100" enabled="true">
+        <sources count="1">
+          <source id="354" title="" connectedTo="350"/>
+        </sources>
+        <sinks count="1">
+          <sink id="355" title="" connectedTo="356"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="17"/>
+        <f2 value="19.8780975341797"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999186511174334"/>
+        <b0 value="0.999186511174334"/>
+        <b1 value="-1.99837302234867"/>
+        <b2 value="0.999186511174334"/>
+        <a1 value="1.99837238263603"/>
+        <a2 value="-0.998373679700577"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="356" title="BQ 5" processtype="ptBiQuad" groupid="1" posx="350" posy="100" enabled="true">
+        <sources count="1">
+          <source id="357" title="" connectedTo="353"/>
+        </sources>
+        <sinks count="1">
+          <sink id="358" title="" connectedTo="359"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="27.4199562072754"/>
+        <f2 value="80.963264465332"/>
+        <gain value="6.24"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00137983208189"/>
+        <b0 value="1.00137983208189"/>
+        <b1 value="-1.99737845786101"/>
+        <b2 value="0.996001998501739"/>
+        <a1 value="1.99737478018985"/>
+        <a2 value="-0.997378152912472"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="359" title="BQ 6" processtype="ptBiQuad" groupid="1" posx="400" posy="100" enabled="false">
+        <sources count="1">
+          <source id="360" title="" connectedTo="356"/>
+        </sources>
+        <sinks count="1">
+          <sink id="361" title="" connectedTo="362"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="136.899993896484"/>
+        <f2 value="99.5288162231445"/>
+        <gain value="-3"/>
+        <q1 value="0.5"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="362" title="BQ 7" processtype="ptBiQuad" groupid="1" posx="450" posy="100" enabled="true">
+        <sources count="1">
+          <source id="363" title="" connectedTo="359"/>
+        </sources>
+        <sinks count="1">
+          <sink id="364" title="" connectedTo="365"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="51.819580078125"/>
+        <f2 value="65.4000015258789"/>
+        <gain value="-3.45"/>
+        <q1 value="2"/>
+        <q2 value="0.1"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999576844519581"/>
+        <b0 value="0.999576844519581"/>
+        <b1 value="-1.99740739321623"/>
+        <b2 value="0.997842594719795"/>
+        <a1 value="1.99740800181655"/>
+        <a2 value="-0.997420047839703"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="365" title="BQ 8" processtype="ptBiQuad" groupid="1" posx="500" posy="100" enabled="true">
+        <sources count="1">
+          <source id="366" title="" connectedTo="362"/>
+        </sources>
+        <sinks count="1">
+          <sink id="367" title="" connectedTo="368"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="58.3486976623535"/>
+        <f2 value="146.950820922852"/>
+        <gain value="-0.68"/>
+        <q1 value="4.08"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999960981159199"/>
+        <b0 value="0.999960981159199"/>
+        <b1 value="-1.99894870192733"/>
+        <b2 value="0.999003005362074"/>
+        <a1 value="1.99894872785453"/>
+        <a2 value="-0.998964012448474"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="368" title="BQ 9" processtype="ptBiQuad" groupid="1" posx="550" posy="100" enabled="true">
+        <sources count="1">
+          <source id="369" title="" connectedTo="365"/>
+        </sources>
+        <sinks count="1">
+          <sink id="370" title="" connectedTo="371"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="53"/>
+        <f2 value="598.529052734375"/>
+        <gain value="5.25"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00026999741825"/>
+        <b0 value="1.00026999741825"/>
+        <b1 value="-1.99845875537783"/>
+        <b2 value="0.998205814346977"/>
+        <a1 value="1.99846487949158"/>
+        <a2 value="-0.99847419887224"/>
+        <shelfhl value="stLowShelf"/>
+      </processobj>
+      <processobj id="371" title="BQ 10" processtype="ptBiQuad" groupid="1" posx="600" posy="100" enabled="true">
+        <sources count="1">
+          <source id="372" title="" connectedTo="368"/>
+        </sources>
+        <sinks count="1">
+          <sink id="373" title="" connectedTo="374"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="46.5202293395996"/>
+        <f2 value="44.3157806396484"/>
+        <gain value="-0.84"/>
+        <q1 value="4.24"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999962672860851"/>
+        <b0 value="0.999962672860851"/>
+        <b1 value="-1.99918059272974"/>
+        <b2 value="0.999227636699883"/>
+        <a1 value="1.99918061194377"/>
+        <a2 value="-0.999190328774763"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="374" title="BQ 11" processtype="ptBiQuad" groupid="1" posx="650" posy="100" enabled="true">
+        <sources count="1">
+          <source id="375" title="" connectedTo="371"/>
+        </sources>
+        <sinks count="1">
+          <sink id="376" title="" connectedTo="377"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="17.2561817169189"/>
+        <f2 value="17.2561817169189"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="377" title="BQ 12" processtype="ptBiQuad" groupid="1" posx="700" posy="100" enabled="true">
+        <sources count="1">
+          <source id="378" title="" connectedTo="374"/>
+        </sources>
+        <sinks count="1">
+          <sink id="379" title="" connectedTo="380"/>
+        </sinks>
+        <filtertype value="ftLowPass1"/>
+        <f1 value="215"/>
+        <f2 value="524.859436035156"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="1"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1350.88484104361"/>
+        <zconst value="0.0142954117585464"/>
+        <b0 value="0.0142954117585464"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0.985693880799583"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="380" title="BQ 13" processtype="ptBiQuad" groupid="1" posx="750" posy="100" enabled="true">
+        <sources count="1">
+          <source id="381" title="" connectedTo="377"/>
+        </sources>
+        <sinks count="1">
+          <sink id="382" title="" connectedTo="383"/>
+        </sinks>
+        <filtertype value="ftLowPass2"/>
+        <f1 value="215"/>
+        <f2 value="136.916870117188"/>
+        <gain value="0"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1824889.85376142"/>
+        <zconst value="0.000205831114773068"/>
+        <b0 value="0.000205831114773068"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="1.98548774122438"/>
+        <a2 value="-0.985693880799583"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="383" title="BQ 14" processtype="ptBiQuad" groupid="1" posx="800" posy="100" enabled="false">
+        <sources count="1">
+          <source id="384" title="" connectedTo="380"/>
+        </sources>
+        <sinks count="1">
+          <sink id="385" title="" connectedTo="386"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="1000"/>
+        <f2 value="1000"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="386" title="BQ 15" processtype="ptBiQuad" groupid="1" posx="850" posy="100" enabled="false">
+        <sources count="1">
+          <source id="387" title="" connectedTo="383"/>
+        </sources>
+        <sinks count="1">
+          <sink id="388" title="" connectedTo="389"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="1000"/>
+        <f2 value="1000"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="389" title="Delay 1" processtype="ptDelay" groupid="1" posx="900" posy="100" enabled="true">
+        <sources count="1">
+          <source id="391" title="" connectedTo="386"/>
+        </sources>
+        <sinks count="1">
+          <sink id="390" title="" connectedTo="392"/>
+        </sinks>
+        <delay value="0"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="392" title="Gain 1" processtype="ptGain" groupid="1" posx="950" posy="100" enabled="true">
+        <sources count="1">
+          <source id="394" title="" connectedTo="389"/>
+        </sources>
+        <sinks count="1">
+          <sink id="393" title="" connectedTo="338"/>
+        </sinks>
+        <gain value="0.5"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+      <processobj id="397" title="BQ 1" processtype="ptBiQuad" groupid="2" posx="150" posy="215" enabled="true">
+        <sources count="1">
+          <source id="398" title="" connectedTo="334"/>
+        </sources>
+        <sinks count="1">
+          <sink id="399" title="" connectedTo="400"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="215"/>
+        <f2 value="145.473587036133"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.989861202511463"/>
+        <b0 value="1.24616142199081"/>
+        <b1 value="-2.49232284398163"/>
+        <b2 value="1.24616142199081"/>
+        <a1 value="1.97961966315192"/>
+        <a2 value="-0.979825189926254"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="400" title="BQ 2" processtype="ptBiQuad" groupid="2" posx="200" posy="215" enabled="true">
+        <sources count="1">
+          <source id="401" title="" connectedTo="397"/>
+        </sources>
+        <sinks count="1">
+          <sink id="402" title="" connectedTo="403"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="509.189453125"/>
+        <f2 value="45.5176391601563"/>
+        <gain value="-1.8"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999215485726095"/>
+        <b0 value="0.999215485726095"/>
+        <b1 value="-1.9904746963723"/>
+        <b2 value="0.992418820110211"/>
+        <a1 value="1.99047866509198"/>
+        <a2 value="-0.991638274554942"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="403" title="BQ 3" processtype="ptBiQuad" groupid="2" posx="250" posy="215" enabled="true">
+        <sources count="1">
+          <source id="404" title="" connectedTo="400"/>
+        </sources>
+        <sinks count="1">
+          <sink id="405" title="" connectedTo="406"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="869.833679199219"/>
+        <f2 value="55.7104949951172"/>
+        <gain value="-3"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.988186585630765"/>
+        <b0 value="0.988186585630765"/>
+        <b1 value="-1.91715063757071"/>
+        <b2 value="0.932225482136322"/>
+        <a1 value="1.91769142177091"/>
+        <a2 value="-0.920952851554005"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="406" title="BQ 4" processtype="ptBiQuad" groupid="2" posx="300" posy="215" enabled="true">
+        <sources count="1">
+          <source id="407" title="" connectedTo="403"/>
+        </sources>
+        <sinks count="1">
+          <sink id="408" title="" connectedTo="409"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="215"/>
+        <f2 value="108.526573181152"/>
+        <gain value="0"/>
+        <q1 value="0.707"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.989861202511463"/>
+        <b0 value="0.989861202511463"/>
+        <b1 value="-1.97972240502293"/>
+        <b2 value="0.989861202511463"/>
+        <a1 value="1.97961966315192"/>
+        <a2 value="-0.979825189926254"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="409" title="BQ 5" processtype="ptBiQuad" groupid="2" posx="350" posy="215" enabled="true">
+        <sources count="1">
+          <source id="410" title="" connectedTo="406"/>
+        </sources>
+        <sinks count="1">
+          <sink id="411" title="" connectedTo="412"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="600"/>
+        <f2 value="552.054931640625"/>
+        <gain value="-0.5"/>
+        <q1 value="1.5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.999209725168282"/>
+        <b0 value="0.999209725168282"/>
+        <b1 value="-1.97039417141299"/>
+        <b2 value="0.972778523922241"/>
+        <a1 value="1.97040857404442"/>
+        <a2 value="-0.972002651716719"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="412" title="BQ 6" processtype="ptBiQuad" groupid="2" posx="400" posy="215" enabled="true">
+        <sources count="1">
+          <source id="413" title="" connectedTo="409"/>
+        </sources>
+        <sinks count="1">
+          <sink id="414" title="" connectedTo="415"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1131.1513671875"/>
+        <f2 value="648.91552734375"/>
+        <gain value="-3.65"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.993457295194611"/>
+        <b0 value="0.993457295194611"/>
+        <b1 value="-1.95648891717654"/>
+        <b2 value="0.968667012783438"/>
+        <a1 value="1.95662638540149"/>
+        <a2 value="-0.962261776025268"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="415" title="BQ 7" processtype="ptBiQuad" groupid="2" posx="450" posy="215" enabled="true">
+        <sources count="1">
+          <source id="416" title="" connectedTo="412"/>
+        </sources>
+        <sinks count="1">
+          <sink id="417" title="" connectedTo="418"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1991.77893066406"/>
+        <f2 value="1086.34875488281"/>
+        <gain value="-6.24"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.98275940442572"/>
+        <b0 value="0.98275940442572"/>
+        <b1 value="-1.91606493652414"/>
+        <b2 value="0.950503417555341"/>
+        <a1 value="1.91663987126865"/>
+        <a2 value="-0.933837754418479"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="418" title="BQ 8" processtype="ptBiQuad" groupid="2" posx="500" posy="215" enabled="true">
+        <sources count="1">
+          <source id="419" title="" connectedTo="415"/>
+        </sources>
+        <sinks count="1">
+          <sink id="420" title="" connectedTo="421"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="5638.85888671875"/>
+        <f2 value="7791.173828125"/>
+        <gain value="-14.68"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.771354192228638"/>
+        <b0 value="0.771354192228638"/>
+        <b1 value="-1.34912461018656"/>
+        <b2 value="0.680055453916675"/>
+        <a1 value="1.40292901776038"/>
+        <a2 value="-0.505212322293356"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="421" title="BQ 9" processtype="ptBiQuad" groupid="2" posx="550" posy="215" enabled="true">
+        <sources count="1">
+          <source id="422" title="" connectedTo="418"/>
+        </sources>
+        <sinks count="1">
+          <sink id="423" title="" connectedTo="424"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="545.299987792969"/>
+        <f2 value="420.252166748047"/>
+        <gain value="1"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00074189413964"/>
+        <b0 value="1.00074189413964"/>
+        <b1 value="-1.98657075945176"/>
+        <b2 value="0.987156251188986"/>
+        <a1 value="1.986564397078"/>
+        <a2 value="-0.987891782956784"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="424" title="BQ 10" processtype="ptBiQuad" groupid="2" posx="600" posy="215" enabled="true">
+        <sources count="1">
+          <source id="425" title="" connectedTo="421"/>
+        </sources>
+        <sinks count="1">
+          <sink id="426" title="" connectedTo="427"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="203.040985107422"/>
+        <f2 value="121.283744812012"/>
+        <gain value="-2.32"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.998960315479674"/>
+        <b0 value="0.998960315479674"/>
+        <b1 value="-1.99096245409382"/>
+        <b2 value="0.992186491320017"/>
+        <a1 value="1.9909678753866"/>
+        <a2 value="-0.991152228092239"/>
+        <shelfhl value="stLowShelf"/>
+      </processobj>
+      <processobj id="427" title="BQ 11" processtype="ptBiQuad" groupid="2" posx="650" posy="215" enabled="false">
+        <sources count="1">
+          <source id="428" title="" connectedTo="424"/>
+        </sources>
+        <sinks count="1">
+          <sink id="429" title="" connectedTo="430"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="200"/>
+        <f2 value="343.362335205078"/>
+        <gain value="-1"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="430" title="BQ 12" processtype="ptBiQuad" groupid="2" posx="700" posy="215" enabled="false">
+        <sources count="1">
+          <source id="431" title="" connectedTo="427"/>
+        </sources>
+        <sinks count="1">
+          <sink id="432" title="" connectedTo="433"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="2365.02001953125"/>
+        <f2 value="25.332820892334"/>
+        <gain value="0.76"/>
+        <q1 value="7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="433" title="BQ 13" processtype="ptBiQuad" groupid="2" posx="750" posy="215" enabled="true">
+        <sources count="1">
+          <source id="434" title="" connectedTo="430"/>
+        </sources>
+        <sinks count="1">
+          <sink id="435" title="" connectedTo="436"/>
+        </sinks>
+        <filtertype value="ftLowPass1"/>
+        <f1 value="1880"/>
+        <f2 value="4206.71533203125"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="1"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="11812.3883774976"/>
+        <zconst value="0.118295568107538"/>
+        <b0 value="0.118295568107538"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0.881615896469965"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="436" title="BQ 14" processtype="ptBiQuad" groupid="2" posx="800" posy="215" enabled="true">
+        <sources count="1">
+          <source id="437" title="" connectedTo="433"/>
+        </sources>
+        <sinks count="1">
+          <sink id="438" title="" connectedTo="439"/>
+        </sinks>
+        <filtertype value="ftUnity"/>
+        <f1 value="148.443054199219"/>
+        <f2 value="148.443054199219"/>
+        <gain value="0"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="0"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1"/>
+        <b0 value="1"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="0"/>
+        <a2 value="0"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="439" title="BQ 15" processtype="ptBiQuad" groupid="2" posx="850" posy="215" enabled="true">
+        <sources count="1">
+          <source id="440" title="" connectedTo="436"/>
+        </sources>
+        <sinks count="1">
+          <sink id="441" title="" connectedTo="442"/>
+        </sinks>
+        <filtertype value="ftLowPass2"/>
+        <f1 value="1880"/>
+        <f2 value="5148.73388671875"/>
+        <gain value="0"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="0"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="139532519.180841"/>
+        <zconst value="0.0148742385035295"/>
+        <b0 value="0.0148742385035295"/>
+        <b1 value="0"/>
+        <b2 value="0"/>
+        <a1 value="1.86671935855634"/>
+        <a2 value="-0.881615896469965"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="442" title="Delay 2" processtype="ptDelay" groupid="2" posx="900" posy="215" enabled="true">
+        <sources count="1">
+          <source id="444" title="" connectedTo="439"/>
+        </sources>
+        <sinks count="1">
+          <sink id="443" title="" connectedTo="445"/>
+        </sinks>
+        <delay value="96"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="445" title="Gain 2" processtype="ptGain" groupid="2" posx="950" posy="215" enabled="true">
+        <sources count="1">
+          <source id="447" title="" connectedTo="442"/>
+        </sources>
+        <sinks count="1">
+          <sink id="446" title="" connectedTo="338"/>
+        </sinks>
+        <gain value="2"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+      <processobj id="450" title="BQ 1" processtype="ptBiQuad" groupid="3" posx="150" posy="330" enabled="true">
+        <sources count="1">
+          <source id="451" title="" connectedTo="334"/>
+        </sources>
+        <sinks count="1">
+          <sink id="452" title="" connectedTo="453"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="5307.1826171875"/>
+        <f2 value="552.054931640625"/>
+        <gain value="9"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="2.81838293126445"/>
+        <zconst value="2.55305296784882"/>
+        <b0 value="3.606283170497"/>
+        <b1 value="-6.11065935292606"/>
+        <b2 value="2.74054967909557"/>
+        <a1 value="1.4635396802907"/>
+        <a2 value="-0.630738559909863"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="453" title="BQ 2" processtype="ptBiQuad" groupid="3" posx="200" posy="330" enabled="true">
+        <sources count="1">
+          <source id="454" title="" connectedTo="450"/>
+        </sources>
+        <sinks count="1">
+          <sink id="455" title="" connectedTo="456"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="7635.318359375"/>
+        <f2 value="1012.17175292969"/>
+        <gain value="-2.21"/>
+        <q1 value="1"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.935320740385615"/>
+        <b0 value="0.935320740385615"/>
+        <b1 value="-1.30843015924839"/>
+        <b2 value="0.560688537790867"/>
+        <a1 value="1.32927988874515"/>
+        <a2 value="-0.516857770260075"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="456" title="BQ 3" processtype="ptBiQuad" groupid="3" posx="250" posy="330" enabled="false">
+        <sources count="1">
+          <source id="457" title="" connectedTo="453"/>
+        </sources>
+        <sinks count="1">
+          <sink id="458" title="" connectedTo="459"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="1880"/>
+        <f2 value="563.32373046875"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.915081496949756"/>
+        <b0 value="0.915081496949756"/>
+        <b1 value="-1.83016299389951"/>
+        <b2 value="0.915081496949756"/>
+        <a1 value="1.82286432925247"/>
+        <a2 value="-0.837391888666751"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="459" title="BQ 4" processtype="ptBiQuad" groupid="3" posx="300" posy="330" enabled="true">
+        <sources count="1">
+          <source id="460" title="" connectedTo="456"/>
+        </sources>
+        <sinks count="1">
+          <sink id="461" title="" connectedTo="462"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="9440.0068359375"/>
+        <f2 value="80.963264465332"/>
+        <gain value="1.59"/>
+        <q1 value="7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00896534687561"/>
+        <b0 value="1.00896534687561"/>
+        <b1 value="-1.54402667015656"/>
+        <b2 value="0.905187780381308"/>
+        <a1 value="1.54345544614643"/>
+        <a2 value="-0.913581956562893"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="462" title="BQ 5" processtype="ptBiQuad" groupid="3" posx="350" posy="330" enabled="true">
+        <sources count="1">
+          <source id="463" title="" connectedTo="459"/>
+        </sources>
+        <sinks count="1">
+          <sink id="464" title="" connectedTo="465"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="21835.59765625"/>
+        <f2 value="211.414688110352"/>
+        <gain value="-6.46"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.862085695357769"/>
+        <b0 value="0.862085695357769"/>
+        <b1 value="-0.170459108982396"/>
+        <b2 value="0.643336245587464"/>
+        <a1 value="0.205293516585944"/>
+        <a2 value="-0.540236140747169"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="465" title="BQ 6" processtype="ptBiQuad" groupid="3" posx="400" posy="330" enabled="true">
+        <sources count="1">
+          <source id="466" title="" connectedTo="462"/>
+        </sources>
+        <sinks count="1">
+          <sink id="467" title="" connectedTo="468"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="3202.36474609375"/>
+        <f2 value="53.5039138793945"/>
+        <gain value="-6.08"/>
+        <q1 value="0.8"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="0.496592321450336"/>
+        <zconst value="0.520898878706843"/>
+        <b0 value="0.520898878706843"/>
+        <b1 value="-0.870318591280796"/>
+        <b2 value="0.37840638634307"/>
+        <a1 value="1.76936117315721"/>
+        <a2 value="-0.798347831546356"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="468" title="BQ 7" processtype="ptBiQuad" groupid="3" posx="450" posy="330" enabled="true">
+        <sources count="1">
+          <source id="469" title="" connectedTo="465"/>
+        </sources>
+        <sinks count="1">
+          <sink id="470" title="" connectedTo="471"/>
+        </sinks>
+        <filtertype value="ftShelf2"/>
+        <f1 value="12275.998046875"/>
+        <f2 value="310.365905761719"/>
+        <gain value="4.42"/>
+        <q1 value="0.7"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1.66341265037017"/>
+        <zconst value="1.433148144331"/>
+        <b0 value="1.433148144331"/>
+        <b1 value="-1.49346377242887"/>
+        <b2 value="0.509119917999689"/>
+        <a1 value="0.814406466386594"/>
+        <a2 value="-0.263209870201923"/>
+        <shelfhl value="stHighShelf"/>
+      </processobj>
+      <processobj id="471" title="BQ 8" processtype="ptBiQuad" groupid="3" posx="500" posy="330" enabled="true">
+        <sources count="1">
+          <source id="472" title="" connectedTo="468"/>
+        </sources>
+        <sinks count="1">
+          <sink id="473" title="" connectedTo="474"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="14284.8203125"/>
+        <f2 value="16791.15625"/>
+        <gain value="1.52"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.02909821703931"/>
+        <b0 value="1.02909821703931"/>
+        <b1 value="-1.0060758128409"/>
+        <b2 value="0.703650612723624"/>
+        <a1 value="1.00010965900899"/>
+        <a2 value="-0.726784005959891"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="474" title="BQ 9" processtype="ptBiQuad" groupid="3" posx="550" posy="330" enabled="true">
+        <sources count="1">
+          <source id="475" title="" connectedTo="471"/>
+        </sources>
+        <sinks count="1">
+          <sink id="476" title="" connectedTo="477"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2285"/>
+        <f2 value="2724.36279296875"/>
+        <gain value="1.5"/>
+        <q1 value="2"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00714134914037"/>
+        <b0 value="1.00714134914037"/>
+        <b1 value="-1.90414169835923"/>
+        <b2 value="0.919533378810258"/>
+        <a1 value="1.90375403524525"/>
+        <a2 value="-0.92628706688466"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="477" title="BQ 10" processtype="ptBiQuad" groupid="3" posx="600" posy="330" enabled="true">
+        <sources count="1">
+          <source id="478" title="" connectedTo="474"/>
+        </sources>
+        <sinks count="1">
+          <sink id="479" title="" connectedTo="480"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2827.10009765625"/>
+        <f2 value="2564.11645507813"/>
+        <gain value="-1"/>
+        <q1 value="3"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.996197149174265"/>
+        <b0 value="0.996197149174265"/>
+        <b1 value="-1.89686780245208"/>
+        <b2 value="0.935225013561209"/>
+        <a1 value="1.89703378589238"/>
+        <a2 value="-0.931588144831766"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="480" title="BQ 11" processtype="ptBiQuad" groupid="3" posx="650" posy="330" enabled="true">
+        <sources count="1">
+          <source id="481" title="" connectedTo="477"/>
+        </sources>
+        <sinks count="1">
+          <sink id="482" title="" connectedTo="483"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1189.76184082031"/>
+        <f2 value="689.469970703125"/>
+        <gain value="-4.37"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.993532485896545"/>
+        <b0 value="0.993532485896545"/>
+        <b1 value="-1.9612040921583"/>
+        <b2 value="0.973922867388933"/>
+        <a1 value="1.96131708257796"/>
+        <a2 value="-0.967568343543511"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="483" title="BQ 12" processtype="ptBiQuad" groupid="3" posx="700" posy="330" enabled="true">
+        <sources count="1">
+          <source id="484" title="" connectedTo="480"/>
+        </sources>
+        <sinks count="1">
+          <sink id="485" title="" connectedTo="486"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="1412.71240234375"/>
+        <f2 value="2365.02001953125"/>
+        <gain value="-1.38"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.997972848435092"/>
+        <b0 value="0.997972848435092"/>
+        <b1 value="-1.9637661888653"/>
+        <b2 value="0.974627987076483"/>
+        <a1 value="1.96380061541577"/>
+        <a2 value="-0.972635261992605"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="486" title="BQ 13" processtype="ptBiQuad" groupid="3" posx="750" posy="330" enabled="true">
+        <sources count="1">
+          <source id="487" title="" connectedTo="483"/>
+        </sources>
+        <sinks count="1">
+          <sink id="488" title="" connectedTo="489"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="2000"/>
+        <f2 value="1782.27465820313"/>
+        <gain value="-2"/>
+        <q1 value="5"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.996552826366508"/>
+        <b0 value="0.996552826366508"/>
+        <b1 value="-1.9491039096897"/>
+        <b2 value="0.970191905688351"/>
+        <a1 value="1.94917274586568"/>
+        <a2 value="-0.966813567952294"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="489" title="BQ 14" processtype="ptBiQuad" groupid="3" posx="800" posy="330" enabled="true">
+        <sources count="1">
+          <source id="490" title="" connectedTo="486"/>
+        </sources>
+        <sinks count="1">
+          <sink id="491" title="" connectedTo="492"/>
+        </sinks>
+        <filtertype value="ftBoostCut"/>
+        <f1 value="4560.8525390625"/>
+        <f2 value="524.859436035156"/>
+        <gain value="0.84"/>
+        <q1 value="4"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="1.00383491500578"/>
+        <b0 value="1.00383491500578"/>
+        <b1 value="-1.83737260695967"/>
+        <b2 value="0.922793635406205"/>
+        <a1 value="1.83717309949195"/>
+        <a2 value="-0.926429047170615"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="492" title="BQ 15" processtype="ptBiQuad" groupid="3" posx="850" posy="330" enabled="true">
+        <sources count="1">
+          <source id="493" title="" connectedTo="489"/>
+        </sources>
+        <sinks count="1">
+          <sink id="494" title="" connectedTo="495"/>
+        </sinks>
+        <filtertype value="ftHighPass2"/>
+        <f1 value="1880"/>
+        <f2 value="464.931121826172"/>
+        <gain value="0"/>
+        <q1 value="0.71"/>
+        <q2 value="0.7"/>
+        <spoles value="2"/>
+        <szeros value="2"/>
+        <zpoles value="2"/>
+        <zzeros value="2"/>
+        <sconst value="1"/>
+        <zconst value="0.915081496949756"/>
+        <b0 value="0.915081496949756"/>
+        <b1 value="-1.83016299389951"/>
+        <b2 value="0.915081496949756"/>
+        <a1 value="1.82286432925247"/>
+        <a2 value="-0.837391888666751"/>
+        <shelfhl value="stUnknown"/>
+      </processobj>
+      <processobj id="495" title="Delay 3" processtype="ptDelay" groupid="3" posx="900" posy="330" enabled="true">
+        <sources count="1">
+          <source id="497" title="" connectedTo="492"/>
+        </sources>
+        <sinks count="1">
+          <sink id="496" title="" connectedTo="498"/>
+        </sinks>
+        <delay value="21"/>
+        <maxdelay value="19"/>
+      </processobj>
+      <processobj id="498" title="Gain 3" processtype="ptGain" groupid="3" posx="950" posy="330" enabled="true">
+        <sources count="1">
+          <source id="500" title="" connectedTo="495"/>
+        </sources>
+        <sinks count="1">
+          <sink id="499" title="" connectedTo="338"/>
+        </sinks>
+        <gain value="3"/>
+        <invert value="false"/>
+        <additionalgain value="0"/>
+        <mute value="false"/>
+      </processobj>
+    </preset>
+  </device>
+  <microphone>
+    <filename value=""/>
+    <loaded value="false"/>
+  </microphone>
+</project>
