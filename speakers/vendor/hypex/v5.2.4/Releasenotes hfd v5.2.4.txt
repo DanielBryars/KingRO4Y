@@ -1,0 +1,29 @@
+- HFD v5.2
+	-	Ability to connect to and setup the new DSP3-224 (Stereo DSP)
+	-	USB connection sometimes “hanged” using VU meter, this is fixed
+	-	FIR enable in graphical filterdesign screen was not working properly
+	-	The delay in graphical filterdesign screen (channel header) was not updated correctly over all the channels when changing one channel
+	-	User messages changed, where “FusionAmp” was written, now contains “DSP3” as both the FusionAmp (DSP3-213) as the new DSP3-224 (Stereo DSP) are of the same DSP3 family
+	-	The softclip limiter maximum power is now 1200W
+	-	DSP3-224 bootloader reported itself as a DSP3-213
+	-	Default setting button now disabled when device is password protected and locked
+	-	A warning is given when dimmed display brightness is changed with a value of 7 or higher to prevent oled burn-in
+	-	A warning is given when the selected database path is no longer valid
+	-	A message is given after the hardware configuration is saved (device needs to reboot to activate the new settings)
+	-	Taborder of components in device settings was erratic
+	-	The softclip limiter value entry now accepts comma’s as well as dots
+	-	The softclip limiter is now completely set to default when ‘Force defaults’ is hit
+	-	The actual input displayed by HFD was not always what was selected
+	-	In graphical filterdesign, Q of a biquad can now be changed by pressing the control-key and then left clicking the biquad. When this combination is held, moving the mouse up will increase Q, moving the mouse down will decrease the Q-factor. This is the same functionality as rotating the mousewheel on a selected biquad 
+	-	When a biquad is added, it is now standard a Boost/Cut filter. Previously a Unity filter was set
+	-	A ‘noise’ checkbox is added on the mainscreen. Checking this box, will instruct the DSP3 to rotate a noise signal from channel to channel. Only valid programmed channels are used for the noise output. The volume is set to -55dB when producing noise
+	-	On the equalizer screen it is now possible to program the EQ of the current preset to all other presets with button ‘save to all presets’. Button ‘upload to DSP’ is renamed to ‘save to this preset’ and will only program the EQ to the current selected preset
+	-	It was not possible to create a project offline with FIR filters other than input-FIR filter
+	-	Improved opening "Device settings" screen (very occasionally failed to load settings from the connected device)
+	-	Fixed channel 4 FIR configuration (in DSP3-224 project)
+	
+  Quick fixes in HFD v5.2.4:
+	- Released along with DSP3-224 firmware v1.21
+	- Clone functionality is now less dependent of host cpu speed
+	- Error in microphone correction calculation fixed
+	- Display logo update button was invisible for OEM users
