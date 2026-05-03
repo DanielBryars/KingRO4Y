@@ -681,6 +681,11 @@ can re-flash the PIC manually.
    `0x03 0x08` we know returns the *project* filename.
 5. **Master/slave behaviour** between two FA503s — does the slave
    follow volume / preset / mute over the digital chain, or do we
-   need dual-host USB?
+   need dual-host USB? **Likely answer based on what we've seen so
+   far: the digital chain carries audio, not control — so for a
+   stereo pair, both amps need their own control link. Avoiding two
+   USB devices is the user's stated preference, hence the BT-dongle
+   design (see `knob/docs/Architecture.md`).** Worth confirming once
+   we have the second FA503 wired up.
 6. **Decode of `08 NN` counters** — frame counter or free-running
    clock? A controlled signal-on / signal-off test would distinguish.
