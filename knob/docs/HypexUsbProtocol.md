@@ -58,7 +58,7 @@ firmware not loaded". (VERIFIED)
 | Property | Value | Tag |
 |----------|-------|-----|
 | Class | HID (`0x03`) | DOC |
-| Packet length | 64 bytes for both directions | DOC |
+| Packet length | **67 bytes on the wire** for status responses (PDF says 64; trailing 3 bytes are constant `… 80 da 02` and were missed in the original write-up). 64-byte writes from the host work fine. | VERIFIED |
 | OUT endpoint | `0x01` (interrupt) | DOC |
 | IN endpoint | `0x81` (interrupt) | DOC |
 | Report ID | **None** — vendor HID exposes a single unnumbered report | VERIFIED |
@@ -106,10 +106,13 @@ on the opcode.
 | `0x06 0x03` | Read (calibration block) | Safe | Per-channel calibration constants. Static. Response type `0x66`. |
 | `0x06 NN` (other) | Read | Safe | Returns trivial / empty. Not currently used. |
 | `0x07` | Untested | **DO NOT SEND** | Adjacent to known-dangerous `0x09`. |
-| `0x08 NN` | Read (live counters) | Safe | The only confirmed live-data opcode. See section 7. |
+| `0x08 NN` | Read (live counters) | Safe | Live counters / boot count. See section 7. |
 | `0x09` | Untested | **DANGER — DO NOT SEND, EVER** | `0x09 0x00` hung the amp's USB stack and required a power-cycle + firmware re-flash + project re-upload to recover. See `feedback_hypex_dangerous_opcodes.md`. |
-| `0x0a`+ | Untested | **DO NOT SEND** | Same risk class as `0x09` until proven otherwise. |
-| `0x10`+ | Untested | **DO NOT SEND** | Same. |
+| `0x0a`–`0x64` | Untested | **DO NOT SEND** | Same risk class as `0x09` until proven otherwise. |
+| `0x65 0x20 NN MM` | Read (parameterised info) | Safe — observed in HFD | Multi-purpose info read. NN selects the field. See section 12. |
+| `0x66` | Read/write (calibration?) | Safe — observed in HFD | HFD writes a packet starting `66 00 00 01 …` and reads `66 00 …` back; payload looks like the same bytes returned by `0x06 0x03`. Section 13. |
+| `0x67` | Read | Safe — observed in HFD | Returns ~36 bytes of `0xff`, then zeros. Likely an EEPROM dump or a "blank" capabilities probe. Section 13. |
+| `0x68`–`0xff` | Untested | **DO NOT SEND** | Until proven otherwise. |
 
 ### Operational rules (derived from incidents)
 
@@ -191,11 +194,33 @@ across mute / volume / preset / input variation. (VERIFIED.)
 
 Two consecutive Set State writes ~50 ms apart can result in the
 **second one being silently dropped** — no error returned, no protocol
-indication, the amp just doesn't apply it. The minimum reliable gap is
-not yet measured precisely. The Tk slider's 30 ms debounce hasn't
-tripped on this in casual use, but for a firmware port it should be
-worked out empirically and documented. (VERIFIED — 2026-05-02 saw a
-v=−40 dB write fail to take after a v=−50 dB write.)
+indication, the amp just doesn't apply it. (VERIFIED — 2026-05-02 saw
+a v=−40 dB write fail to take after a v=−50 dB write.)
+
+The HFD pcap on 2026-05-03 narrows the floor: HFD's own polling loop
+ran at 8 Hz (mean gap 125 ms) with **a minimum observed gap of 53 ms**
+across 248 packets, and HFD never had a write silently dropped. So
+the safe minimum gap for back-to-back state-changing writes is
+somewhere between **50 ms and 80 ms**. Recommended firmware throttle:
+**100 ms minimum** between consecutive Set State writes; the slider's
+30 ms debounce should be raised. (VERIFIED.)
+
+### The "polling" sub-command (`0x05 0x01` vs `0x05 0x00`)
+
+Opcode `0x05` is *overloaded*. Byte 1 distinguishes two modes:
+
+- **`0x05 0x00 …`** — Set State (destructive, atomic). Byte 1 = 0
+  means "input source: no change"; the rest of the packet sets state.
+- **`0x05 0x01 …`** — **VU-meter polling request**. Byte 1 = 0x01 is
+  *not* "set input to XLR" in this position; it's a sub-command that
+  asks the amp to return state plus current peak meter values. The
+  rest of the packet must mirror the amp's *current* state (preset,
+  volume, project signature) so the amp can verify the host is in
+  sync. The IN response is a 67-byte status frame with peak meter
+  values populated in bytes 47–49 (see section 5).
+
+This was discovered from the HFD pcap on 2026-05-03; the vendor PDF
+does not document it. (VERIFIED.)
 
 ---
 
@@ -222,14 +247,49 @@ Response: 64 bytes, response type `0x05` in byte 0.
 
 | Byte(s) | Behaviour | Best guess |
 |---------|-----------|------------|
-| 21–22 | Vary; sometimes echo the volume; lag the commanded value | "Volume mirror" — possibly a different stage of the volume pipeline |
-| 35–36 | Vary across state changes | UNKNOWN |
-| 46–48 | Rise sharply when going muted → unmuted at the same volume; values not monotonic across states | **GUESS: an output-level meter (probably summed, not per-channel)**. Strongest candidate for a single-value VU readout we already have access to. Worth a focused signal-on / signal-off / known-amplitude experiment. |
-| 51 | Mirrors current preset | Just a redundant copy |
-| 52–53 | Lag the commanded volume by ~1–2 captures | **GUESS: actual fader position vs commanded target during a soft volume ramp.** If true, the knob can use this for a smooth animation. |
-| 56–57 | Vary, not monotonic | UNKNOWN — was hypothesised to be a state-change counter, doesn't behave like one |
-| 60 | Goes `0x40` only when a valid preset is active AND unmuted; clears on mute or preset switch | **GUESS: an "audio output active" flag — bit 6 set when DSP is producing output.** Useful indicator for the knob ("live" vs "silent"). |
-| Tail (61–63) | Trailing constants (`80 da 02`) | UNKNOWN |
+| 8–11 | Constant within one project, e.g. `0f 09 00 02` for the user's KingRO4Y project; was `0f 19 00 02` before the post-incident project re-upload | **GUESS: project / DSP signature. HFD echoes this back in every polling packet so the amp can detect project mismatches.** |
+| 21–22 | Echo the volume target, but lag the actual fader during ramps | "Volume mirror" — possibly the per-output trim post-DSP |
+| 24–26 | Constant `ff ff ff` in IN responses, `ff ff 00` (last byte 0) in HFD's polling OUT | **GUESS: one of these bits is a "last write valid" flag the amp toggles** |
+| 35–36 | Constant `f6 01` (= 502 LE) across all captures we have | **GUESS: probably a project / firmware version code** |
+| 45–46 | Constant `e0 01` (= 480 LE) across the 248 polling responses | **GUESS: peak-meter scale endpoint or sample-count constant** |
+| **47–48** | **Vary across every polling response — `0x05/0x80` to `0x55/0x55` typical, range as LE16 ≈ 1280..21800.** | **VU METER. Linear peak scale 0..32767 ≈ 0..0 dBFS. A reading of ~9000 = -11 dB FS, ~3000 = -21 dB FS.** See section 5a. |
+| 49 | Range 0..85 — varies with audio level but more slowly than 47–48 | **GUESS: peak-hold counter or a second VU value (per-channel?).** |
+| 51 | Mirrors current preset | Redundant copy |
+| 52–53 | Lag the commanded volume by ~1–2 captures | "Actual fader position" during soft ramp (vs commanded target at bytes 3–4) |
+| 56–57 | `3e 3a` constant in HFD's traces | UNKNOWN |
+| 60 | Three values across captures: `0x00`, `0x40`, `0xc0` — bit 6 = "audio active", bit 7 = ? | **GUESS: bit 6 = audio output enabled, bit 7 = signal lock (e.g. SPDIF lock). When both clear, the amp is silent.** |
+| Tail (61, 62, 63, 64) | Constant `00 80 da 02` across all captures | Probably packet framing / version marker — ignore |
+
+### 5a. VU meter encoding (decoded from HFD pcap)
+
+Across 248 polling responses captured while music was playing:
+
+- **Byte 47 (LE low) and byte 48 (LE high)** form a 16-bit unsigned
+  value in the range **1280..21763** (varying with audio amplitude).
+- Interpreting as linear peak in `[0, 32767]` mapped to `[0, 0 dB FS]`:
+
+```
+dB_FS = 20 * log10(value / 32768.0)
+```
+
+  Yields plausible audio peaks: 1280 → −28 dB FS, 9000 → −11 dB FS,
+  21763 → −3.5 dB FS. (GUESS, but the range and dynamics fit.)
+
+- **Byte 46** also varies dynamically (114 unique values). Could be a
+  second meter (e.g. input vs output), an envelope follower with
+  different ballistics, or per-channel data. Needs a per-channel
+  controlled experiment to confirm.
+
+- **Byte 49** (range 0..85) tracks audio level more slowly. Likely
+  peak-hold or a per-channel sample.
+
+The full per-channel meter set (input L/R + 3 output channels, as
+HFD's `LblDspPeakOutCh1..Ch4` symbols imply) probably lives in the
+`0x65 0x20 (a0/c0/e0) NN` reads — see section 12. Bytes 47–49 of the
+status response appear to be a **single summed level**, perfect for a
+single-bar VU.
+
+
 
 The full decode of these bytes is on the experiment shopping-list in
 `experiments.md`, but no longer urgent given the knob's core requirements
@@ -481,7 +541,46 @@ capture.
 
 ---
 
-## 11. Known dangerous opcodes
+## 12. Parameterised info read (`0x65 0x20 NN MM`)
+
+Newly observed in HFD pcap. The first two bytes `0x65 0x20` select an
+"info" report; bytes 2 and 3 select sub-fields. The response shape and
+length vary per sub-field. Confirmed safe (HFD uses these freely).
+(VERIFIED.)
+
+| Request bytes | Response (excerpt) | Decoded |
+|---------------|--------------------|---------|
+| `65 20 00 01 …` | `65 20 48 30 35 55 30 30 33 32 36 38 2d 30 35 30 30 4d 36 35 37 39 2d 30 30 35 32 00 …` | **Serial number string** as ASCII at byte 2. Matches the unit serial we already see in `hid.enumerate()`. |
+| `65 20 20 01 …` | `65 20 46 41 35 30 33 00 …` | **Model name string** at byte 2: `"FA503"`. |
+| `65 20 40 01 …` | `65 20 00 00 …` | Empty in our capture. Purpose UNKNOWN. |
+| `65 20 a0 5N 02 01 …` | `65 20 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 80 88 13 00 c3 02 00 00 80 10 27 00 …` | UNKNOWN — small flags, then a constant `13 00`, then values. |
+| `65 20 c0 5N 02 01 …` | `65 20 c3 02 00 00 80 20 4e 00  c3 02 00 00 80 50 c3 00  c3 02 00 00 80 a0 86 01  c3 02 00 00 80 40 0d 03 …` | **Per-channel triplet of 8-byte records** (4 records, each `c3 02 00 00 80 XX XX XX`). Triple matches FA503's 3 channels plus possibly a sum. The `c3 02 00 00` prefix is constant; the trailing 4 bytes vary per record. **GUESS: per-channel limiter / clip / setpoint state.** |
+| `65 20 e0 5N 02 01 …` | `65 20 c3 02 00 00 80 20 a1 07  …  ff ff 5d 3e …` | Same shape as `c0` but with larger values; **GUESS: a different field in the same per-channel record.** |
+| `65 20 (a0|c0|e0) (50|60|70|80)` | (each forms a 3-tuple) | HFD reads these in synchronised groups every ~2 s — looks like a periodic per-channel telemetry sweep complementary to the fast `0x05 0x01` polling. |
+
+Note the second nibble of byte 3 (the `5`/`6`/`7`/`8` in `50/60/70/80`)
+appears to advance through some kind of channel or page index.
+
+## 13. Calibration write (`0x66`) and EEPROM-ish read (`0x67`)
+
+Both observed once each in HFD's startup handshake.
+
+`0x66`: HFD wrote `66 00 00 01 00 00 00 00 00 00 05 09 00 01 01 00 00
+00 00 00 2c 2d f0 08 ff ff 00 …` — the body matches the data the amp
+returns from `0x06 0x03` (the calibration block). Likely a
+"calibration confirm / write-through" in HFD's bootstrap. Byte 3 = 1
+means "write" vs the read-side `0x66 0x00 0x00 0x00`. (GUESS.)
+
+`0x67`: HFD wrote `67 00 00 00 …` (zero body) and got back
+`67 00 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 00 00 …` — 36 bytes of
+`0xff`, then zeros. Probably an **EEPROM read where the addresses are
+unprogrammed** (`0xff` = blank flash / EEPROM) or a probe for OEM /
+license bytes. (GUESS.)
+
+Neither is needed for the knob — listed for completeness.
+
+## 14. Known dangerous opcodes
 
 ### `0x09 NN` — DO NOT SEND
 
@@ -509,7 +608,7 @@ Untested. Until proven otherwise, treat as potentially hangs-the-amp.
 
 ---
 
-## 12. Recovery procedure (if the amp goes silent / drops off USB)
+## 15. Recovery procedure (if the amp goes silent / drops off USB)
 
 Canonical steps, proven 2026-05-03:
 
@@ -541,7 +640,7 @@ can re-flash the PIC manually.
 
 ---
 
-## 13. References
+## 16. References
 
 - Vendor PDF: `speakers/vendor/hypex/Hypex USB Hid documentation.pdf`
 - Local notes: `hypex_fusion_notes.md` (repo root) — protocol summary
@@ -564,24 +663,24 @@ can re-flash the PIC manually.
 
 ---
 
-## 14. Open questions, in priority order
+## 17. Open questions, in priority order
 
-1. **Report ID for the per-channel VU meter.** Likely findable in 5
-   minutes with Wireshark + USBPcap on a session of HFD with its VU
-   meter window open. The amp clearly returns input L/R peak and
-   per-output-channel peak; we just don't know which `0x0X 0xNN`.
-2. **Status bits / Health bits report ID.** Same approach — HFD
-   polls these and we'd see it on the wire.
-3. **Decode of `08 NN` counters** — frame counter or free-running
-   clock? A controlled signal-on / signal-off test would distinguish.
-4. **Status bytes 46–48 hypothesis** — single-channel summed VU meter,
-   in the existing status response. A controlled signal level test
-   would confirm.
-5. **Set State rate-limit floor** — empirical sweep of inter-write gap
-   from 5 to 100 ms.
-6. **Per-preset friendly name** — find the `0x03 NN` (or other
-   opcode) that returns per-preset name strings rather than the project
-   filename.
-7. **Master/slave behaviour** between two FA503s — does the slave
+1. **Per-channel VU meters via `0x65 0x20`.** We have a single-channel
+   VU at status bytes 47–48; per-channel input + output peaks live in
+   the `0x65 0x20 (c0/e0) NN` triplets per section 12. Need to decode
+   the 8-byte record format inside.
+2. **Status bits and Health bits report ID.** Still unknown which
+   `0x0X 0xNN` carries them. A second pcap with HFD's "Status" panel
+   open (showing protection/temp warnings) would reveal it.
+3. **Linear-peak vs dB-FS scaling for bytes 47–48.** Our hypothesis is
+   linear `[0, 32767] → [-∞, 0] dB FS`. Should be verified by playing
+   a tone at a known level (e.g. -20 dB FS pink noise) and reading
+   back the value.
+4. **Per-preset friendly name** — find the `0x03 NN` (or other) that
+   returns the user-friendly preset name HFD shows in its UI. The
+   `0x03 0x08` we know returns the *project* filename.
+5. **Master/slave behaviour** between two FA503s — does the slave
    follow volume / preset / mute over the digital chain, or do we
    need dual-host USB?
+6. **Decode of `08 NN` counters** — frame counter or free-running
+   clock? A controlled signal-on / signal-off test would distinguish.
