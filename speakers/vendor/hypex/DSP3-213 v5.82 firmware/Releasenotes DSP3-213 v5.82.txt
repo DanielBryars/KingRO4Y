@@ -1,0 +1,15 @@
+Firmware DSP3-213 v5.8 release notes (hardware with PIC32):
+- Firmware improvements (v5.8):
+	- Samplerate added for OLED display
+	- DC error screen added for OLED display
+	- Autosource detection improved for detecting non-standard Consumer AES digital audio
+	- When a single channel amp is configured, channel 2 is ignored when calculating and testing temperature, and fan control
+
+Firmware v5.81 release notes:
+- Firmware improvements (v5.81):
+	- Added noise generator for channel detection
+	
+Firmware v5.82 release notes:
+- Bug fix (v5.82):
+	- Temperature sensor did not function correctly when NCAS amplifiers were configured
+	
