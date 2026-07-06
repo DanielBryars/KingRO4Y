@@ -1,0 +1,1222 @@
+I (64229) ble_input: controller battery: 100%
+I (64729) ble_input: input report id=0 len=3
+I (64729) ble_input: 01 00 00
+W (64729) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (64779) ble_input: input report id=0 len=3
+I (64779) ble_input: 00 00 00
+I (64879) ble_input: input report id=0 len=3
+I (64879) ble_input: 00 00 00
+I (65079) ble_input: input report id=0 len=3
+I (65079) ble_input: 00 00 00
+I (65279) ble_input: input report id=0 len=3
+I (65279) ble_input: 00 00 00
+I (65429) ble_input: input report id=0 len=3
+I (65429) ble_input: 00 00 00
+I (65629) ble_input: input report id=0 len=3
+I (65629) ble_input: 00 00 00
+I (65829) ble_input: input report id=0 len=3
+I (65829) ble_input: 00 00 00
+I (67129) ble_input: input report id=0 len=3
+I (67129) ble_input: 01 00 00
+W (67129) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67179) ble_input: input report id=0 len=3
+I (67179) ble_input: 00 00 00
+I (67229) ble_input: input report id=0 len=3
+I (67229) ble_input: 01 00 00
+W (67229) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67279) ble_input: input report id=0 len=3
+I (67279) ble_input: 00 00 00
+I (67329) ble_input: input report id=0 len=3
+I (67329) ble_input: 01 00 00
+W (67329) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67379) ble_input: input report id=0 len=3
+I (67379) ble_input: 00 00 00
+I (67429) ble_input: input report id=0 len=3
+I (67429) ble_input: 01 00 00
+W (67429) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67479) ble_input: input report id=0 len=3
+I (67479) ble_input: 00 00 00
+I (67529) ble_input: input report id=0 len=3
+I (67529) ble_input: 01 00 00
+W (67529) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67579) ble_input: input report id=0 len=3
+I (67579) ble_input: 00 00 00
+I (67629) ble_input: input report id=0 len=3
+I (67629) ble_input: 01 00 00
+W (67629) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67679) ble_input: input report id=0 len=3
+I (67679) ble_input: 00 00 00
+I (67729) ble_input: input report id=0 len=3
+I (67729) ble_input: 01 00 00
+W (67729) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67779) ble_input: input report id=0 len=3
+I (67779) ble_input: 00 00 00
+I (67829) ble_input: input report id=0 len=3
+I (67829) ble_input: 00 00 00
+I (67879) ble_input: input report id=0 len=3
+I (67879) ble_input: 01 00 00
+W (67879) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67929) ble_input: input report id=0 len=3
+I (67929) ble_input: 01 00 00
+W (67929) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (67979) ble_input: input report id=0 len=3
+I (67979) ble_input: 02 00 00
+W (67979) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68029) ble_input: input report id=0 len=3
+I (68029) ble_input: 00 00 00
+I (68079) ble_input: input report id=0 len=3
+I (68079) ble_input: 02 00 00
+W (68079) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68129) ble_input: input report id=0 len=3
+I (68129) ble_input: 00 00 00
+I (68179) ble_input: input report id=0 len=3
+I (68179) ble_input: 02 00 00
+W (68179) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68229) ble_input: input report id=0 len=3
+I (68229) ble_input: 02 00 00
+W (68229) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68279) ble_input: input report id=0 len=3
+I (68279) ble_input: 00 00 00
+I (68329) ble_input: input report id=0 len=3
+I (68329) ble_input: 02 00 00
+W (68329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68379) ble_input: input report id=0 len=3
+I (68379) ble_input: 02 00 00
+W (68379) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68429) ble_input: input report id=0 len=3
+I (68429) ble_input: 02 00 00
+W (68429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68479) ble_input: input report id=0 len=3
+I (68479) ble_input: 02 00 00
+W (68479) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68529) ble_input: input report id=0 len=3
+I (68529) ble_input: 02 00 00
+W (68529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68579) ble_input: input report id=0 len=3
+I (68579) ble_input: 02 00 00
+W (68579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68629) ble_input: input report id=0 len=3
+I (68629) ble_input: 02 00 00
+W (68629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68679) ble_input: input report id=0 len=3
+I (68679) ble_input: 02 00 00
+W (68679) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (68729) ble_input: input report id=0 len=3
+I (68729) ble_input: 01 00 00
+W (68729) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (68779) ble_input: input report id=0 len=3
+I (68779) ble_input: 00 00 00
+I (68829) ble_input: input report id=0 len=3
+I (68829) ble_input: 01 00 00
+W (68829) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (68879) ble_input: input report id=0 len=3
+I (68879) ble_input: 01 00 00
+W (68879) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (68929) ble_input: input report id=0 len=3
+I (68929) ble_input: 01 00 00
+W (68929) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (68979) ble_input: input report id=0 len=3
+I (68979) ble_input: 01 00 00
+W (68979) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (69029) ble_input: input report id=0 len=3
+I (69029) ble_input: 01 00 00
+W (69029) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (69079) ble_input: input report id=0 len=3
+I (69079) ble_input: 01 00 00
+W (69079) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (69129) ble_input: input report id=0 len=3
+I (69129) ble_input: 01 00 00
+W (69129) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (69179) ble_input: input report id=0 len=3
+I (69179) ble_input: 00 00 00
+I (69229) ble_input: input report id=0 len=3
+I (69229) ble_input: 01 00 00
+W (69229) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (69279) ble_input: input report id=0 len=3
+I (69279) ble_input: 01 00 00
+W (69279) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (69329) ble_input: input report id=0 len=3
+I (69329) ble_input: 01 00 00
+W (69329) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (69379) ble_input: input report id=0 len=3
+I (69379) ble_input: 01 00 00
+W (69379) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (69429) ble_input: input report id=0 len=3
+I (69429) ble_input: 02 00 00
+W (69429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (69479) ble_input: input report id=0 len=3
+I (69479) ble_input: 00 00 00
+I (69529) ble_input: input report id=0 len=3
+I (69529) ble_input: 02 00 00
+W (69529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (69579) ble_input: input report id=0 len=3
+I (69579) ble_input: 02 00 00
+W (69579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (69629) ble_input: input report id=0 len=3
+I (69629) ble_input: 02 00 00
+W (69629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (69679) ble_input: input report id=0 len=3
+I (69679) ble_input: 00 00 00
+I (69729) ble_input: input report id=0 len=3
+I (69729) ble_input: 00 00 00
+I (69779) ble_input: input report id=0 len=3
+I (69779) ble_input: 00 00 00
+I (69879) ble_input: input report id=0 len=3
+I (69879) ble_input: 00 00 00
+I (70079) ble_input: input report id=0 len=3
+I (70079) ble_input: 00 00 00
+I (70129) ble_input: input report id=0 len=3
+I (70129) ble_input: 02 00 00
+W (70129) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (70179) ble_input: input report id=0 len=3
+I (70179) ble_input: 00 00 00
+I (70229) ble_input: input report id=0 len=3
+I (70229) ble_input: 02 00 00
+W (70229) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (70279) ble_input: input report id=0 len=3
+I (70279) ble_input: 00 00 00
+I (70329) ble_input: input report id=0 len=3
+I (70329) ble_input: 02 00 00
+W (70329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (70379) ble_input: input report id=0 len=3
+I (70379) ble_input: 00 00 00
+I (70429) ble_input: input report id=0 len=3
+I (70429) ble_input: 02 00 00
+W (70429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (70479) ble_input: input report id=0 len=3
+I (70479) ble_input: 00 00 00
+I (70529) ble_input: input report id=0 len=3
+I (70529) ble_input: 02 00 00
+W (70529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (70579) ble_input: input report id=0 len=3
+I (70579) ble_input: 00 00 00
+I (70629) ble_input: input report id=0 len=3
+I (70629) ble_input: 02 00 00
+W (70629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (70679) ble_input: input report id=0 len=3
+I (70679) ble_input: 00 00 00
+I (70729) ble_input: input report id=0 len=3
+I (70729) ble_input: 01 00 00
+W (70729) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (70779) ble_input: input report id=0 len=3
+I (70779) ble_input: 00 00 00
+I (70829) ble_input: input report id=0 len=3
+I (70829) ble_input: 01 00 00
+W (70829) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (70879) ble_input: input report id=0 len=3
+I (70879) ble_input: 00 00 00
+I (70929) ble_input: input report id=0 len=3
+I (70929) ble_input: 01 00 00
+W (70929) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (70979) ble_input: input report id=0 len=3
+I (70979) ble_input: 00 00 00
+I (71029) ble_input: input report id=0 len=3
+I (71029) ble_input: 01 00 00
+W (71029) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (71079) ble_input: input report id=0 len=3
+I (71079) ble_input: 01 00 00
+W (71079) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (71129) ble_input: input report id=0 len=3
+I (71129) ble_input: 02 00 00
+W (71129) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71179) ble_input: input report id=0 len=3
+I (71179) ble_input: 00 00 00
+I (71229) ble_input: input report id=0 len=3
+I (71229) ble_input: 02 00 00
+W (71229) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71279) ble_input: input report id=0 len=3
+I (71279) ble_input: 02 00 00
+W (71279) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71329) ble_input: input report id=0 len=3
+I (71329) ble_input: 02 00 00
+W (71329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71379) ble_input: input report id=0 len=3
+I (71379) ble_input: 02 00 00
+W (71379) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71429) ble_input: input report id=0 len=3
+I (71429) ble_input: 02 00 00
+W (71429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71479) ble_input: input report id=0 len=3
+I (71479) ble_input: 00 00 00
+I (71529) ble_input: input report id=0 len=3
+I (71529) ble_input: 02 00 00
+W (71529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71579) ble_input: input report id=0 len=3
+I (71579) ble_input: 02 00 00
+W (71579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71629) ble_input: input report id=0 len=3
+I (71629) ble_input: 00 00 00
+I (71679) ble_input: input report id=0 len=3
+I (71679) ble_input: 02 00 00
+W (71679) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71729) ble_input: input report id=0 len=3
+I (71729) ble_input: 00 00 00
+I (71779) ble_input: input report id=0 len=3
+I (71779) ble_input: 00 00 00
+I (71879) ble_input: input report id=0 len=3
+I (71879) ble_input: 02 00 00
+W (71879) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (71929) ble_input: input report id=0 len=3
+I (71929) ble_input: 00 00 00
+I (71979) ble_input: input report id=0 len=3
+I (71979) ble_input: 02 00 00
+W (71979) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (72029) ble_input: input report id=0 len=3
+I (72029) ble_input: 00 00 00
+I (72079) ble_input: input report id=0 len=3
+I (72079) ble_input: 00 00 00
+I (72129) ble_input: input report id=0 len=3
+I (72129) ble_input: 02 00 00
+W (72129) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (72179) ble_input: input report id=0 len=3
+I (72179) ble_input: 00 00 00
+I (72229) ble_input: input report id=0 len=3
+I (72229) ble_input: 02 00 00
+W (72229) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (72279) ble_input: input report id=0 len=3
+I (72279) ble_input: 00 00 00
+I (72329) ble_input: input report id=0 len=3
+I (72329) ble_input: 02 00 00
+W (72329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (72379) ble_input: input report id=0 len=3
+I (72379) ble_input: 00 00 00
+I (72429) ble_input: input report id=0 len=3
+I (72429) ble_input: 00 00 00
+I (72479) ble_input: input report id=0 len=3
+I (72479) ble_input: 02 00 00
+W (72479) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (72529) ble_input: input report id=0 len=3
+I (72529) ble_input: 00 00 00
+I (72579) ble_input: input report id=0 len=3
+I (72579) ble_input: 02 00 00
+W (72579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (72629) ble_input: input report id=0 len=3
+I (72629) ble_input: 00 00 00
+I (72679) ble_input: input report id=0 len=3
+I (72679) ble_input: 00 00 00
+I (72829) ble_input: input report id=0 len=3
+I (72829) ble_input: 00 00 00
+I (73029) ble_input: input report id=0 len=3
+I (73029) ble_input: 00 00 00
+I (73179) ble_input: input report id=0 len=3
+I (73179) ble_input: 00 00 00
+I (73379) ble_input: input report id=0 len=3
+I (73379) ble_input: 00 00 00
+I (73579) ble_input: controller battery: 100%
+I (73629) ble_input: input report id=0 len=3
+I (73629) ble_input: 00 00 00
+I (74129) ble_input: input report id=0 len=3
+I (74129) ble_input: 01 00 00
+W (74129) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (74179) ble_input: input report id=0 len=3
+I (74179) ble_input: 00 00 00
+I (74229) ble_input: input report id=0 len=3
+I (74229) ble_input: 01 00 00
+W (74229) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (74279) ble_input: input report id=0 len=3
+I (74279) ble_input: 00 00 00
+I (74329) ble_input: input report id=0 len=3
+I (74329) ble_input: 01 00 00
+W (74329) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (74379) ble_input: input report id=0 len=3
+I (74379) ble_input: 00 00 00
+I (74429) ble_input: input report id=0 len=3
+I (74429) ble_input: 00 00 00
+I (74479) ble_input: input report id=0 len=3
+I (74479) ble_input: 02 00 00
+W (74479) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (74529) ble_input: input report id=0 len=3
+I (74529) ble_input: 00 00 00
+I (74629) ble_input: input report id=0 len=3
+I (74629) ble_input: 00 00 00
+I (74679) ble_input: input report id=0 len=3
+I (74679) ble_input: 01 00 00
+W (74679) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (74729) ble_input: input report id=0 len=3
+I (74729) ble_input: 00 00 00
+I (74779) ble_input: input report id=0 len=3
+I (74779) ble_input: 01 00 00
+W (74779) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (74829) ble_input: input report id=0 len=3
+I (74829) ble_input: 00 00 00
+I (74879) ble_input: input report id=0 len=3
+I (74879) ble_input: 00 00 00
+I (74929) ble_input: input report id=0 len=3
+I (74929) ble_input: 01 00 00
+W (74929) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (74979) ble_input: input report id=0 len=3
+I (74979) ble_input: 00 00 00
+I (75129) ble_input: input report id=0 len=3
+I (75129) ble_input: 00 00 00
+I (75229) ble_input: input report id=0 len=3
+I (75229) ble_input: 01 00 00
+W (75229) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (75279) ble_input: input report id=0 len=3
+I (75279) ble_input: 00 00 00
+I (75429) ble_input: input report id=0 len=3
+I (75429) ble_input: 00 00 00
+I (75629) ble_input: input report id=0 len=3
+I (75629) ble_input: 00 00 00
+I (75779) ble_input: input report id=0 len=3
+I (75779) ble_input: 00 00 00
+I (75979) ble_input: input report id=0 len=3
+I (75979) ble_input: 00 00 00
+I (76179) ble_input: input report id=0 len=3
+I (76179) ble_input: 00 00 00
+I (76379) ble_input: input report id=0 len=3
+I (76379) ble_input: 00 00 00
+I (76429) ble_input: input report id=0 len=3
+I (76429) ble_input: 20 00 00
+W (76429) ble_input: unrecognised usage code 0x0020 ??? capture this and extend decode_consumer_usage()
+I (76479) ble_input: input report id=0 len=3
+I (76479) ble_input: 00 00 00
+I (76529) ble_input: input report id=0 len=3
+I (76529) ble_input: 02 00 00
+W (76529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (76579) ble_input: input report id=0 len=3
+I (76579) ble_input: 00 00 00
+I (76729) ble_input: input report id=0 len=3
+I (76729) ble_input: 00 00 00
+I (76779) ble_input: input report id=0 len=3
+I (76779) ble_input: 01 00 00
+W (76779) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (76829) ble_input: input report id=0 len=3
+I (76829) ble_input: 00 00 00
+I (76929) ble_input: input report id=0 len=3
+I (76929) ble_input: 00 00 00
+I (77129) ble_input: input report id=0 len=3
+I (77129) ble_input: 00 00 00
+I (77329) ble_input: input report id=0 len=3
+I (77329) ble_input: 00 00 00
+I (77579) ble_input: input report id=0 len=3
+I (77579) ble_input: 00 00 00
+I (77729) ble_input: input report id=0 len=3
+I (77729) ble_input: 00 00 00
+I (77779) ble_input: input report id=0 len=3
+I (77779) ble_input: 01 00 00
+W (77779) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (77829) ble_input: input report id=0 len=3
+I (77829) ble_input: 00 00 00
+I (77979) ble_input: input report id=0 len=3
+I (77979) ble_input: 00 00 00
+I (78179) ble_input: input report id=0 len=3
+I (78179) ble_input: 02 00 00
+W (78179) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (78229) ble_input: input report id=0 len=3
+I (78229) ble_input: 00 00 00
+I (78279) ble_input: input report id=0 len=3
+I (78279) ble_input: 02 00 00
+W (78279) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (78329) ble_input: input report id=0 len=3
+I (78329) ble_input: 00 00 00
+I (78379) ble_input: input report id=0 len=3
+I (78379) ble_input: 02 00 00
+W (78379) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (78429) ble_input: input report id=0 len=3
+I (78429) ble_input: 00 00 00
+I (78479) ble_input: input report id=0 len=3
+I (78479) ble_input: 02 00 00
+W (78479) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (78529) ble_input: input report id=0 len=3
+I (78529) ble_input: 00 00 00
+I (78579) ble_input: input report id=0 len=3
+I (78579) ble_input: 01 00 00
+W (78579) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (78629) ble_input: input report id=0 len=3
+I (78629) ble_input: 00 00 00
+I (78679) ble_input: input report id=0 len=3
+I (78679) ble_input: 00 00 00
+I (78879) ble_input: input report id=0 len=3
+I (78879) ble_input: 00 00 00
+I (79079) ble_input: input report id=0 len=3
+I (79079) ble_input: 00 00 00
+I (79279) ble_input: input report id=0 len=3
+I (79279) ble_input: 00 00 00
+I (79329) ble_input: input report id=0 len=3
+I (79329) ble_input: 02 00 00
+W (79329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (79379) ble_input: input report id=0 len=3
+I (79379) ble_input: 00 00 00
+I (79429) ble_input: input report id=0 len=3
+I (79429) ble_input: 02 00 00
+W (79429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (79479) ble_input: input report id=0 len=3
+I (79479) ble_input: 00 00 00
+I (79579) ble_input: input report id=0 len=3
+I (79579) ble_input: 02 00 00
+W (79579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (79629) ble_input: input report id=0 len=3
+I (79629) ble_input: 00 00 00
+I (79679) ble_input: input report id=0 len=3
+I (79679) ble_input: 02 00 00
+W (79679) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (79729) ble_input: input report id=0 len=3
+I (79729) ble_input: 00 00 00
+I (79779) ble_input: input report id=0 len=3
+I (79779) ble_input: 02 00 00
+W (79779) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (79829) ble_input: input report id=0 len=3
+I (79829) ble_input: 02 00 00
+W (79829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (79879) ble_input: input report id=0 len=3
+I (79879) ble_input: 00 00 00
+I (79929) ble_input: input report id=0 len=3
+I (79929) ble_input: 00 00 00
+I (79979) ble_input: input report id=0 len=3
+I (79979) ble_input: 00 00 00
+I (80029) ble_input: input report id=0 len=3
+I (80029) ble_input: 02 00 00
+W (80029) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (80079) ble_input: input report id=0 len=3
+I (80079) ble_input: 02 00 00
+W (80079) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (80129) ble_input: input report id=0 len=3
+I (80129) ble_input: 01 00 00
+W (80129) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80179) ble_input: input report id=0 len=3
+I (80179) ble_input: 01 00 00
+W (80179) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80229) ble_input: input report id=0 len=3
+I (80229) ble_input: 00 00 00
+I (80279) ble_input: input report id=0 len=3
+I (80279) ble_input: 00 00 00
+I (80329) ble_input: input report id=0 len=3
+I (80329) ble_input: 00 00 00
+I (80379) ble_input: input report id=0 len=3
+I (80379) ble_input: 01 00 00
+W (80379) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80429) ble_input: input report id=0 len=3
+I (80429) ble_input: 01 00 00
+W (80429) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80479) ble_input: input report id=0 len=3
+I (80479) ble_input: 01 00 00
+W (80479) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80529) ble_input: input report id=0 len=3
+I (80529) ble_input: 00 00 00
+I (80579) ble_input: input report id=0 len=3
+I (80579) ble_input: 01 00 00
+W (80579) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80629) ble_input: input report id=0 len=3
+I (80629) ble_input: 00 00 00
+I (80679) ble_input: input report id=0 len=3
+I (80679) ble_input: 01 00 00
+W (80679) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80729) ble_input: input report id=0 len=3
+I (80729) ble_input: 01 00 00
+W (80729) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80779) ble_input: input report id=0 len=3
+I (80779) ble_input: 00 00 00
+I (80879) ble_input: input report id=0 len=3
+I (80879) ble_input: 01 00 00
+W (80879) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80929) ble_input: input report id=0 len=3
+I (80929) ble_input: 01 00 00
+W (80929) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (80979) ble_input: input report id=0 len=3
+I (80979) ble_input: 00 00 00
+I (81029) ble_input: input report id=0 len=3
+I (81029) ble_input: 01 00 00
+W (81029) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81079) ble_input: input report id=0 len=3
+I (81079) ble_input: 00 00 00
+I (81129) ble_input: input report id=0 len=3
+I (81129) ble_input: 00 00 00
+I (81179) ble_input: input report id=0 len=3
+I (81179) ble_input: 01 00 00
+W (81179) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81229) ble_input: input report id=0 len=3
+I (81229) ble_input: 01 00 00
+W (81229) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81279) ble_input: input report id=0 len=3
+I (81279) ble_input: 01 00 00
+W (81279) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81329) ble_input: input report id=0 len=3
+I (81329) ble_input: 00 00 00
+I (81379) ble_input: input report id=0 len=3
+I (81379) ble_input: 01 00 00
+W (81379) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81429) ble_input: input report id=0 len=3
+I (81429) ble_input: 00 00 00
+I (81479) ble_input: input report id=0 len=3
+I (81479) ble_input: 01 00 00
+W (81479) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81529) ble_input: input report id=0 len=3
+I (81529) ble_input: 01 00 00
+W (81529) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81579) ble_input: input report id=0 len=3
+I (81579) ble_input: 01 00 00
+W (81579) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81629) ble_input: input report id=0 len=3
+I (81629) ble_input: 01 00 00
+W (81629) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (81729) ble_input: input report id=0 len=3
+I (81729) ble_input: 02 00 00
+W (81729) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (81779) ble_input: input report id=0 len=3
+I (81779) ble_input: 00 00 00
+I (81829) ble_input: input report id=0 len=3
+I (81829) ble_input: 02 00 00
+W (81829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (81879) ble_input: input report id=0 len=3
+I (81879) ble_input: 00 00 00
+I (81929) ble_input: input report id=0 len=3
+I (81929) ble_input: 00 00 00
+I (81979) ble_input: input report id=0 len=3
+I (81979) ble_input: 00 00 00
+I (82029) ble_input: input report id=0 len=3
+I (82029) ble_input: 02 00 00
+W (82029) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82079) ble_input: input report id=0 len=3
+I (82079) ble_input: 02 00 00
+W (82079) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82129) ble_input: input report id=0 len=3
+I (82129) ble_input: 02 00 00
+W (82129) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82179) ble_input: input report id=0 len=3
+I (82179) ble_input: 02 00 00
+W (82179) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82229) ble_input: input report id=0 len=3
+I (82229) ble_input: 02 00 00
+W (82229) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82279) ble_input: input report id=0 len=3
+I (82279) ble_input: 02 00 00
+W (82279) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82329) ble_input: input report id=0 len=3
+I (82329) ble_input: 00 00 00
+I (82379) ble_input: input report id=0 len=3
+I (82379) ble_input: 02 00 00
+W (82379) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82429) ble_input: input report id=0 len=3
+I (82429) ble_input: 00 00 00
+I (82479) ble_input: input report id=0 len=3
+I (82479) ble_input: 02 00 00
+W (82479) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82529) ble_input: input report id=0 len=3
+I (82529) ble_input: 02 00 00
+W (82529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82579) ble_input: input report id=0 len=3
+I (82579) ble_input: 00 00 00
+I (82629) ble_input: input report id=0 len=3
+I (82629) ble_input: 02 00 00
+W (82629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82679) ble_input: input report id=0 len=3
+I (82679) ble_input: 00 00 00
+I (82729) ble_input: input report id=0 len=3
+I (82729) ble_input: 00 00 00
+I (82779) ble_input: input report id=0 len=3
+I (82779) ble_input: 02 00 00
+W (82779) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82829) ble_input: input report id=0 len=3
+I (82829) ble_input: 00 00 00
+I (82879) ble_input: input report id=0 len=3
+I (82879) ble_input: 02 00 00
+W (82879) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82929) ble_input: input report id=0 len=3
+I (82929) ble_input: 02 00 00
+W (82929) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (82979) ble_input: input report id=0 len=3
+I (82979) ble_input: 00 00 00
+I (83029) ble_input: input report id=0 len=3
+I (83029) ble_input: 01 00 00
+W (83029) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (83079) ble_input: input report id=0 len=3
+I (83079) ble_input: 00 00 00
+I (83129) ble_input: input report id=0 len=3
+I (83129) ble_input: 00 00 00
+I (83179) ble_input: input report id=0 len=3
+I (83179) ble_input: 01 00 00
+W (83179) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (83229) ble_input: input report id=0 len=3
+I (83229) ble_input: 00 00 00
+I (83279) ble_input: input report id=0 len=3
+I (83279) ble_input: 01 00 00
+W (83279) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (83329) ble_input: input report id=0 len=3
+I (83329) ble_input: 02 00 00
+W (83329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (83379) ble_input: input report id=0 len=3
+I (83379) ble_input: 02 00 00
+W (83379) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (83429) ble_input: input report id=0 len=3
+I (83429) ble_input: 02 00 00
+W (83429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (83479) ble_input: input report id=0 len=3
+I (83479) ble_input: 00 00 00
+I (83579) ble_input: input report id=0 len=3
+I (83579) ble_input: 02 00 00
+W (83579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (83629) ble_input: input report id=0 len=3
+I (83629) ble_input: 00 00 00
+I (83679) ble_input: input report id=0 len=3
+I (83679) ble_input: 01 00 00
+W (83679) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (83729) ble_input: input report id=0 len=3
+I (83729) ble_input: 00 00 00
+I (83779) ble_input: input report id=0 len=3
+I (83779) ble_input: 01 00 00
+W (83779) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (83879) ble_input: input report id=0 len=3
+I (83879) ble_input: 01 00 00
+W (83879) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (83929) ble_input: input report id=0 len=3
+I (83929) ble_input: 01 00 00
+W (83929) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (83979) ble_input: input report id=0 len=3
+I (83979) ble_input: 00 00 00
+I (84029) ble_input: input report id=0 len=3
+I (84029) ble_input: 00 00 00
+I (84079) ble_input: input report id=0 len=3
+I (84079) ble_input: 00 00 00
+I (84279) ble_input: input report id=0 len=3
+I (84279) ble_input: 00 00 00
+I (84479) ble_input: input report id=0 len=3
+I (84479) ble_input: 00 00 00
+I (84679) ble_input: input report id=0 len=3
+I (84679) ble_input: 02 00 00
+W (84679) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (84729) ble_input: input report id=0 len=3
+I (84729) ble_input: 00 00 00
+I (84779) ble_input: input report id=0 len=3
+I (84779) ble_input: 01 00 00
+W (84779) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (84829) ble_input: input report id=0 len=3
+I (84829) ble_input: 00 00 00
+I (84879) ble_input: input report id=0 len=3
+I (84879) ble_input: 01 00 00
+W (84879) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (84929) ble_input: input report id=0 len=3
+I (84929) ble_input: 00 00 00
+I (84979) ble_input: input report id=0 len=3
+I (84979) ble_input: 01 00 00
+W (84979) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (85029) ble_input: input report id=0 len=3
+I (85029) ble_input: 00 00 00
+I (85079) ble_input: input report id=0 len=3
+I (85079) ble_input: 01 00 00
+W (85079) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (85129) ble_input: input report id=0 len=3
+I (85129) ble_input: 00 00 00
+I (85179) ble_input: input report id=0 len=3
+I (85179) ble_input: 01 00 00
+W (85179) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (85229) ble_input: input report id=0 len=3
+I (85229) ble_input: 01 00 00
+W (85229) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (85279) ble_input: input report id=0 len=3
+I (85279) ble_input: 00 00 00
+I (85329) ble_input: input report id=0 len=3
+I (85329) ble_input: 02 00 00
+W (85329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (85379) ble_input: input report id=0 len=3
+I (85379) ble_input: 00 00 00
+I (85429) ble_input: input report id=0 len=3
+I (85429) ble_input: 02 00 00
+W (85429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (85479) ble_input: input report id=0 len=3
+I (85479) ble_input: 00 00 00
+I (85529) ble_input: input report id=0 len=3
+I (85529) ble_input: 02 00 00
+W (85529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (85579) ble_input: input report id=0 len=3
+I (85579) ble_input: 02 00 00
+W (85579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (85629) ble_input: input report id=0 len=3
+I (85629) ble_input: 02 00 00
+W (85629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (85679) ble_input: input report id=0 len=3
+I (85679) ble_input: 01 00 00
+W (85679) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (85729) ble_input: input report id=0 len=3
+I (85729) ble_input: 00 00 00
+I (85779) ble_input: input report id=0 len=3
+I (85779) ble_input: 01 00 00
+W (85779) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (85829) ble_input: input report id=0 len=3
+I (85829) ble_input: 00 00 00
+I (85879) ble_input: input report id=0 len=3
+I (85879) ble_input: 00 00 00
+I (86029) ble_input: input report id=0 len=3
+I (86029) ble_input: 00 00 00
+I (86229) ble_input: input report id=0 len=3
+I (86229) ble_input: 00 00 00
+I (86429) ble_input: input report id=0 len=3
+I (86429) ble_input: 00 00 00
+I (86579) ble_input: input report id=0 len=3
+I (86579) ble_input: 00 00 00
+I (86779) ble_input: input report id=0 len=3
+I (86779) ble_input: 08 00 00
+W (86779) ble_input: unrecognised usage code 0x0008 ??? capture this and extend decode_consumer_usage()
+I (86829) ble_input: input report id=0 len=3
+I (86829) ble_input: 00 00 00
+I (86929) ble_input: input report id=0 len=3
+I (86929) ble_input: 00 00 00
+I (87129) ble_input: input report id=0 len=3
+I (87129) ble_input: 00 00 00
+I (87329) ble_input: input report id=0 len=3
+I (87329) ble_input: 00 00 00
+I (87529) ble_input: input report id=0 len=3
+I (87529) ble_input: 00 00 00
+I (87579) ble_input: input report id=0 len=3
+I (87579) ble_input: 08 00 00
+W (87579) ble_input: unrecognised usage code 0x0008 ??? capture this and extend decode_consumer_usage()
+I (87629) ble_input: input report id=0 len=3
+I (87629) ble_input: 00 00 00
+I (87779) ble_input: input report id=0 len=3
+I (87779) ble_input: 00 00 00
+I (87929) ble_input: input report id=0 len=3
+I (87929) ble_input: 00 00 00
+I (88229) ble_input: input report id=0 len=3
+I (88229) ble_input: 00 00 00
+I (88329) ble_input: input report id=0 len=3
+I (88329) ble_input: 00 00 00
+I (88379) ble_input: input report id=0 len=3
+I (88379) ble_input: 08 00 00
+W (88379) ble_input: unrecognised usage code 0x0008 ??? capture this and extend decode_consumer_usage()
+I (88429) ble_input: input report id=0 len=3
+I (88429) ble_input: 00 00 00
+I (88529) ble_input: input report id=0 len=3
+I (88529) ble_input: 00 00 00
+I (88729) ble_input: input report id=0 len=3
+I (88729) ble_input: 00 00 00
+I (88929) ble_input: input report id=0 len=3
+I (88929) ble_input: 00 00 00
+I (89129) ble_input: input report id=0 len=3
+I (89129) ble_input: 00 00 00
+I (89179) ble_input: input report id=0 len=3
+I (89179) ble_input: 08 00 00
+W (89179) ble_input: unrecognised usage code 0x0008 ??? capture this and extend decode_consumer_usage()
+I (89229) ble_input: input report id=0 len=3
+I (89229) ble_input: 00 00 00
+I (89329) ble_input: input report id=0 len=3
+I (89329) ble_input: 00 00 00
+I (89529) ble_input: input report id=0 len=3
+I (89529) ble_input: 00 00 00
+I (89729) ble_input: input report id=0 len=3
+I (89729) ble_input: 01 00 00
+W (89729) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (89779) ble_input: input report id=0 len=3
+I (89779) ble_input: 00 00 00
+I (89829) ble_input: input report id=0 len=3
+I (89829) ble_input: 01 00 00
+W (89829) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (89879) ble_input: input report id=0 len=3
+I (89879) ble_input: 00 00 00
+I (89929) ble_input: input report id=0 len=3
+I (89929) ble_input: 01 00 00
+W (89929) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (89979) ble_input: input report id=0 len=3
+I (89979) ble_input: 00 00 00
+I (90029) ble_input: input report id=0 len=3
+I (90029) ble_input: 01 00 00
+W (90029) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (90079) ble_input: input report id=0 len=3
+I (90079) ble_input: 00 00 00
+I (90129) ble_input: input report id=0 len=3
+I (90129) ble_input: 01 00 00
+W (90129) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (90179) ble_input: input report id=0 len=3
+I (90179) ble_input: 00 00 00
+I (90229) ble_input: input report id=0 len=3
+I (90229) ble_input: 01 00 00
+W (90229) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (90329) ble_input: input report id=0 len=3
+I (90329) ble_input: 02 00 00
+W (90329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (90379) ble_input: input report id=0 len=3
+I (90379) ble_input: 00 00 00
+I (90429) ble_input: input report id=0 len=3
+I (90429) ble_input: 02 00 00
+W (90429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (90479) ble_input: input report id=0 len=3
+I (90479) ble_input: 00 00 00
+I (90529) ble_input: input report id=0 len=3
+I (90529) ble_input: 02 00 00
+W (90529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (90579) ble_input: input report id=0 len=3
+I (90579) ble_input: 01 00 00
+W (90579) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (90629) ble_input: input report id=0 len=3
+I (90629) ble_input: 00 00 00
+I (90679) ble_input: input report id=0 len=3
+I (90679) ble_input: 01 00 00
+W (90679) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (90729) ble_input: input report id=0 len=3
+I (90729) ble_input: 01 00 00
+W (90729) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (90779) ble_input: input report id=0 len=3
+I (90779) ble_input: 02 00 00
+W (90779) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (90829) ble_input: input report id=0 len=3
+I (90829) ble_input: 02 00 00
+W (90829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (90879) ble_input: input report id=0 len=3
+I (90879) ble_input: 02 00 00
+W (90879) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (90929) ble_input: input report id=0 len=3
+I (90929) ble_input: 02 00 00
+W (90929) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (90979) ble_input: input report id=0 len=3
+I (90979) ble_input: 00 00 00
+I (91029) ble_input: input report id=0 len=3
+I (91029) ble_input: 00 00 00
+I (91079) ble_input: input report id=0 len=3
+I (91079) ble_input: 02 00 00
+W (91079) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91129) ble_input: input report id=0 len=3
+I (91129) ble_input: 02 00 00
+W (91129) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91179) ble_input: input report id=0 len=3
+I (91179) ble_input: 02 00 00
+W (91179) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91229) ble_input: input report id=0 len=3
+I (91229) ble_input: 00 00 00
+I (91279) ble_input: input report id=0 len=3
+I (91279) ble_input: 02 00 00
+W (91279) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91329) ble_input: input report id=0 len=3
+I (91329) ble_input: 00 00 00
+I (91379) ble_input: input report id=0 len=3
+I (91379) ble_input: 02 00 00
+W (91379) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91429) ble_input: input report id=0 len=3
+I (91429) ble_input: 00 00 00
+I (91479) ble_input: input report id=0 len=3
+I (91479) ble_input: 02 00 00
+W (91479) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91529) ble_input: input report id=0 len=3
+I (91529) ble_input: 00 00 00
+I (91579) ble_input: input report id=0 len=3
+I (91579) ble_input: 02 00 00
+W (91579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91629) ble_input: input report id=0 len=3
+I (91629) ble_input: 00 00 00
+I (91679) ble_input: input report id=0 len=3
+I (91679) ble_input: 00 00 00
+I (91729) ble_input: input report id=0 len=3
+I (91729) ble_input: 00 00 00
+I (91779) ble_input: input report id=0 len=3
+I (91779) ble_input: 02 00 00
+W (91779) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91829) ble_input: input report id=0 len=3
+I (91829) ble_input: 02 00 00
+W (91829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (91879) ble_input: input report id=0 len=3
+I (91879) ble_input: 00 00 00
+I (91929) ble_input: input report id=0 len=3
+I (91929) ble_input: 00 00 00
+I (91979) ble_input: input report id=0 len=3
+I (91979) ble_input: 02 00 00
+W (91979) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (92029) ble_input: input report id=0 len=3
+I (92029) ble_input: 00 00 00
+I (92079) ble_input: input report id=0 len=3
+I (92079) ble_input: 02 00 00
+W (92079) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (92129) ble_input: input report id=0 len=3
+I (92129) ble_input: 00 00 00
+I (92179) ble_input: input report id=0 len=3
+I (92179) ble_input: 02 00 00
+W (92179) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (92229) ble_input: input report id=0 len=3
+I (92229) ble_input: 00 00 00
+I (92329) ble_input: input report id=0 len=3
+I (92329) ble_input: 00 00 00
+I (92379) ble_input: input report id=0 len=3
+I (92379) ble_input: 00 00 00
+I (92479) ble_input: controller battery: 100%
+I (92529) ble_input: input report id=0 len=3
+I (92529) ble_input: 00 00 00
+I (92629) ble_input: input report id=0 len=3
+I (92629) ble_input: 02 00 00
+W (92629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (92679) ble_input: input report id=0 len=3
+I (92679) ble_input: 00 00 00
+I (92829) ble_input: input report id=0 len=3
+I (92829) ble_input: 00 00 00
+I (93029) ble_input: input report id=0 len=3
+I (93029) ble_input: 00 00 00
+I (93179) ble_input: input report id=0 len=3
+I (93179) ble_input: 00 00 00
+I (93379) ble_input: input report id=0 len=3
+I (93379) ble_input: 00 00 00
+I (93579) ble_input: input report id=0 len=3
+I (93579) ble_input: 00 00 00
+I (93779) ble_input: input report id=0 len=3
+I (93779) ble_input: 00 00 00
+I (101679) ble_input: controller battery: 100%
+I (111079) ble_input: controller battery: 100%
+I (116979) ble_input: input report id=0 len=3
+I (116979) ble_input: 02 00 00
+W (116979) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117029) ble_input: input report id=0 len=3
+I (117029) ble_input: 00 00 00
+I (117179) ble_input: input report id=0 len=3
+I (117179) ble_input: 02 00 00
+W (117179) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117229) ble_input: input report id=0 len=3
+I (117229) ble_input: 00 00 00
+I (117279) ble_input: input report id=0 len=3
+I (117279) ble_input: 02 00 00
+W (117279) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117329) ble_input: input report id=0 len=3
+I (117329) ble_input: 00 00 00
+I (117429) ble_input: input report id=0 len=3
+I (117429) ble_input: 02 00 00
+W (117429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117479) ble_input: input report id=0 len=3
+I (117479) ble_input: 00 00 00
+I (117529) ble_input: input report id=0 len=3
+I (117529) ble_input: 02 00 00
+W (117529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117579) ble_input: input report id=0 len=3
+I (117579) ble_input: 00 00 00
+I (117629) ble_input: input report id=0 len=3
+I (117629) ble_input: 02 00 00
+W (117629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117679) ble_input: input report id=0 len=3
+I (117679) ble_input: 00 00 00
+I (117729) ble_input: input report id=0 len=3
+I (117729) ble_input: 02 00 00
+W (117729) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117779) ble_input: input report id=0 len=3
+I (117779) ble_input: 00 00 00
+I (117829) ble_input: input report id=0 len=3
+I (117829) ble_input: 02 00 00
+W (117829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117879) ble_input: input report id=0 len=3
+I (117879) ble_input: 00 00 00
+I (117929) ble_input: input report id=0 len=3
+I (117929) ble_input: 02 00 00
+W (117929) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (117979) ble_input: input report id=0 len=3
+I (117979) ble_input: 00 00 00
+I (118129) ble_input: input report id=0 len=3
+I (118129) ble_input: 02 00 00
+W (118129) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118179) ble_input: input report id=0 len=3
+I (118179) ble_input: 00 00 00
+I (118229) ble_input: input report id=0 len=3
+I (118229) ble_input: 02 00 00
+W (118229) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118279) ble_input: input report id=0 len=3
+I (118279) ble_input: 00 00 00
+I (118329) ble_input: input report id=0 len=3
+I (118329) ble_input: 02 00 00
+W (118329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118379) ble_input: input report id=0 len=3
+I (118379) ble_input: 00 00 00
+I (118429) ble_input: input report id=0 len=3
+I (118429) ble_input: 02 00 00
+W (118429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118479) ble_input: input report id=0 len=3
+I (118479) ble_input: 00 00 00
+I (118529) ble_input: input report id=0 len=3
+I (118529) ble_input: 02 00 00
+W (118529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118579) ble_input: input report id=0 len=3
+I (118579) ble_input: 00 00 00
+I (118629) ble_input: input report id=0 len=3
+I (118629) ble_input: 02 00 00
+W (118629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118679) ble_input: input report id=0 len=3
+I (118679) ble_input: 00 00 00
+I (118729) ble_input: input report id=0 len=3
+I (118729) ble_input: 02 00 00
+W (118729) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118779) ble_input: input report id=0 len=3
+I (118779) ble_input: 00 00 00
+I (118829) ble_input: input report id=0 len=3
+I (118829) ble_input: 02 00 00
+W (118829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118879) ble_input: input report id=0 len=3
+I (118879) ble_input: 00 00 00
+I (118929) ble_input: input report id=0 len=3
+I (118929) ble_input: 02 00 00
+W (118929) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (118979) ble_input: input report id=0 len=3
+I (118979) ble_input: 00 00 00
+I (119029) ble_input: input report id=0 len=3
+I (119029) ble_input: 02 00 00
+W (119029) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119079) ble_input: input report id=0 len=3
+I (119079) ble_input: 00 00 00
+I (119129) ble_input: input report id=0 len=3
+I (119129) ble_input: 02 00 00
+W (119129) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119179) ble_input: input report id=0 len=3
+I (119179) ble_input: 00 00 00
+I (119229) ble_input: input report id=0 len=3
+I (119229) ble_input: 02 00 00
+W (119229) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119279) ble_input: input report id=0 len=3
+I (119279) ble_input: 00 00 00
+I (119329) ble_input: input report id=0 len=3
+I (119329) ble_input: 00 00 00
+I (119379) ble_input: input report id=0 len=3
+I (119379) ble_input: 00 00 00
+I (119429) ble_input: input report id=0 len=3
+I (119429) ble_input: 02 00 00
+W (119429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119479) ble_input: input report id=0 len=3
+I (119479) ble_input: 00 00 00
+I (119529) ble_input: input report id=0 len=3
+I (119529) ble_input: 02 00 00
+W (119529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119579) ble_input: input report id=0 len=3
+I (119579) ble_input: 00 00 00
+I (119629) ble_input: input report id=0 len=3
+I (119629) ble_input: 02 00 00
+W (119629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119679) ble_input: input report id=0 len=3
+I (119679) ble_input: 00 00 00
+I (119729) ble_input: input report id=0 len=3
+I (119729) ble_input: 02 00 00
+W (119729) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119779) ble_input: input report id=0 len=3
+I (119779) ble_input: 00 00 00
+I (119829) ble_input: input report id=0 len=3
+I (119829) ble_input: 02 00 00
+W (119829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119879) ble_input: input report id=0 len=3
+I (119879) ble_input: 00 00 00
+I (119929) ble_input: input report id=0 len=3
+I (119929) ble_input: 02 00 00
+W (119929) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (119979) ble_input: input report id=0 len=3
+I (119979) ble_input: 00 00 00
+I (120029) ble_input: input report id=0 len=3
+I (120029) ble_input: 02 00 00
+W (120029) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120079) ble_input: input report id=0 len=3
+I (120079) ble_input: 00 00 00
+I (120129) ble_input: input report id=0 len=3
+I (120129) ble_input: 02 00 00
+W (120129) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120279) ble_input: input report id=0 len=3
+I (120279) ble_input: 02 00 00
+W (120279) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120329) ble_input: input report id=0 len=3
+I (120329) ble_input: 00 00 00
+I (120379) ble_input: input report id=0 len=3
+I (120379) ble_input: 00 00 00
+I (120429) ble_input: input report id=0 len=3
+I (120429) ble_input: 02 00 00
+W (120429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120479) ble_input: input report id=0 len=3
+I (120479) ble_input: 02 00 00
+W (120479) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120529) ble_input: input report id=0 len=3
+I (120529) ble_input: 02 00 00
+W (120529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120579) ble_input: input report id=0 len=3
+I (120579) ble_input: 02 00 00
+W (120579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120629) ble_input: input report id=0 len=3
+I (120629) ble_input: 02 00 00
+W (120629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120679) ble_input: input report id=0 len=3
+I (120679) ble_input: 02 00 00
+W (120679) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120729) ble_input: input report id=0 len=3
+I (120729) ble_input: 00 00 00
+I (120779) ble_input: controller battery: 100%
+I (120829) ble_input: input report id=0 len=3
+I (120829) ble_input: 02 00 00
+W (120829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120879) ble_input: input report id=0 len=3
+I (120879) ble_input: 02 00 00
+W (120879) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120929) ble_input: input report id=0 len=3
+I (120929) ble_input: 02 00 00
+W (120929) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (120979) ble_input: input report id=0 len=3
+I (120979) ble_input: 02 00 00
+W (120979) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121029) ble_input: input report id=0 len=3
+I (121029) ble_input: 02 00 00
+W (121029) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121079) ble_input: input report id=0 len=3
+I (121079) ble_input: 02 00 00
+W (121079) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121129) ble_input: input report id=0 len=3
+I (121129) ble_input: 00 00 00
+I (121179) ble_input: input report id=0 len=3
+I (121179) ble_input: 02 00 00
+W (121179) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121229) ble_input: input report id=0 len=3
+I (121229) ble_input: 02 00 00
+W (121229) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121279) ble_input: input report id=0 len=3
+I (121279) ble_input: 02 00 00
+W (121279) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121329) ble_input: input report id=0 len=3
+I (121329) ble_input: 02 00 00
+W (121329) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121379) ble_input: input report id=0 len=3
+I (121379) ble_input: 02 00 00
+W (121379) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121429) ble_input: input report id=0 len=3
+I (121429) ble_input: 02 00 00
+W (121429) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121479) ble_input: input report id=0 len=3
+I (121479) ble_input: 02 00 00
+W (121479) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121529) ble_input: input report id=0 len=3
+I (121529) ble_input: 02 00 00
+W (121529) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121579) ble_input: input report id=0 len=3
+I (121579) ble_input: 02 00 00
+W (121579) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121629) ble_input: input report id=0 len=3
+I (121629) ble_input: 02 00 00
+W (121629) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121679) ble_input: input report id=0 len=3
+I (121679) ble_input: 00 00 00
+I (121729) ble_input: input report id=0 len=3
+I (121729) ble_input: 00 00 00
+I (121779) ble_input: input report id=0 len=3
+I (121779) ble_input: 02 00 00
+W (121779) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121829) ble_input: input report id=0 len=3
+I (121829) ble_input: 02 00 00
+W (121829) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121879) ble_input: input report id=0 len=3
+I (121879) ble_input: 02 00 00
+W (121879) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121929) ble_input: input report id=0 len=3
+I (121929) ble_input: 02 00 00
+W (121929) ble_input: unrecognised usage code 0x0002 ??? capture this and extend decode_consumer_usage()
+I (121979) ble_input: input report id=0 len=3
+I (121979) ble_input: 00 00 00
+I (122029) ble_input: input report id=0 len=3
+I (122029) ble_input: 01 00 00
+W (122029) ble_input: unrecognised usage code 0x0001 ??? capture this and extend decode_consumer_usage()
+I (122079) ble_input: input report id=0 len=3
+I (122079) ble_input: 00 00 00
+I (122129) ble_input: input report id=0 len=3
+I (122129) ble_input: 00 00 00
+I (122229) ble_input: input report id=0 len=3
+I (122229) ble_input: 00 00 00
+I (122429) ble_input: input report id=0 len=3
+I (122429) ble_input: 00 00 00
+I (122629) ble_input: input report id=0 len=3
+I (122629) ble_input: 00 00 00
+I (122829) ble_input: input report id=0 len=3
+I (122829) ble_input: 00 00 00
+I (123029) ble_input: input report id=0 len=3
+I (123029) ble_input: 00 00 00
+I (129779) ble_input: controller battery: 100%
+I (139179) ble_input: controller battery: 100%
+I (148539) ble_input: controller battery: 100%
+I (157939) ble_input: controller battery: 100%
+I (167289) ble_input: controller battery: 100%
+I (176639) ble_input: controller battery: 100%
+I (186039) ble_input: controller battery: 100%
+I (195389) ble_input: controller battery: 100%
+I (204789) ble_input: controller battery: 100%
+I (214139) ble_input: controller battery: 100%
+I (223539) ble_input: controller battery: 100%
+I (232889) ble_input: controller battery: 100%
+I (242239) ble_input: controller battery: 100%
+I (251639) ble_input: controller battery: 100%
+I (260989) ble_input: controller battery: 100%

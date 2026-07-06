@@ -152,15 +152,16 @@ profiling on first prototype.
 
 | Component | Choice | Rationale |
 |-----------|--------|-----------|
-| MCU | **ESP32-S3** | Native USB OTG host + BLE 5.0 in one chip. Mature ESP-IDF support for both. |
-| USB | USB-A male plug, ESP32-S3's OTG pin | Plug straight into amp. |
-| Power | 5 V from amp's USB bus | Amp provides plenty for HID-only use. |
+| MCU | **ESP32-S3** | Native USB OTG host + BLE 5.0 in one chip. Mature ESP-IDF support for both. *Confirmed 2026-07-06: it's also the only viable choice — no Espressif chip pairs Bluetooth Classic with USB host, and the S3 is BLE-only, which is fine because the VOL20 is BLE (WCH CH573 inside).* |
+| USB | Mini-B male toward the amp, from the ESP32-S3's OTG pins | *Corrected 2026-07-06:* the FA503's port is USB **Mini-B** (per the Hypex Fusion Manual R4), not A. Short captive cable or board-mounted plug. |
+| Power | **External 5 V** (USB PSU, or a 5 V tap inside the speaker cabinet) | *Corrected 2026-07-06:* the amp's USB port is a *device* port — it does not source VBUS. The dongle, being the USB host, must itself supply 5 V VBUS toward the amp. (UsbAmpControl likewise powers its ESP32-S3 externally.) |
 | Indicator | One small LED | Connected / paired / error states. |
 | Enclosure | Heat-shrink or 3D-printed shell | Tiny — most of the volume is the USB-A plug. |
 
-Form factor: USB-A flash-drive sized, single-piece. No buttons (pair
-mode triggered automatically on first power-up; reset by a long
-press of a recessed button or by a HFD-style hold-on-boot).
+Form factor: small pod on a short captive Mini-B cable, single-piece.
+No buttons (pair mode triggered automatically on first power-up;
+reset by a long press of a recessed button or by a HFD-style
+hold-on-boot).
 
 ### Firmware
 
@@ -409,8 +410,11 @@ default 0.5 dB).
 
 **Recommended test hardware:**
 - **Fosi Audio VOL20** (~$50) — established brand, BT + USB-C,
-  decent feel. Caveat: product page doesn't confirm BLE; verify with
-  nRF Connect before relying on it.
+  decent feel. *Purchased; BLE confirmed 2026-07-06:* built on a WCH
+  CH573, a BLE-4.2-only SoC (ASR forum teardown), so it speaks HOGP —
+  compatible with the ESP32-S3. Still do a quick nRF Connect scan on
+  first use. Pairing gotcha: it bonds to ONE host at a time — forget
+  it on the phone/PC before the dongle can see it.
 - **Adafruit ItsyBitsy nRF52840 + EC11 encoder** (~$25 total, half
   an hour of soldering) — guaranteed BLE HID via the Adafruit
   CircuitPython tutorial. Use as a backup or primary if BLE

@@ -1,0 +1,3 @@
+# Olimex ESP32-DevKit-LiPo (WROOM-32E): BLE-only controller mode —
+# Classic BT is not needed (VOL20 is BLE) and this saves RAM.
+CONFIG_BTDM_CTRL_MODE_BLE_ONLY=y

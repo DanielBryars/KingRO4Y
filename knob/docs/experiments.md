@@ -672,6 +672,144 @@ between volume writes. Worth a dedicated experiment.
   trailing block (`62 00/40 80 da 02`) didn't change cleanly across our
   state matrix. Need finer-grained experiments to label them.
 
+### 2026-07-06 - Dongle kickoff: VOL20 verified, hardware settled, firmware scaffold
+
+User bought a **Fosi Audio VOL20** BLE volume knob as the tier-2 test
+controller and asked to start on the dongle software. Research session
+(web) + first firmware code. No amp contact this session.
+
+#### VOL20: BLE confirmed (enough to build against)
+
+- Fosi documents no Bluetooth version anywhere official. But an Audio
+  Science Review teardown post (thread 56608, post #38) identifies the
+  SoC: **WCH CH573** - a RISC-V, **BLE-4.2-only** chip with no Classic
+  BR/EDR in the family. Its integrated USB controller also explains the
+  VOL20's wired USB-HID mode. Single-source but credible; 2-minute
+  verification at home: nRF Connect scan while the VOL20 flashes blue -
+  appearing in the scan at all proves BLE (look for HID service 0x1812).
+- Controls (manual): rotate = Volume+/-; single-click = Play/Pause;
+  double = Next; triple = Prev; 2 s hold = Mute. **Firmware maps
+  play/pause -> amp mute** because the VOL20 locks itself after its own
+  mute (manual FAQ 4) until unmuted on-device.
+- Bonds to ONE host at a time. Forget it on the PC/phone (and
+  double-click its light button) before the dongle can pair.
+
+#### Chip choice locked: ESP32-S3, and it had to be
+
+- ESP32-S3 = BLE only (no Classic) + native USB-OTG host. The original
+  ESP32 has Classic but **zero USB hardware**. No Espressif chip has
+  both Classic and USB host - so a Classic-only knob would have sunk
+  the single-chip dongle. The VOL20 being BLE means we're fine.
+- ESP-IDF's `usb_host_hid` class driver is **unsuitable** for the amp:
+  it never uses the interrupt OUT endpoint (sends output via EP0
+  control), while the Hypex protocol runs on OUT 0x01. Use the raw
+  `usb_host` client API - which is exactly what UsbAmpControl does.
+- Dev board: standard ESP32-S3-DevKitC-1 does NOT put 5 V on its OTG
+  port (blocked by Schottky D7). Espressif's **ESP32-S3-USB-OTG** board
+  has a USB-A host port with GPIO-switched 5 V (GPIO12 DEV_VBUS_EN) -
+  ordered route. UK stock confirmed at DigiKey UK (~GBP 32 inc VAT).
+
+#### Two design corrections (Architecture.md updated)
+
+1. **The amp cannot power the dongle.** The FA503's USB port is a
+   device port; VBUS is host-supplied, so the dongle must bring its own
+   5 V *and* supply VBUS toward the amp. (Worth a multimeter check on
+   the amp port for stray 5 V, but plan for external power.)
+2. **The FA503's USB connector is Mini-B** (Hypex Fusion Manual R4,
+   accessories: "USB Type A Plug - Mini USB Type B Plug"), not USB-A.
+
+#### UsbAmpControl reference analysis (github.com/Turbopsych/UsbAmpControl)
+
+Native ESP-IDF, MIT. Raw 64-byte interrupt transfers to OUT 0x01/IN
+0x81; implements 0x05 set, 0x06 0x02 status, 0x03 0x08 filter name.
+Reusable quirks documented in its `main/usb_driver.c`:
+
+- Set packets effectively use the **first 32 bytes**; when echoing state
+  back, bytes 5, 23, 26 must be zeroed ("always 0x00 in request").
+- **Discrepancy vs our FA503:** it claims writing byte 1 (input source)
+  gets the command *rejected* on the FA253 (fw 5.7), with per-preset
+  input sources in bytes 12-14 low nibble (+bit 4 = EQ enable). We
+  verifiably switched input via byte 1 on our FA503 (fw 5.82). Likely a
+  firmware difference - test on our amp before relying on either.
+- It has NO write rate limiting (our >=100 ms rule stands), no VID/PID
+  filter (ours must filter 0x345e:0x03e8), and zero Bluetooth (UI is a
+  WiFi web app).
+
+#### Firmware scaffold created: `knob/firmware/dongle/`
+
+ESP-IDF project, two-halves structure per Architecture.md:
+
+- `components/hypex_proto/` - dependency-free C port of
+  `hypex_probe.py` (builders/parsers, volume encoding, safe-opcode
+  allowlist). **Host unit tests pass: 257 checks against real captured
+  packets** (`host_tests/run_tests.py`, works with gcc/clang/tcc/MSVC).
+- `components/ble_input/` - BLE HID host (esp_hidh + esp_hid_gap
+  vendored unmodified from the ESP-IDF v5.5 esp_hid_host example, also
+  archived at `knob/vendor/esp_hid_host_example/`). Scans for "VOL20",
+  bonds (Just Works), logs every raw report, decodes common consumer
+  usages.
+- `main/` - `input_map` (rotate = +-0.5 dB, play/pause = mute, next/
+  prev = preset cycle) driving an `amp_backend` interface with a
+  **simulated amp** (phase A) so the whole BLE half runs on the Olimex
+  ESP32-DevKit-LiPo with no amp attached. Phase B: real USB backend on
+  the ESP32-S3 behind the same interface.
+
+Next session: install ESP-IDF v5.5, flash the Olimex board, pair the
+VOL20, capture its actual report format, fix `decode_consumer_usage()`
+if needed.
+
+### 2026-07-06 (evening) - First hardware bring-up: VOL20 paired, reports decoded
+
+Same day, hands-on session. The Olimex ESP32-DevKit-LiPo enumerates as
+**COM6** (CH340). ESP-IDF v5.5 installed at `~/esp/esp-idf`; note two
+Windows quirks: `idf_tools.py` refuses to run if the `MSYSTEM` env var
+is set (Git-Bash leaks it into every shell - strip it first), and the
+`install.bat`/`export.bat` wrappers misbehave from non-interactive
+shells - use `python tools/idf_tools.py install` and PowerShell
+`export.ps1` directly.
+
+Result: **the dongle's BLE half works end-to-end against the VOL20.**
+
+1. **VOL20 is BLE - now confirmed on our own hardware**, not just via
+   the CH573 teardown: it advertises as `VOL20`, addr type RANDOM, HID
+   *appearance* `0x03C1` (keyboard category).
+2. **Bug found in the vendored scan helper:** `esp_hid_gap.c` only
+   accepted devices advertising the HID service UUID (0x1812), which
+   the VOL20 does not include in its advertisement. Patched (marked
+   "KingRO4Y modification") to also accept the HID appearance category
+   `0x03C0..0x03FF`.
+3. After the fix: scan -> found -> open -> **connected and bonded on
+   the first attempt** ("Just Works" pairing, no button dance needed
+   beyond the VOL20 being in pairing mode). The knob then **reconnects
+   automatically** after a dongle reset - the bond persists on both
+   sides. It pushes a battery report (100%) roughly every 9 s.
+4. **Input report format captured live** (raw log:
+   `experiment_results/vol20_ble_reports_20260706.log`): a single
+   unnumbered report, 3 bytes, **bitmap** encoding - NOT the 16-bit
+   usage-code layout. One report per detent/gesture, `00 00 00` on
+   release; fast rotation repeats the same non-zero report per detent.
+   Observed byte-0 values:
+   - `0x01` / `0x02` - the two rotation directions (dozens of each in
+     runs). **Which one is clockwise is provisional** - the capture
+     session was freeform, so the direction assignment needs a 30 s
+     choreographed check (if volume moves backwards, swap the two
+     cases in `decode_vol20_bits()`).
+   - `0x20` - seen exactly once; single button click (play/pause).
+   - `0x08` - seen four times during freeform clicking; provisionally
+     mapped to next-track. `0x04` / `0x10` never observed.
+5. `ble_input.c` decoder rewritten for this bitmap format. Rotation
+   events now map to +-0.5 dB steps on the simulated amp
+   (`amp_backend_log`). **End-to-end "turn knob -> sim volume moves"
+   is still to be eyeballed** - the decoder landed after the hands-on
+   window closed; the capture data says it will work.
+
+Next session (30 seconds of hands-on): choreographed gesture test -
+3 detents CW, pause, 3 CCW, pause, single click, pause, double-click,
+pause, triple-click, pause, 2 s hold. That pins the direction and the
+remaining button bits (`0x08`/`0x10`/`0x04`), and visually confirms the
+sim amp tracking. Then phase B (real USB backend) when the
+ESP32-S3-USB-OTG board arrives.
+
 ## Open questions / next steps
 
 In rough priority order:

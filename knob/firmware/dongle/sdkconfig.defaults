@@ -1,0 +1,12 @@
+# BLE-only Bluedroid HID host (per the vendored esp_hid_host example,
+# release/v5.5). With BT_HID_HOST_ENABLED unset, esp_hid_gap.h's
+# HID_HOST_MODE resolves to HIDH_BLE_MODE.
+CONFIG_BT_ENABLED=y
+CONFIG_BT_BLUEDROID_ENABLED=y
+CONFIG_BT_BLE_ENABLED=y
+CONFIG_BT_BLE_42_FEATURES_SUPPORTED=y
+# HID devices register one GATT notify per input report characteristic;
+# the default maximum is too low for some controllers.
+CONFIG_BT_GATTC_NOTIF_REG_MAX=16
+# Bluedroid does not fit the default 1 MB app partition.
+CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
