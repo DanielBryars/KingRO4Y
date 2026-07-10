@@ -810,6 +810,57 @@ remaining button bits (`0x08`/`0x10`/`0x04`), and visually confirms the
 sim amp tracking. Then phase B (real USB backend) when the
 ESP32-S3-USB-OTG board arrives.
 
+### 2026-07-09/10 - ESP32-S3-USB-OTG: USB host probe + on-board LCD
+
+The ESP32-S3-USB-OTG board arrived (**COM7**, native USB-Serial-JTAG).
+Two workstreams this session, both behind a Kconfig app-mode switch
+(`CONFIG_DONGLE_APP_MODE_*`) so one project builds either.
+
+#### Phase B1 - USB host probe (`components/hypex_host`)
+
+Read-only: powers the USB-A host port, enumerates the amp, does a single
+safe `06 02` status read, decodes via hypex_proto. On-board LEDs show
+status (green=OK, yellow=waiting). **Board power path** (from esp-bsp
+`esp32_s3_usb_otg`): GPIO18 USB_SEL=1 (host), GPIO12 DEV_VBUS_EN=1,
+GPIO17 LIMIT_EN=1, GPIO13 BOOST_EN=0. Verified it engages host mode
+(COM7 vanishes = PHY handed to OTG, VBUS live). **Not yet tested against
+the real FA503** - user will connect it later.
+
+Board notes:
+- Three USB ports: **USB_DEV** (A-male, native/USB-Serial-JTAG = COM7,
+  flashing+console), **USB_HOST** (A-female, downstream/amp), and a
+  **Micro-USB USB-to-UART bridge** (best for console during host mode,
+  survives the PHY switch; auto-reset flashing if DTR/RTS wired).
+- Enabling USB host takes over the shared PHY, so COM7 drops during
+  host mode. There is a **power switch** on the board - if off, the
+  LCD/rail is dead but the chip still flashes over USB (this cost an
+  hour of "is it bricked" - it wasn't).
+
+#### On-board LCD (`components/ui_display`), gated by `DONGLE_ENABLE_DISPLAY`
+
+1.3" ST7789 240x240 on SPI3 (CS5 DC4 CLK6 MOSI7 RST8 BL9, 40 MHz,
+invert_color true, no mirror/swap - matches the BSP). Lightweight
+esp_lcd + an 8x8 bitmap font (vendored, public domain); shows knob
+name, big volume, bar, preset+input, driven from the simulated amp.
+**Milestone: turning the VOL20 moves the volume live on the LCD.**
+
+Three real bugs found and fixed (all confirmed on hardware via a USB
+webcam + ffmpeg screen-grab loop - far faster than trading photos):
+- **Oversized SPI transfer** -> image duplicated side-by-side. The BSP
+  draws in ~30-row / ~14 KB chunks; a full 80-row / 38 KB transfer
+  wrapped. Fixed by chunking flushes to `FLUSH_ROWS`.
+- **`%f` prints nothing** (ESP-IDF nano newlib drops float) -> the big
+  volume number was blank. Switched to integer formatting.
+- **Band-seam clipping** -> tall glyphs (the "-40.0") were sliced in
+  half where they crossed a 30 px band boundary. Fixed by drawing the
+  whole screen into one full-frame buffer, then flushing in slices.
+- Also: VOL20 rotation direction was inverted (swapped 0x01/0x02).
+
+Tooling note: the Nuroum V11 webcam can't focus on the small LCD, but
+the **Dell WB7022 at 2560x1440** is sharp; capture with
+`ffmpeg -f dshow -i video="Dell Webcam WB7022"` then crop/upscale the
+screen region. This closed the see-my-own-output loop.
+
 ## Open questions / next steps
 
 In rough priority order:

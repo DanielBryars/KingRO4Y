@@ -10,6 +10,8 @@
  */
 #pragma once
 
+#include <stdbool.h>
+
 #include "esp_err.h"
 
 #ifdef __cplusplus
@@ -34,6 +36,12 @@ typedef void (*ble_input_event_cb_t)(input_event_t evt);
 /* Initialises BT controller + Bluedroid + esp_hidh and starts the
  * scan/connect task. Call once, after nvs_flash_init(). */
 esp_err_t ble_input_start(ble_input_event_cb_t cb);
+
+/* True while a controller is connected. */
+bool ble_input_is_connected(void);
+
+/* Last reported controller battery level (0-100), or -1 if unknown. */
+int ble_input_battery_pct(void);
 
 #ifdef __cplusplus
 }

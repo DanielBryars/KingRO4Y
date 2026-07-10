@@ -18,6 +18,10 @@ static const char *TAG = "ble_input";
 
 static ble_input_event_cb_t s_event_cb;
 static volatile bool s_connected;
+static volatile int s_battery_pct = -1;
+
+bool ble_input_is_connected(void) { return s_connected; }
+int ble_input_battery_pct(void) { return s_battery_pct; }
 
 /* --- VOL20 report decoding -------------------------------------------------
  * Captured empirically 2026-07-06: the VOL20 sends an unnumbered 3-byte
@@ -39,8 +43,10 @@ static volatile bool s_connected;
 static input_event_t decode_vol20_bits(uint8_t bits)
 {
     switch (bits) {
-    case 0x01: return INPUT_EVT_VOL_UP;
-    case 0x02: return INPUT_EVT_VOL_DOWN;
+    /* 0x01 = counter-clockwise, 0x02 = clockwise (confirmed on hardware
+     * 2026-07-09: clockwise must raise the volume). */
+    case 0x01: return INPUT_EVT_VOL_DOWN;
+    case 0x02: return INPUT_EVT_VOL_UP;
     case 0x20: return INPUT_EVT_PLAY_PAUSE;
     case 0x08: return INPUT_EVT_NEXT;  /* provisional */
     case 0x10: return INPUT_EVT_PREV;  /* provisional */
@@ -97,6 +103,7 @@ static void hidh_callback(void *handler_args, esp_event_base_t base,
         }
         break;
     case ESP_HIDH_BATTERY_EVENT:
+        s_battery_pct = param->battery.level;
         ESP_LOGI(TAG, "controller battery: %d%%", param->battery.level);
         break;
     case ESP_HIDH_INPUT_EVENT:
