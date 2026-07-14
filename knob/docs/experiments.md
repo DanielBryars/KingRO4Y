@@ -861,6 +861,33 @@ the **Dell WB7022 at 2560x1440** is sharp; capture with
 `ffmpeg -f dshow -i video="Dell Webcam WB7022"` then crop/upscale the
 screen region. This closed the see-my-own-output loop.
 
+### 2026-07-14 - Phase B1 validated against the real FA503
+
+Connected the actual amp to the ESP32-S3-USB-OTG host port for the first
+time. Sequence that worked, first try:
+- Confirmed VID/PID on the PC before touching cables:
+  `Get-PnpDevice` showed `345E 03E8` = exactly what hypex_proto filters on
+  (no wasted flash cycle chasing a mismatch).
+- Rebuilt in `USB_PROBE` mode with `DONGLE_ENABLE_DISPLAY=y` (freed the
+  display from the BLE_SIM-only dependency, since the console dies in host
+  mode - the LCD is now how we read the probe result). The probe's status
+  callback mirrors the decoded frame onto the LCD.
+- Left the dongle powered from its USB_DEV port (COM7, host-mode drops the
+  console but not the power), moved the amp's USB from PC to the dongle's
+  USB-A host port. Mains reachable per the safe-opcode policy.
+
+Result: **green LED (amp enumerated + `06 02` read + decode OK)** and the
+LCD showed **OPT / P3 / -33 dB** - all three matched the amp's real state
+(optical input, preset 3, -33 dB). So transport *and* `hypex_parse_status`
+are both validated on real hardware, not just the simulator/pcap. The
+VID/PID/endpoint sanity checks in `probe_device` all passed.
+
+Limitation: the probe is **one-shot** (fires on the `NEW_DEV` event), so
+the LCD does not track volume changes made on the amp. Next: make it poll
+the safe status read on a timer for a live read-out, *then* the write path
+(`0x05` Set State) behind `amp_backend_usb.c` so the knob drives the amp -
+carefully, per the destructive-atomic-write rules above.
+
 ## Open questions / next steps
 
 In rough priority order:

@@ -12,6 +12,9 @@
 
 #if CONFIG_DONGLE_APP_MODE_USB_PROBE
 #include "hypex_host.h"
+#if CONFIG_DONGLE_ENABLE_DISPLAY
+#include "ui_display.h"
+#endif
 #else
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
@@ -87,13 +90,39 @@ static void display_task(void *arg)
 }
 #endif
 
+#if CONFIG_DONGLE_APP_MODE_USB_PROBE && CONFIG_DONGLE_ENABLE_DISPLAY
+/* The probe's status read decodes here; mirror it onto the LCD, since
+ * enabling USB host drops the USB-Serial-JTAG console (COM7). */
+static void probe_status_cb(const hypex_status_t *st)
+{
+    dongle_ui_state_t ui = {
+        .volume_db_x100 = st->volume_db_x100,
+        .preset = st->preset,
+        .mute = st->mute,
+        .input_source = st->active_input,
+        .ble_connected = true, /* green dot = amp reported OK */
+        .battery_pct = -1,
+    };
+    ui_display_render(&ui);
+}
+#endif
+
 void app_main(void)
 {
     init_nvs();
 
 #if CONFIG_DONGLE_APP_MODE_USB_PROBE
     ESP_LOGI(TAG, "KingRO4Y dongle, phase B1: read-only USB host probe");
+#if CONFIG_DONGLE_ENABLE_DISPLAY
+    esp_err_t derr = ui_display_init();
+    if (derr != ESP_OK) {
+        ESP_LOGE(TAG, "display init failed: %s — continuing without LCD",
+                 esp_err_to_name(derr));
+    }
+    ESP_ERROR_CHECK(hypex_host_start(derr == ESP_OK ? probe_status_cb : NULL));
+#else
     ESP_ERROR_CHECK(hypex_host_start(NULL));
+#endif
 #else
     xTaskCreate(heartbeat_task, "heartbeat", 2048, NULL, 5, NULL);
     ESP_LOGW(TAG, "app_main reached — green LED should be blinking");

@@ -28,10 +28,12 @@ endchoice
 
 config DONGLE_ENABLE_DISPLAY
     bool "Enable on-board LCD (ESP32-S3-USB-OTG)"
-    depends on DONGLE_APP_MODE_BLE_SIM
+    depends on SOC_USB_OTG_SUPPORTED
     default n
     help
-        Show live amp/knob state on the board's 1.3" ST7789 LCD. Only
-        meaningful on the ESP32-S3-USB-OTG board (SPI3, GPIO4-9).
+        Show live state on the board's 1.3" ST7789 LCD. In BLE_SIM mode it
+        shows the simulated amp; in USB_PROBE mode it shows what the real
+        FA503 reported (useful because enabling USB host drops the console).
+        Only meaningful on the ESP32-S3-USB-OTG board (SPI3, GPIO4-9).
 
 endmenu
