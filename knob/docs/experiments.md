@@ -888,6 +888,102 @@ the safe status read on a timer for a live read-out, *then* the write path
 (`0x05` Set State) behind `amp_backend_usb.c` so the knob drives the amp -
 carefully, per the destructive-atomic-write rules above.
 
+### 2026-07-15 - THE LOUD INCIDENT: Set State's tail is not padding
+
+Phase B2 (knob → dongle → real FA503) worked, then the amp came up at
+**full volume** after a power-cycle. The user found the amp's persistent
+startup volume had changed from their −40 dB to **0.0 dB** — a setting
+they had definitely not touched.
+
+Root cause, found by decoding `UsbCapture_FA503.pcapng` (the user's
+2026-05-03 USBPcap of HFD driving the amp): **the vendor PDF's "bytes
+7–63: zero-padded" claim for Set State is wrong.** Across all 254 Set
+State frames HFD sent, it round-trips bytes 8–11 (project signature),
+**21–22 (= `60 f0` = −40.00 dB — the persistent STARTUP VOLUME, constant
+while the live volume varied)**, 24–25 (`ff ff`), and 35–36 (`f6 01`).
+Our firmware and `hypex_probe.py` both zero-filled the tail per the PDF,
+so **every write we ever sent reprogrammed the startup volume to 0x0000 =
+0.0 dB**. The `06 02` status response uses the same layout at these
+offsets (confirmed against the 2026-05-02 golden frame), so the fix is a
+strict read-modify-write.
+
+Changes (firmware + tools, all four layers):
+- `hypex_build_set_state()` now REQUIRES a fresh raw status frame and
+  copies bytes 7–36 verbatim (conservative superset of HFD's mask — the
+  golden hardware frame has nonzero bytes at 12–14/26 that the pcap
+  session lacked; echoing the amp's own values is by definition "no
+  change"). Bytes 37–63 (live telemetry) zeroed, exactly as HFD does.
+  There is no longer any way to build a Set State from nothing.
+- `hypex_host_write_state()` does the read → patch → write atomically
+  under the link mutex.
+- `hypex_probe.py set_state()` same fix; `decode_status` now shows
+  `startup_volume_db`.
+- `amp_backend_usb.c`: **seed-clamp bug fixed** (seeding used to clamp
+  the amp's actual volume to the ceiling, making the ceiling the target —
+  the first detent would then command a jump to it; the ceiling now gates
+  increases only), added a **3 dB-per-write slew limit** anchored to the
+  last verified read, and a **startup-volume tripwire** that logs an
+  error if the persistent setting ever changes from its seeded value.
+- Host tests extended (262 checks green); protocol doc §4 rewritten.
+
+**Verification, same day (amp on the PC, no input connected — silent):**
+- Speakers measured against the healthy reference: **no damage** (response
+  within ~0.6 dB through 200 Hz–6.3 kHz, no distortion/rattle signature).
+- Fixed `hypex_probe.py` against the real amp: three Set States (volume
+  −33.0, mute, volume −33.5), each verified with a fresh drained read.
+  All applied; **`startup_volume_db` held −40.1 (`56 f0`) throughout** —
+  the field the old code zeroed on every write. Round-tripping `ff` at
+  byte 26 (HFD sends `00` there) caused no misbehaviour.
+- One anomaly: the FIRST write's verify read showed mute cleared despite
+  round-tripping mute=on. Not reproducible with HFD closed; HFD had been
+  holding the (shared-access) HID device earlier and its background
+  polling mirrors a state image, so interleaved writers are the prime
+  suspect. New rule: close HFD before driving the amp from anything else.
+- Dongle flashed with the fixed firmware over COM8 (zero-touch); boots
+  clean, BLE link to the VOL20 up. Not yet reconnected to the amp —
+  next session: move the amp's USB to the dongle, expect `seeded from
+  amp: ... startup -40.10 dB` on the console, knob detents ramping at
+  ≤3 dB/write, and the startup-volume tripwire silent.
+
+Also documented: get-status replies carry packet_id `0x06` on the raw
+interrupt endpoint (firmware path, hardware-verified) but `0x00` via
+hidapi/Windows and in HFD's own pcap traffic. Unexplained; both real.
+Recorded in HypexUsbProtocol.md §5 so neither host treats its variant
+as an error.
+
+### 2026-07-15 (later) - Dongle "USB fault" root-caused twice; full chain WORKING
+
+Reconnecting the amp to the dongle gave "USB FAULT" — opening read timed
+out on every attempt, surviving amp power-cycles, hot-replug, probe mode
+(no BLE), and Windows-style HID init (report-descriptor read + SET_IDLE,
+which we added and kept). The amp answered hidapi on the PC throughout.
+
+**Root cause #1 — the amp requires a pre-armed IN.** It only delivers
+vendor responses to a host that already has an interrupt IN pending when
+the request arrives (Windows always does). Our code submitted the IN
+after the OUT completed → every request ACKed, no reply ever. Fix:
+txn_locked arms the IN before the OUT; per-transfer completion tracking
+(usb_transfer_t.context) allows two in-flight transfers. First txn then
+succeeded immediately — and revealed the resync loop's packet_id==0x06
+expectation was rejecting valid replies (the amp now stamps 0x00, same
+as every hidapi read); packet_id is informational now.
+
+**Root cause #2 — request pacing.** With the link up, a fast knob spin
+produced one good write then a cascade of all-zero 64-byte responses
+("bad status frame") until reboot: each flush ran read/write/verify ~1 ms
+apart, and the amp's handler wedged into zero-response mode (HFD's
+observed floor is 53 ms between ANY requests). Fix: 60 ms minimum gap
+between all transactions (txn_throttle) + one paced retry on a bad frame.
+The all-zero packet is the amp's "complaint" response — same thing hidapi
+sees on report-ID slips; a bus reset clears the wedge.
+
+**Result:** sustained hard-spin stress test, 50+ Set States: volume
+tracked −40 → −56 → −37 → −51 smoothly, slew limiter split large jumps
+("ramping"), two verify MISMATCHes (the amp's known dropped-write
+behaviour) logged and self-recovered, zero USB faults, and the
+startup-volume tripwire silent throughout — bytes 21-22 held −40.10 dB
+across every write. Phase B2 is functionally complete on amp #1.
+
 ## Open questions / next steps
 
 In rough priority order:

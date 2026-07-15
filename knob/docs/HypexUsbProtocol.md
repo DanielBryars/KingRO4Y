@@ -121,12 +121,41 @@ on the opcode.
 - **Probe scripts must declare their allowed opcodes explicitly.**
   `experiment_probe_reports.py` is currently restricted to
   `{0x03, 0x04, 0x06, 0x08}`.
-- **Set State writes always round-trip current state.** Use
-  `hypex_probe.py`'s `set_state()` helper.
+- **Set State writes always round-trip current state — INCLUDING the
+  raw packet tail (bytes 7–36).** The tail carries the persistent
+  startup volume at bytes 21–22; zero-filling it reprograms the amp to
+  power on at 0.0 dB (2026-07-15 incident, section 4). Use
+  `hypex_probe.py`'s `set_state()` helper, which now does this.
 - **After every write, verify with a fresh `06 02` read.** Don't trust
   the immediate response packet alone.
 - **Volume cap during exploration:** −30 dB unless the user has
   explicitly authorised higher.
+- **Arm the interrupt IN before sending any request.** The amp only
+  delivers vendor-protocol responses to a host that already has an IN
+  transfer pending when the command arrives (how Windows' HID driver
+  always behaves). A host that submits the IN after the OUT completes
+  gets every request ACKed and no reply, ever — enumeration fine,
+  control endpoint fine, vendor pipe silent. (VERIFIED 2026-07-15: this
+  alone took the ESP32 dongle from 100% failure to working.)
+- **Pace ALL transactions ≥60 ms apart, not just Set States.** HFD
+  never goes below 53 ms between requests. Three back-to-back txns
+  ~1 ms apart (read/write/verify) drove the amp's protocol handler
+  into a persistent zero-response wedge. (VERIFIED 2026-07-15.)
+- **A 64-byte all-zero response is the amp complaining**, not data —
+  seen for malformed writes (hidapi report-ID slip) and after
+  too-fast request bursts. If it persists, the amp's handler is
+  wedged; a USB bus reset (re-enumeration) clears it. Power-cycling
+  the amp is NOT required.
+- **Get-status replies may carry packet_id 0x00 or 0x06** (byte 1).
+  Do not treat either as an error; pair requests to responses by
+  arming the IN first, not by inspecting this byte.
+- **Close HFD before driving the amp from anything else.** Windows HID
+  is shared-access: HFD stays connected in the background and its
+  polling loop mirrors a full state image at the amp. On 2026-07-15 a
+  Set State that round-tripped mute=on was followed by a drained fresh
+  read showing mute OFF — not reproducible once HFD was closed, and
+  every later mute round-trip held. (PLAUSIBLE, single observation —
+  but interleaved writers are a bad idea regardless.)
 
 ---
 
@@ -143,10 +172,50 @@ byte 2: preset          (uint8, 1..3)
 byte 3-4: volume        (int16 LE, dB × 100)
 byte 5: 0x00            (reserved)
 byte 6: mute_flag       (bit 7: 0x80 = muted, 0x00 = not)
-byte 7-63: zero-padded
+byte 7-36: PERSISTENT STATE — round-trip from a fresh 06 02 read (see below)
+byte 37-63: zero (live-telemetry region; HFD always sends zeros here)
 ```
 
-(Source: vendor PDF; verified on FA503.)
+(Bytes 0–6: vendor PDF, verified on FA503. Bytes 7+: the vendor PDF
+calls them padding — **that is WRONG and it cost us**; see the next
+subsection.)
+
+### ⚠ The tail is NOT padding (found 2026-07-15, the hard way)
+
+Set State is atomic over the WHOLE packet, not just bytes 0–6. Bytes
+7–36 carry persistent configuration that the amp re-applies on every
+write. Confirmed by decoding all 254 Set State frames HFD sent in the
+2026-05-03 pcap (`UsbCapture_FA503.pcapng`): HFD never zero-fills the
+tail — it round-trips these fields from the current state:
+
+| Byte(s) | Field | Status |
+|---------|-------|--------|
+| 8–11 | Project/DSP signature (`0f 09 00 02` in the pcap) | VERIFIED constant per project |
+| 21–22 | **STARTUP VOLUME, int16 LE, dB × 100 — the persistent power-on volume** (`60 f0` = −40.00 dB throughout the pcap while live volume varied) | **VERIFIED — see incident** |
+| 24–25 | `ff ff` (unknown; possibly a limit) | round-tripped by HFD |
+| 35–36 | `f6 01` (unknown; possibly version code) | round-tripped by HFD |
+
+Every other byte in 7–63 was zero in ALL 254 HFD writes.
+
+**The incident:** our firmware and `hypex_probe.py` both built Set
+State packets with a zero-filled tail, per the vendor PDF. Every such
+write silently reprogrammed the startup volume (bytes 21–22) from the
+user's −40.00 dB to 0x0000 = **0.00 dB — full volume at power-on**.
+The amp then power-cycled during unrelated debugging and came up at
+full output. Both implementations now REQUIRE a fresh `06 02` status
+frame and round-trip bytes 7–36 verbatim (a conservative superset of
+HFD's mask: the real amp's status shows nonzero bytes at 12–14 and 26
+that the pcap session happened not to have, and echoing the amp's own
+reported values back is by definition "no change"). Bytes 37–63 are
+zeroed exactly as HFD does.
+
+**Fix verified live (2026-07-15, amp on the PC, no input connected):**
+three Set States via the fixed `hypex_probe.py` (volume −33.0, mute,
+volume −33.5), each confirmed with a fresh drained read. Volume and
+mute applied correctly, and bytes 21–22 held `56 f0` = −40.10 dB (the
+value HFD stored for the user's "−40") through every write. The
+round-tripped tail — including `ff` at byte 26, where HFD sends `00` —
+caused no misbehaviour.
 
 ### Input source enum (byte 1)
 
@@ -236,20 +305,20 @@ Response: 64 bytes, response type `0x05` in byte 0.
 | Byte(s) | Field | Notes |
 |---------|-------|-------|
 | 0 | Response type | Always `0x05` for a status response |
-| 1 | Packet ID | Echoes the request type — `0x06` for get-status, `0x00` for the synchronous response after a Set State |
+| 1 | Packet ID | Echoes the request type — but the two host paths disagree, both observations real: reading the **raw interrupt endpoint from the ESP32 firmware**, a get-status reply carries `0x06` here (`0x00` = a Set State response; hardware-verified 2026-07-14/15, and the firmware's resync loop keys on it). Via **hidapi on Windows** every get-status reply read `0x00` (all 2026-07-15 probes, drained queue) — and HFD's own reads in the 2026-05-03 pcap also got `0x00`. Unexplained; hosts should not treat `0x00` here as an error. |
 | 2 | Current preset | 1, 2, or 3 |
 | 3–4 | Current volume | int16 LE, dB × 100 |
 | 5 | Reserved | Always 0 in our captures |
 | 6 | Status flags | Bit 7 = mute. Other bits unused. |
+| 21–22 | **Startup volume** | int16 LE, dB × 100 — the PERSISTENT power-on volume. Must be round-tripped into every Set State (section 4). *Not in the vendor PDF; identified 2026-07-15 after zero-filling it corrupted the setting.* |
 | 50 | **Active input source** | Same enum as in Set State byte 1. Confirmed `0x06` after switching to OPT. *Not documented in the vendor PDF — discovered empirically.* |
 
 ### Bytes that change but are not yet decoded (GUESS / UNVERIFIED)
 
 | Byte(s) | Behaviour | Best guess |
 |---------|-----------|------------|
-| 8–11 | Constant within one project, e.g. `0f 09 00 02` for the user's KingRO4Y project; was `0f 19 00 02` before the post-incident project re-upload | **GUESS: project / DSP signature. HFD echoes this back in every polling packet so the amp can detect project mismatches.** |
-| 21–22 | Echo the volume target, but lag the actual fader during ramps | "Volume mirror" — possibly the per-output trim post-DSP |
-| 24–26 | Constant `ff ff ff` in IN responses, `ff ff 00` (last byte 0) in HFD's polling OUT | **GUESS: one of these bits is a "last write valid" flag the amp toggles** |
+| 8–11 | Constant within one project: `0f 09 00 02` in the 2026-05-03 pcap, `0f 19 00 02` in the 2026-05-02 golden frame, `01 00 00 00` after the July project re-upload (2026-07-15) | **GUESS: project / DSP signature. HFD echoes this back in every polling packet so the amp can detect project mismatches.** |
+| 24–26 | Constant `ff ff ff` in IN responses, `ff ff 00` (last byte 0) in HFD's polling OUT | **GUESS: one of these bits is a "last write valid" flag the amp toggles.** Writing `ff` back at byte 26 (our round-trip does; HFD sends `00`) is harmless: verified live 2026-07-15 — volume, mute, and the persistent startup volume all behaved across writes carrying it. |
 | 35–36 | Constant `f6 01` (= 502 LE) across all captures we have | **GUESS: probably a project / firmware version code** |
 | 45–46 | Constant `e0 01` (= 480 LE) across the 248 polling responses | **GUESS: peak-meter scale endpoint or sample-count constant** |
 | **47–48** | **Vary across every polling response — `0x05/0x80` to `0x55/0x55` typical, range as LE16 ≈ 1280..21800.** | **VU METER. Linear peak scale 0..32767 ≈ 0..0 dBFS. A reading of ~9000 = -11 dB FS, ~3000 = -21 dB FS.** See section 5a. |

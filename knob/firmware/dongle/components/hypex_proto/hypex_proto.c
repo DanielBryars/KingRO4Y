@@ -11,6 +11,18 @@
 #define OFF_VOLUME_HI 4
 #define OFF_FLAGS 6
 #define OFF_PROJECT_SIG 8   /* 4 bytes LE (GUESS) */
+#define OFF_STARTUP_VOL 21  /* int16 LE — PERSISTENT power-on volume. In every
+                             * HFD Set State these bytes carry the stored value
+                             * (60 f0 = -40.00 dB in the 2026-05-03 pcap);
+                             * zero-filling them reprogrammed the amp to boot
+                             * at 0.0 dB. VERIFIED 2026-07-15. */
+
+/* Set State tail policy (VERIFIED against all 254 HFD Set States in the
+ * 2026-05-03 pcap): bytes 7..36 hold persistent/echoed configuration and are
+ * round-tripped from the current status frame; bytes 37..63 are live
+ * telemetry in responses and are always zero in HFD's writes. */
+#define SET_STATE_COPY_FIRST 7
+#define SET_STATE_COPY_LAST 36
 #define OFF_VU_LO 47        /* PROVISIONAL — from HFD pcap decode */
 #define OFF_VU_HI 48
 #define OFF_ACTIVE_INPUT 50 /* empirical, not in vendor PDF */
@@ -66,7 +78,8 @@ bool hypex_is_safe_read_opcode(uint8_t opcode)
            opcode == 0x08;
 }
 
-bool hypex_build_set_state(uint8_t *buf, const hypex_state_t *s)
+bool hypex_build_set_state(uint8_t *buf, const hypex_state_t *s,
+                           const uint8_t *status_raw)
 {
     if (s == NULL || buf == NULL) return false;
     if (s->preset < 1 || s->preset > 3) return false;
@@ -74,8 +87,14 @@ bool hypex_build_set_state(uint8_t *buf, const hypex_state_t *s)
         s->volume_db_x100 > HYPEX_VOLUME_MAX_DB_X100)
         return false;
     if (!hypex_input_is_valid(s->input_source)) return false;
+    /* No status frame, no write. The tail carries persistent config (startup
+     * volume!) that MUST be round-tripped, never invented or zeroed. */
+    if (status_raw == NULL || status_raw[0] != STATUS_RESPONSE_TYPE)
+        return false;
 
     memset(buf, 0, HYPEX_PACKET_LEN);
+    memcpy(&buf[SET_STATE_COPY_FIRST], &status_raw[SET_STATE_COPY_FIRST],
+           SET_STATE_COPY_LAST - SET_STATE_COPY_FIRST + 1);
     buf[0] = 0x05;
     buf[1] = s->input_source;
     buf[2] = s->preset;
@@ -100,6 +119,7 @@ bool hypex_parse_status(const uint8_t *buf, size_t len, hypex_status_t *out)
     out->preset = buf[OFF_PRESET];
     out->volume_db_x100 = rd_i16le(&buf[OFF_VOLUME_LO]);
     out->mute = (buf[OFF_FLAGS] & MUTE_BIT) != 0;
+    out->startup_volume_db_x100 = rd_i16le(&buf[OFF_STARTUP_VOL]);
     out->active_input = buf[OFF_ACTIVE_INPUT];
     out->actual_volume_db_x100 = rd_i16le(&buf[OFF_ACTUAL_VOL_LO]);
     out->audio_active = (buf[OFF_AUDIO_FLAGS] & AUDIO_ACTIVE_BIT) != 0;

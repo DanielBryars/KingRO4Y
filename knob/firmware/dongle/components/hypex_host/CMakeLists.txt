@@ -2,7 +2,7 @@
 # targets (S2/S3/P4). On other targets the source compiles to a stub (guarded
 # by SOC_USB_OTG_SUPPORTED), so the component still registers without `usb`.
 idf_build_get_property(target IDF_TARGET)
-set(reqs hypex_proto driver)
+set(reqs hypex_proto driver esp_timer)
 if(target STREQUAL "esp32s2" OR target STREQUAL "esp32s3" OR target STREQUAL "esp32p4")
     list(APPEND reqs usb)
 endif()

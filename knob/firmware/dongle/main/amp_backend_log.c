@@ -6,6 +6,11 @@
  */
 #include "amp_backend.h"
 
+#include "sdkconfig.h"
+
+/* amp_backend_usb.c provides these same symbols in USB_LIVE mode. */
+#if !CONFIG_DONGLE_APP_MODE_USB_LIVE
+
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
@@ -27,11 +32,17 @@ static void log_state(void)
              s_state.mute ? "MUTED" : "unmuted", s_state.input_source);
 
     /* What phase B would put on the wire (input round-tripped as
-     * NO_CHANGE, exactly like hypex_probe.py does). */
+     * NO_CHANGE, exactly like hypex_probe.py does). The builder needs a raw
+     * status frame to round-trip the persistent tail from; the simulated amp
+     * fabricates a minimal one with the usual -40 dB startup volume. */
+    uint8_t fake_status[HYPEX_PACKET_LEN] = {0};
+    fake_status[0] = 0x05;
+    fake_status[21] = 0x60; /* startup volume -40.00 dB, int16 LE */
+    fake_status[22] = 0xf0;
     hypex_state_t wire = s_state;
     wire.input_source = HYPEX_INPUT_NO_CHANGE;
     uint8_t pkt[HYPEX_PACKET_LEN];
-    if (hypex_build_set_state(pkt, &wire)) {
+    if (hypex_build_set_state(pkt, &wire, fake_status)) {
         ESP_LOG_BUFFER_HEX_LEVEL(TAG, pkt, 8, ESP_LOG_DEBUG);
     }
 }
@@ -77,3 +88,5 @@ void amp_backend_preset_step(int dir)
     log_state();
     xSemaphoreGive(s_lock);
 }
+
+#endif /* !CONFIG_DONGLE_APP_MODE_USB_LIVE */

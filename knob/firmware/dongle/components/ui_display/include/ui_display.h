@@ -29,6 +29,11 @@ typedef struct {
 /* Brings up SPI3 + the ST7789 panel + backlight and shows a splash. */
 esp_err_t ui_display_init(void);
 
+/* Full-screen 3-line message. The USB-Serial-JTAG console dies the moment USB
+ * host mode starts, so during the USB phase this screen IS the log — use it to
+ * surface faults that would otherwise be invisible. l2/l3 may be NULL. */
+void ui_display_banner(const char *l1, const char *l2, const char *l3);
+
 /* Redraws the whole screen from the given state. Cheap to call at a few Hz. */
 void ui_display_render(const dongle_ui_state_t *s);
 

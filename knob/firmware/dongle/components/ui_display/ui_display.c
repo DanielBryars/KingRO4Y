@@ -239,3 +239,13 @@ void ui_display_render(const dongle_ui_state_t *s)
     draw_ui(s);
     flush();
 }
+
+void ui_display_banner(const char *l1, const char *l2, const char *l3)
+{
+    if (!s_panel) return;
+    clear(COL_BG);
+    if (l1) draw_text_centered(LCD_W / 2, 60, l1, 2, COL_RED);
+    if (l2) draw_text_centered(LCD_W / 2, 110, l2, 1, COL_FG);
+    if (l3) draw_text_centered(LCD_W / 2, 140, l3, 1, COL_ACCENT);
+    flush();
+}

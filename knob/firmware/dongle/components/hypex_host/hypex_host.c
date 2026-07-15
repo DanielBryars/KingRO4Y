@@ -11,13 +11,27 @@ esp_err_t hypex_host_start(hypex_host_status_cb_t cb)
     ESP_LOGE("hypex_host", "USB host requires a USB-OTG-capable target (S2/S3/P4)");
     return ESP_ERR_NOT_SUPPORTED;
 }
+bool hypex_host_is_connected(void) { return false; }
+void hypex_host_set_diag_cb(hypex_host_diag_cb_t cb) { (void)cb; }
+esp_err_t hypex_host_read_status(hypex_status_t *out)
+{
+    (void)out;
+    return ESP_ERR_NOT_SUPPORTED;
+}
+esp_err_t hypex_host_write_state(const hypex_state_t *st)
+{
+    (void)st;
+    return ESP_ERR_NOT_SUPPORTED;
+}
 
 #else /* SOC_USB_OTG_SUPPORTED */
 
+#include <stdio.h>
 #include <string.h>
 
 #include "driver/gpio.h"
 #include "esp_log.h"
+#include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "freertos/task.h"
@@ -38,6 +52,12 @@ static const char *TAG = "hypex_host";
 #define EXPECT_EP_OUT 0x01
 #define EXPECT_EP_IN 0x81
 
+/* How long we wait for a transfer to complete (see xfer_sync). */
+#define XFER_WAIT_MS 1500
+/* The amp may need a moment after the interface is claimed before it will
+ * answer; retry the opening read rather than declaring the link dead. */
+#define OPEN_READ_TRIES 3
+
 typedef enum {
     LED_WAITING,     /* yellow solid — VBUS on, no device yet */
     LED_OK,          /* green solid — amp read OK */
@@ -47,11 +67,49 @@ typedef enum {
 
 static volatile led_state_t s_led_state = LED_WAITING;
 static hypex_host_status_cb_t s_status_cb;
+static hypex_host_diag_cb_t s_diag_cb;
+
+void hypex_host_set_diag_cb(hypex_host_diag_cb_t cb) { s_diag_cb = cb; }
+
+static void diag(const char *msg, const uint8_t *data, int len)
+{
+    ESP_LOGE(TAG, "%s", msg);
+    if (s_diag_cb) {
+        s_diag_cb(msg, data, len);
+    }
+}
 
 static usb_host_client_handle_t s_client;
-static QueueHandle_t s_new_dev_q;         /* uint8_t device addresses */
-static SemaphoreHandle_t s_xfer_done;     /* per-transfer completion */
-static volatile int s_xfer_status;        /* usb_transfer_status_t of last xfer */
+
+/* Per-transfer completion tracking (in usb_transfer_t.context). Two transfers
+ * can now be in flight at once — the IN is armed BEFORE the OUT request goes
+ * out, like Windows' always-pending HID read; see read_status_locked. */
+typedef struct {
+    SemaphoreHandle_t done;
+    volatile int status; /* usb_transfer_status_t of the last completion */
+} xfer_track_t;
+static xfer_track_t s_out_track, s_in_track, s_ctrl_track;
+
+/* Connection events from the USB client callback to conn_task. Teardown must
+ * not happen in the callback itself (it blocks), so DEV_GONE is queued too. */
+typedef enum { EVT_NEW_DEV, EVT_DEV_GONE } host_evt_type_t;
+typedef struct {
+    host_evt_type_t type;
+    uint8_t addr; /* EVT_NEW_DEV only */
+} host_evt_t;
+static QueueHandle_t s_evt_q;
+
+/* --- The open link. Held from connect until DEV_GONE, so transactions can
+ * reuse the claimed interface and the two allocated transfers. All of this
+ * is owned by conn_task; readers/writers go through s_link_mutex. ----------*/
+static SemaphoreHandle_t s_link_mutex;
+static volatile bool s_connected;
+static usb_device_handle_t s_dev;
+static uint8_t s_intf_num;
+static uint8_t s_ep_in, s_ep_out;
+static usb_transfer_t *s_out_xfer, *s_in_xfer;
+
+bool hypex_host_is_connected(void) { return s_connected; }
 
 /* --- LEDs -----------------------------------------------------------------*/
 static void led_set(int green, int yellow)
@@ -101,25 +159,58 @@ static void board_power_on(void)
 /* --- USB transfers --------------------------------------------------------*/
 static void xfer_cb(usb_transfer_t *t)
 {
-    s_xfer_status = t->status;
-    xSemaphoreGive(s_xfer_done);
+    xfer_track_t *trk = (xfer_track_t *)t->context;
+    trk->status = t->status;
+    xSemaphoreGive(trk->done);
+}
+
+/* NOTE: usb_transfer_t.timeout_ms is NOT implemented by ESP-IDF's USB Host
+ * library — it is accepted and ignored. A transfer the device never answers
+ * therefore stays queued forever, so the wait in xfer_wait is OUR timeout,
+ * and when it expires the transfer is STILL IN FLIGHT. Reusing it then is a
+ * bug (submit returns INVALID_STATE, or a late completion fires against a
+ * buffer we have moved on from). Callers must ep_recover the endpoint (or
+ * treat the link as dead) after a timeout. */
+static int xfer_submit(usb_transfer_t *t)
+{
+    xfer_track_t *trk = (xfer_track_t *)t->context;
+    /* Drop any completion left over from a previously timed-out transfer, so
+     * we can't mistake it for this one's. */
+    xSemaphoreTake(trk->done, 0);
+    esp_err_t err = usb_host_transfer_submit(t);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "submit ep=0x%02x failed: %s", t->bEndpointAddress,
+                 esp_err_to_name(err));
+        return -1;
+    }
+    return 0;
+}
+
+static int xfer_wait(usb_transfer_t *t)
+{
+    xfer_track_t *trk = (xfer_track_t *)t->context;
+    if (xSemaphoreTake(trk->done, pdMS_TO_TICKS(XFER_WAIT_MS)) != pdTRUE) {
+        ESP_LOGE(TAG, "ep=0x%02x NO COMPLETION after %d ms — transfer is still "
+                      "in flight; link is now unusable",
+                 t->bEndpointAddress, XFER_WAIT_MS);
+        return -1;
+    }
+    if (trk->status != USB_TRANSFER_STATUS_COMPLETED) {
+        ESP_LOGW(TAG, "ep=0x%02x transfer status %d", t->bEndpointAddress,
+                 trk->status);
+        return -1;
+    }
+    return t->actual_num_bytes;
 }
 
 /* Submit one transfer and block until its completion callback fires.
  * Returns the number of bytes actually transferred, or -1 on error. */
 static int xfer_sync(usb_transfer_t *t)
 {
-    if (usb_host_transfer_submit(t) != ESP_OK) {
+    if (xfer_submit(t) < 0) {
         return -1;
     }
-    if (xSemaphoreTake(s_xfer_done, pdMS_TO_TICKS(1500)) != pdTRUE) {
-        return -1;
-    }
-    if (s_xfer_status != USB_TRANSFER_STATUS_COMPLETED) {
-        ESP_LOGW(TAG, "transfer status %d", s_xfer_status);
-        return -1;
-    }
-    return t->actual_num_bytes;
+    return xfer_wait(t);
 }
 
 /* Find the HID interface (bInterfaceClass 0x03) and its interrupt IN/OUT
@@ -164,13 +255,275 @@ static bool find_hid_endpoints(const usb_config_desc_t *cfg,
     return false;
 }
 
-/* Do the read-only probe against one opened device. */
-static void probe_device(usb_device_handle_t dev)
+static void ep_recover(usb_device_handle_t dev, uint8_t ep);
+
+/* Minimum spacing between ANY two transactions to the amp, not just writes.
+ * HFD's own traffic never goes below 53 ms between requests (2026-05-03
+ * pcap), and on 2026-07-15 running three back-to-back txns per volume flush
+ * (pre-write read / Set State / verify read, ~1 ms apart) drove the amp's
+ * protocol handler into a zero-response wedge that only a bus reset cleared.
+ * The amp needs breathing room between requests, full stop. */
+#define TXN_MIN_GAP_MS 60
+static int64_t s_last_txn_us;
+
+static void txn_throttle(void)
 {
+    int64_t since_ms = (esp_timer_get_time() - s_last_txn_us) / 1000;
+    if (since_ms < TXN_MIN_GAP_MS) {
+        vTaskDelay(pdMS_TO_TICKS(TXN_MIN_GAP_MS - (int)since_ms));
+    }
+}
+
+/* One request/response round trip on the claimed interface. Caller holds
+ * s_link_mutex and has checked s_connected. Returns bytes read, or -1.
+ *
+ * ORDER MATTERS: the IN is armed BEFORE the OUT request goes out. A real HID
+ * host (Windows) keeps an IN transfer permanently pending, so IN tokens are
+ * already flowing when the device wants to reply. Observed on 2026-07-15:
+ * with the IN submitted only after the OUT completed, the FA503 ACKed every
+ * request and never delivered a response (fresh amp, fresh dongle, any
+ * order of attach) — yet answered Windows normally. Arming the IN first
+ * matches the host behaviour the amp is evidently written against. */
+static int txn_locked(int *out_len)
+{
+    txn_throttle();
+
+    s_in_xfer->num_bytes = HYPEX_PACKET_LEN;
+    int n = -1;
+    if (xfer_submit(s_in_xfer) < 0) {
+        goto done;
+    }
+    if (xfer_submit(s_out_xfer) < 0) {
+        /* The armed IN is still in flight — reap it before anyone reuses it. */
+        ep_recover(s_dev, s_ep_in);
+        xfer_wait(s_in_xfer); /* consumes the CANCELED completion */
+        goto done;
+    }
+    if (xfer_wait(s_out_xfer) < 0) {
+        ESP_LOGE(TAG, "request (OUT) failed");
+        ep_recover(s_dev, s_ep_in);
+        xfer_wait(s_in_xfer);
+        goto done;
+    }
+    n = xfer_wait(s_in_xfer);
+    if (n < 0) {
+        ESP_LOGE(TAG, "response (IN) failed");
+    } else if (out_len) {
+        *out_len = n;
+    }
+done:
+    s_last_txn_us = esp_timer_get_time();
+    return n;
+}
+
+/*
+ * Send the SAFE get-status request and return the reply.
+ *
+ * Pairing is maintained by ARMING THE IN BEFORE THE OUT (txn_locked): with an
+ * IN always pending when the request lands, the amp's response goes into it,
+ * one-for-one — exactly how hidapi/Windows drive this device. An earlier
+ * design instead validated the reply by its packet_id byte, expecting the
+ * 0x06 historically seen there for get-status replies; on 2026-07-15 the amp
+ * answered every get-status (hidapi AND this path) with packet_id 0x00, so
+ * that byte is treated as informational, not as a validity check.
+ */
+static esp_err_t read_status_locked(hypex_status_t *out)
+{
+    /* Guard: this path only ever emits a SAFE read opcode. */
+    hypex_build_get_status(s_out_xfer->data_buffer);
+    configASSERT(hypex_is_safe_read_opcode(s_out_xfer->data_buffer[0]));
+    s_out_xfer->num_bytes = HYPEX_PACKET_LEN;
+
+    /* One retry: a bad frame can be a one-off (a leftover notification, or
+     * the amp's zeroed-packet complaint) — the retry goes out paced by
+     * txn_throttle, which is usually all the amp wanted. */
+    for (int attempt = 0; attempt < 2; attempt++) {
+        int n = txn_locked(NULL);
+        if (n < 0) {
+            ESP_LOGE(TAG, "get-status txn failed");
+            return ESP_FAIL;
+        }
+        if (hypex_parse_status(s_in_xfer->data_buffer, n, out)) {
+            ESP_LOGD(TAG, "status reply packet_id 0x%02x", out->packet_id);
+            return ESP_OK;
+        }
+        ESP_LOGW(TAG, "bad status frame (attempt %d/2, %d bytes)", attempt + 1,
+                 n);
+    }
+    diag("bad status frame", s_in_xfer->data_buffer, 8);
+    return ESP_ERR_INVALID_RESPONSE;
+}
+
+esp_err_t hypex_host_read_status(hypex_status_t *out)
+{
+    if (out == NULL) return ESP_ERR_INVALID_ARG;
+    xSemaphoreTake(s_link_mutex, portMAX_DELAY);
+    esp_err_t err =
+        s_connected ? read_status_locked(out) : ESP_ERR_INVALID_STATE;
+    xSemaphoreGive(s_link_mutex);
+    return err;
+}
+
+esp_err_t hypex_host_write_state(const hypex_state_t *st)
+{
+    if (st == NULL) return ESP_ERR_INVALID_ARG;
+
+    xSemaphoreTake(s_link_mutex, portMAX_DELAY);
+    esp_err_t err = ESP_ERR_INVALID_STATE;
+    if (s_connected) {
+        /* READ-MODIFY-WRITE, atomically under the link mutex. A Set State's
+         * bytes 7..36 carry persistent config (startup volume at 21-22) that
+         * the amp re-applies wholesale, so the packet must be built from a
+         * FRESH status frame — zero-filling that tail is what silently
+         * reprogrammed the amp's power-on volume to 0.0 dB (2026-07-15). */
+        hypex_status_t cur;
+        err = read_status_locked(&cur);
+        if (err == ESP_OK) {
+            /* The frame we just validated is still in the IN buffer. */
+            uint8_t pkt[HYPEX_PACKET_LEN];
+            if (!hypex_build_set_state(pkt, st, s_in_xfer->data_buffer)) {
+                ESP_LOGE(TAG,
+                         "refusing malformed Set State (preset %u vol %d in %u)",
+                         st->preset, st->volume_db_x100, st->input_source);
+                err = ESP_ERR_INVALID_ARG;
+            } else if (pkt[0] != 0x05) {
+                /* SAFETY BACKSTOP: 0x05 is the only opcode this transport may
+                 * ever write. Anything else (0x07/0x09/0x0a+) is documented as
+                 * able to hang or brick the amp — see the Safe-Opcode Policy
+                 * in knob/docs/experiments.md. */
+                ESP_LOGE(TAG, "BUG: non-Set-State write opcode 0x%02x blocked",
+                         pkt[0]);
+                err = ESP_ERR_INVALID_ARG;
+            } else {
+                memcpy(s_out_xfer->data_buffer, pkt, HYPEX_PACKET_LEN);
+                s_out_xfer->num_bytes = HYPEX_PACKET_LEN;
+                /* Set State returns a response frame (packet_id 0x00), and it
+                 * MUST be read. The amp's IN pipe is strictly one response per
+                 * request, so an undrained response desyncs every later read
+                 * by one packet — the stale-buffer trap that once reported a
+                 * preset change which had not happened, and the reason
+                 * hypex_drain.py exists. The reference implementation
+                 * (hypex_probe.py set_state) reads it too; we discard the
+                 * contents and verify with a fresh read instead. */
+                err = (txn_locked(NULL) < 0) ? ESP_FAIL : ESP_OK;
+            }
+        } else {
+            ESP_LOGE(TAG, "pre-write status read failed — Set State not sent");
+        }
+    }
+    xSemaphoreGive(s_link_mutex);
+    return err;
+}
+
+/* --- HID class initialization ---------------------------------------------
+ * Windows performs these at enumeration (visible in the 2026-05-03 HFD pcap):
+ * it reads the HID report descriptor and sends SET_IDLE(0). Our raw-endpoint
+ * host skipped both, and the FA503 was observed on 2026-07-15 to enumerate
+ * but never answer the vendor protocol for such a host (it answered Windows
+ * minutes apart) — evidently the amp gates its vendor pipe on looking like a
+ * properly initialised HID host. So: mimic Windows. */
+#define REPORT_DESC_MAX 256
+#define HID_DESC_TYPE_REPORT 0x22 /* HID 1.11 §7.1.1 (not in IDF's ch9 set) */
+
+static int ctrl_sync(usb_transfer_t *t)
+{
+    xfer_track_t *trk = (xfer_track_t *)t->context;
+    xSemaphoreTake(trk->done, 0);
+    esp_err_t err = usb_host_transfer_submit_control(s_client, t);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "control submit failed: %s", esp_err_to_name(err));
+        return -1;
+    }
+    if (xSemaphoreTake(trk->done, pdMS_TO_TICKS(XFER_WAIT_MS)) != pdTRUE) {
+        ESP_LOGE(TAG, "control transfer: no completion after %d ms",
+                 XFER_WAIT_MS);
+        return -1;
+    }
+    if (trk->status != USB_TRANSFER_STATUS_COMPLETED) {
+        ESP_LOGW(TAG, "control transfer status %d", trk->status);
+        return -1;
+    }
+    return t->actual_num_bytes;
+}
+
+static void hid_class_init(usb_device_handle_t dev, uint8_t intf_num)
+{
+    usb_transfer_t *ctrl = NULL;
+    if (usb_host_transfer_alloc(sizeof(usb_setup_packet_t) + REPORT_DESC_MAX,
+                                0, &ctrl) != ESP_OK) {
+        ESP_LOGW(TAG, "no memory for HID init transfer — skipping");
+        return;
+    }
+    ctrl->device_handle = dev;
+    ctrl->bEndpointAddress = 0;
+    ctrl->callback = xfer_cb;
+    ctrl->context = &s_ctrl_track;
+
+    /* GET_DESCRIPTOR(HID report descriptor) on the interface. */
+    usb_setup_packet_t *setup = (usb_setup_packet_t *)ctrl->data_buffer;
+    setup->bmRequestType = USB_BM_REQUEST_TYPE_DIR_IN |
+                           USB_BM_REQUEST_TYPE_TYPE_STANDARD |
+                           USB_BM_REQUEST_TYPE_RECIP_INTERFACE;
+    setup->bRequest = USB_B_REQUEST_GET_DESCRIPTOR;
+    setup->wValue = (HID_DESC_TYPE_REPORT << 8);
+    setup->wIndex = intf_num;
+    setup->wLength = REPORT_DESC_MAX;
+    ctrl->num_bytes = sizeof(usb_setup_packet_t) + REPORT_DESC_MAX;
+    int n = ctrl_sync(ctrl);
+    if (n < 0) {
+        ESP_LOGW(TAG, "HID report descriptor read failed (continuing)");
+    } else {
+        ESP_LOGI(TAG, "HID report descriptor: %d bytes",
+                 n - (int)sizeof(usb_setup_packet_t));
+    }
+
+    /* SET_IDLE(duration 0, all reports) — the classic HID class request
+     * Windows always sends. A STALL here would be non-fatal. */
+    setup->bmRequestType = USB_BM_REQUEST_TYPE_DIR_OUT |
+                           USB_BM_REQUEST_TYPE_TYPE_CLASS |
+                           USB_BM_REQUEST_TYPE_RECIP_INTERFACE;
+    setup->bRequest = 0x0a; /* SET_IDLE */
+    setup->wValue = 0;
+    setup->wIndex = intf_num;
+    setup->wLength = 0;
+    ctrl->num_bytes = sizeof(usb_setup_packet_t);
+    if (ctrl_sync(ctrl) < 0) {
+        ESP_LOGW(TAG, "SET_IDLE failed (continuing)");
+    } else {
+        ESP_LOGI(TAG, "SET_IDLE(0) sent");
+    }
+
+    usb_host_transfer_free(ctrl);
+}
+
+/* Cancel anything stuck on an endpoint and make it usable again. Needed
+ * because a transfer we gave up waiting for is still queued in the host
+ * library (see xfer_sync); without flushing it, the next submit on that
+ * endpoint fails. flush() completes the stranded transfers with a CANCELED
+ * status, whose callbacks give the transfer's done semaphore — xfer_submit
+ * drains that stale
+ * count before its next submit. */
+static void ep_recover(usb_device_handle_t dev, uint8_t ep)
+{
+    usb_host_endpoint_halt(dev, ep);
+    usb_host_endpoint_flush(dev, ep);
+    usb_host_endpoint_clear(dev, ep);
+}
+
+/* Enumerate, validate, claim, and hold the link open. */
+static void link_open(uint8_t addr)
+{
+    usb_device_handle_t dev;
+    if (usb_host_device_open(s_client, addr, &dev) != ESP_OK) {
+        ESP_LOGE(TAG, "device open failed (addr %u)", addr);
+        s_led_state = LED_ERROR;
+        return;
+    }
+
     const usb_device_desc_t *dd;
     if (usb_host_get_device_descriptor(dev, &dd) != ESP_OK) {
         s_led_state = LED_ERROR;
-        return;
+        goto close;
     }
     ESP_LOGI(TAG, "device VID=0x%04x PID=0x%04x", dd->idVendor, dd->idProduct);
 
@@ -178,20 +531,20 @@ static void probe_device(usb_device_handle_t dev)
         ESP_LOGW(TAG, "not the FA503 (expected %04x:%04x) — ignoring",
                  HYPEX_USB_VID, HYPEX_USB_PID);
         s_led_state = LED_WRONG_DEV;
-        return;
+        goto close;
     }
 
     const usb_config_desc_t *cfg;
     if (usb_host_get_active_config_descriptor(dev, &cfg) != ESP_OK) {
         s_led_state = LED_ERROR;
-        return;
+        goto close;
     }
 
     uint8_t intf_num, alt, ep_in, ep_out;
     if (!find_hid_endpoints(cfg, &intf_num, &alt, &ep_in, &ep_out)) {
-        ESP_LOGE(TAG, "no HID interface with interrupt IN+OUT endpoints");
+        diag("no HID interrupt IN+OUT endpoints", NULL, 0);
         s_led_state = LED_ERROR;
-        return;
+        goto close;
     }
     ESP_LOGI(TAG, "HID interface %u alt %u  EP IN 0x%02x  EP OUT 0x%02x",
              intf_num, alt, ep_in, ep_out);
@@ -201,80 +554,132 @@ static void probe_device(usb_device_handle_t dev)
     }
 
     if (usb_host_interface_claim(s_client, dev, intf_num, alt) != ESP_OK) {
-        ESP_LOGE(TAG, "interface claim failed");
+        diag("interface claim failed", NULL, 0);
         s_led_state = LED_ERROR;
-        return;
+        goto close;
     }
 
-    usb_transfer_t *out_xfer = NULL, *in_xfer = NULL;
-    bool ok = false;
-    if (usb_host_transfer_alloc(HYPEX_PACKET_LEN, 0, &out_xfer) != ESP_OK ||
-        usb_host_transfer_alloc(HYPEX_PACKET_LEN, 0, &in_xfer) != ESP_OK) {
-        goto cleanup;
+    /* Mimic Windows' HID enumeration before touching the vendor pipe —
+     * without this the amp has been seen to enumerate but never answer. */
+    hid_class_init(dev, intf_num);
+
+    /* NULL first: a failing alloc leaves its out-param untouched, and the
+     * free_xfers path must not free a stale pointer. */
+    s_out_xfer = s_in_xfer = NULL;
+    if (usb_host_transfer_alloc(HYPEX_PACKET_LEN, 0, &s_out_xfer) != ESP_OK ||
+        usb_host_transfer_alloc(HYPEX_PACKET_LEN, 0, &s_in_xfer) != ESP_OK) {
+        ESP_LOGE(TAG, "transfer alloc failed");
+        s_led_state = LED_ERROR;
+        goto free_xfers; /* the first alloc may have succeeded */
     }
 
-    /* Build the get-status request. Guard: only ever a SAFE read opcode. */
-    hypex_build_get_status(out_xfer->data_buffer);
-    configASSERT(hypex_is_safe_read_opcode(out_xfer->data_buffer[0]));
-    out_xfer->num_bytes = HYPEX_PACKET_LEN;
-    out_xfer->device_handle = dev;
-    out_xfer->bEndpointAddress = ep_out;
-    out_xfer->callback = xfer_cb;
-    out_xfer->timeout_ms = 1000;
+    s_out_xfer->device_handle = dev;
+    s_out_xfer->bEndpointAddress = ep_out;
+    s_out_xfer->callback = xfer_cb;
+    s_out_xfer->context = &s_out_track;
+    s_out_xfer->timeout_ms = 1000;
 
-    in_xfer->num_bytes = HYPEX_PACKET_LEN;
-    in_xfer->device_handle = dev;
-    in_xfer->bEndpointAddress = ep_in;
-    in_xfer->callback = xfer_cb;
-    in_xfer->timeout_ms = 1000;
+    s_in_xfer->num_bytes = HYPEX_PACKET_LEN;
+    s_in_xfer->device_handle = dev;
+    s_in_xfer->bEndpointAddress = ep_in;
+    s_in_xfer->callback = xfer_cb;
+    s_in_xfer->context = &s_in_track;
+    s_in_xfer->timeout_ms = 1000;
 
-    if (xfer_sync(out_xfer) < 0) {
-        ESP_LOGE(TAG, "status request (OUT) failed");
-        goto cleanup;
-    }
-    int n = xfer_sync(in_xfer);
-    if (n < 0) {
-        ESP_LOGE(TAG, "status response (IN) failed");
-        goto cleanup;
-    }
+    s_dev = dev;
+    s_intf_num = intf_num;
+    s_ep_in = ep_in;
+    s_ep_out = ep_out;
 
-    ESP_LOG_BUFFER_HEX(TAG, in_xfer->data_buffer, n);
+    /* Publish the link only once the opening read has proved it works. While
+     * s_connected is still false no other task can enter a transaction, so we
+     * may use the _locked helper directly — and on failure we can tear the
+     * transfers down knowing nobody else ever saw them. */
     hypex_status_t st;
-    if (!hypex_parse_status(in_xfer->data_buffer, n, &st)) {
-        ESP_LOGE(TAG, "response did not decode as a status frame");
-        goto cleanup;
+    esp_err_t err = ESP_FAIL;
+    for (int i = 0; i < OPEN_READ_TRIES; i++) {
+        xSemaphoreTake(s_link_mutex, portMAX_DELAY);
+        err = read_status_locked(&st);
+        if (err == ESP_OK) {
+            s_connected = true;
+        }
+        xSemaphoreGive(s_link_mutex);
+        if (err == ESP_OK) {
+            break;
+        }
+        ESP_LOGW(TAG, "opening read %d/%d failed — flushing endpoints, retrying",
+                 i + 1, OPEN_READ_TRIES);
+        ep_recover(dev, ep_in);
+        ep_recover(dev, ep_out);
+        vTaskDelay(pdMS_TO_TICKS(250));
     }
 
-    ESP_LOGI(TAG, "AMP OK: preset %u | %+.2f dB | %s | input 0x%02x",
-             st.preset, st.volume_db_x100 / 100.0,
+    if (err != ESP_OK) {
+        diag("opening read failed", NULL, 0);
+        s_led_state = LED_ERROR;
+        goto free_xfers;
+    }
+
+    /* Integer dB formatting: ESP-IDF's nano newlib drops %f. */
+    int v100 = st.volume_db_x100, av = v100 < 0 ? -v100 : v100;
+    ESP_LOGI(TAG, "AMP OK: preset %u | %s%d.%02d dB | %s | input 0x%02x",
+             st.preset, v100 < 0 ? "-" : "", av / 100, av % 100,
              st.mute ? "MUTED" : "unmuted", st.active_input);
+    s_led_state = LED_OK;
     if (s_status_cb) {
         s_status_cb(&st);
     }
-    s_led_state = LED_OK;
-    ok = true;
+    return; /* link stays open */
 
-cleanup:
-    if (out_xfer) usb_host_transfer_free(out_xfer);
-    if (in_xfer) usb_host_transfer_free(in_xfer);
+free_xfers: /* falls through: free transfers, release interface, close device */
+    if (s_out_xfer) usb_host_transfer_free(s_out_xfer);
+    if (s_in_xfer) usb_host_transfer_free(s_in_xfer);
+    s_out_xfer = s_in_xfer = NULL;
     usb_host_interface_release(s_client, dev, intf_num);
-    if (!ok && s_led_state != LED_WRONG_DEV) {
-        s_led_state = LED_ERROR;
+close:
+    usb_host_device_close(s_client, dev);
+}
+
+/* Teardown runs entirely under s_link_mutex. If a transaction is mid-flight
+ * the take blocks until it finishes, so we can never free a transfer that is
+ * still submitted, and any task that acquires the mutex afterwards sees
+ * s_connected == false and bails before touching the freed handles. */
+static void link_close(void)
+{
+    xSemaphoreTake(s_link_mutex, portMAX_DELAY);
+    if (!s_connected) {
+        xSemaphoreGive(s_link_mutex);
+        return;
     }
+    s_connected = false;
+    if (s_out_xfer) usb_host_transfer_free(s_out_xfer);
+    if (s_in_xfer) usb_host_transfer_free(s_in_xfer);
+    s_out_xfer = s_in_xfer = NULL;
+    usb_host_interface_release(s_client, s_dev, s_intf_num);
+    usb_host_device_close(s_client, s_dev);
+    s_dev = NULL;
+    xSemaphoreGive(s_link_mutex);
+
+    s_led_state = LED_WAITING;
+    ESP_LOGW(TAG, "link closed");
 }
 
 /* --- USB host plumbing ----------------------------------------------------*/
 static void client_event_cb(const usb_host_client_event_msg_t *msg, void *arg)
 {
+    host_evt_t e;
     switch (msg->event) {
-    case USB_HOST_CLIENT_EVENT_NEW_DEV: {
-        uint8_t addr = msg->new_dev.address;
-        xQueueSend(s_new_dev_q, &addr, 0);
+    case USB_HOST_CLIENT_EVENT_NEW_DEV:
+        e.type = EVT_NEW_DEV;
+        e.addr = msg->new_dev.address;
+        xQueueSend(s_evt_q, &e, 0);
         break;
-    }
     case USB_HOST_CLIENT_EVENT_DEV_GONE:
         ESP_LOGW(TAG, "device disconnected");
-        s_led_state = LED_WAITING;
+        /* Teardown blocks, so it cannot run here — hand it to conn_task. */
+        e.type = EVT_DEV_GONE;
+        e.addr = 0;
+        xQueueSend(s_evt_q, &e, 0);
         break;
     default:
         break;
@@ -299,30 +704,38 @@ static void client_task(void *arg)
     }
 }
 
-static void probe_task(void *arg)
+static void conn_task(void *arg)
 {
-    uint8_t addr;
+    host_evt_t e;
     while (true) {
-        if (xQueueReceive(s_new_dev_q, &addr, portMAX_DELAY) != pdTRUE) {
+        if (xQueueReceive(s_evt_q, &e, portMAX_DELAY) != pdTRUE) {
             continue;
         }
-        usb_device_handle_t dev;
-        if (usb_host_device_open(s_client, addr, &dev) != ESP_OK) {
-            ESP_LOGE(TAG, "device open failed (addr %u)", addr);
-            s_led_state = LED_ERROR;
-            continue;
+        switch (e.type) {
+        case EVT_NEW_DEV:
+            if (s_connected) {
+                ESP_LOGW(TAG, "already linked — ignoring device %u", e.addr);
+                break;
+            }
+            link_open(e.addr);
+            break;
+        case EVT_DEV_GONE:
+            link_close();
+            break;
         }
-        probe_device(dev);
-        usb_host_device_close(s_client, dev);
     }
 }
 
 esp_err_t hypex_host_start(hypex_host_status_cb_t cb)
 {
     s_status_cb = cb;
-    s_new_dev_q = xQueueCreate(4, sizeof(uint8_t));
-    s_xfer_done = xSemaphoreCreateBinary();
-    if (!s_new_dev_q || !s_xfer_done) {
+    s_evt_q = xQueueCreate(4, sizeof(host_evt_t));
+    s_out_track.done = xSemaphoreCreateBinary();
+    s_in_track.done = xSemaphoreCreateBinary();
+    s_ctrl_track.done = xSemaphoreCreateBinary();
+    s_link_mutex = xSemaphoreCreateMutex();
+    if (!s_evt_q || !s_out_track.done || !s_in_track.done ||
+        !s_ctrl_track.done || !s_link_mutex) {
         return ESP_ERR_NO_MEM;
     }
 
@@ -355,9 +768,8 @@ esp_err_t hypex_host_start(hypex_host_status_cb_t cb)
 
     xTaskCreate(host_lib_task, "usb_lib", 4096, NULL, 5, NULL);
     xTaskCreate(client_task, "usb_client", 4096, NULL, 4, NULL);
-    xTaskCreate(probe_task, "usb_probe", 4096, NULL, 4, NULL);
-    ESP_LOGI(TAG, "USB host probe running — connect the FA503 (Mini-B) to the "
-                  "USB-A host port");
+    xTaskCreate(conn_task, "usb_conn", 4096, NULL, 4, NULL);
+    ESP_LOGI(TAG, "USB host running — connect the FA503 to the USB-A host port");
     return ESP_OK;
 }
 

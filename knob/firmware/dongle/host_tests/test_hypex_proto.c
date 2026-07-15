@@ -65,6 +65,7 @@ static void test_parse_status_golden(void)
     CHECK_EQ_INT(st.packet_id, 0x06);
     CHECK_EQ_INT(st.preset, 1);
     CHECK_EQ_INT(st.volume_db_x100, -4000); /* -40.00 dB */
+    CHECK_EQ_INT(st.startup_volume_db_x100, -4000); /* bytes 21-22 = 60 f0 */
     CHECK(!st.mute);
     CHECK_EQ_INT(st.active_input, HYPEX_INPUT_OPT);
     CHECK_EQ_INT(st.actual_volume_db_x100, -4000);
@@ -145,7 +146,7 @@ static void test_build_set_state_volume_encoding(void)
     for (size_t i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
         hypex_state_t s = {1, cases[i].db_x100, false,
                            HYPEX_INPUT_NO_CHANGE};
-        CHECK(hypex_build_set_state(buf, &s));
+        CHECK(hypex_build_set_state(buf, &s, STATUS_P1_M40_UNMUTED));
         CHECK_EQ_INT(buf[0], 0x05);
         CHECK_EQ_INT(buf[1], HYPEX_INPUT_NO_CHANGE);
         CHECK_EQ_INT(buf[2], 1);
@@ -156,17 +157,28 @@ static void test_build_set_state_volume_encoding(void)
     }
 }
 
-static void test_build_set_state_mute_and_input(void)
+/* The 2026-07-15 corruption bug: a Set State's bytes 7..36 carry persistent
+ * config (startup volume at 21-22) that MUST round-trip from the status
+ * frame. Bytes 37..63 are live telemetry and MUST be zeroed (as HFD does). */
+static void test_build_set_state_round_trips_tail(void)
 {
     uint8_t buf[HYPEX_PACKET_LEN];
     hypex_state_t s = {2, -6000, true, HYPEX_INPUT_OPT};
-    CHECK(hypex_build_set_state(buf, &s));
+    CHECK(hypex_build_set_state(buf, &s, STATUS_P1_M40_UNMUTED));
     CHECK_EQ_INT(buf[1], HYPEX_INPUT_OPT);
     CHECK_EQ_INT(buf[2], 2);
     CHECK_EQ_INT(buf[3], 0x90);
     CHECK_EQ_INT(buf[4], 0xe8);
     CHECK_EQ_INT(buf[6], 0x80);
-    for (int i = 7; i < HYPEX_PACKET_LEN; i++) CHECK(buf[i] == 0);
+    /* bytes 7..36 copied verbatim from the status frame... */
+    for (int i = 7; i <= 36; i++) {
+        CHECK_EQ_INT(buf[i], STATUS_P1_M40_UNMUTED[i]);
+    }
+    /* ...which specifically preserves the startup volume (-40.00 dB)... */
+    CHECK_EQ_INT(buf[21], 0x60);
+    CHECK_EQ_INT(buf[22], 0xf0);
+    /* ...and the live-telemetry region is zeroed. */
+    for (int i = 37; i < HYPEX_PACKET_LEN; i++) CHECK(buf[i] == 0);
 }
 
 static void test_build_set_state_rejects(void)
@@ -175,16 +187,25 @@ static void test_build_set_state_rejects(void)
     hypex_state_t s;
 
     s = (hypex_state_t){0, -4000, false, HYPEX_INPUT_NO_CHANGE};
-    CHECK(!hypex_build_set_state(buf, &s)); /* preset 0: the May-02 all-zeros
-                                               incident state — must reject */
+    CHECK(!hypex_build_set_state(buf, &s, STATUS_P1_M40_UNMUTED));
+    /* preset 0: the May-02 all-zeros incident state — must reject */
     s = (hypex_state_t){4, -4000, false, HYPEX_INPUT_NO_CHANGE};
-    CHECK(!hypex_build_set_state(buf, &s));
+    CHECK(!hypex_build_set_state(buf, &s, STATUS_P1_M40_UNMUTED));
     s = (hypex_state_t){1, 100, false, HYPEX_INPUT_NO_CHANGE};
-    CHECK(!hypex_build_set_state(buf, &s)); /* above 0 dB */
+    CHECK(!hypex_build_set_state(buf, &s, STATUS_P1_M40_UNMUTED));
+    /* above 0 dB */
     s = (hypex_state_t){1, -10000, false, HYPEX_INPUT_NO_CHANGE};
-    CHECK(!hypex_build_set_state(buf, &s));
+    CHECK(!hypex_build_set_state(buf, &s, STATUS_P1_M40_UNMUTED));
     s = (hypex_state_t){1, -4000, false, 0x03};
-    CHECK(!hypex_build_set_state(buf, &s)); /* 0x03 is not a valid input */
+    CHECK(!hypex_build_set_state(buf, &s, STATUS_P1_M40_UNMUTED));
+    /* 0x03 is not a valid input */
+
+    /* No status frame, no write — there is no way to build a Set State
+     * without real state to round-trip. */
+    s = (hypex_state_t){1, -4000, false, HYPEX_INPUT_NO_CHANGE};
+    CHECK(!hypex_build_set_state(buf, &s, NULL));
+    uint8_t not_status[HYPEX_PACKET_LEN] = {0x66}; /* calibration block */
+    CHECK(!hypex_build_set_state(buf, &s, not_status));
 }
 
 static void test_parse_filter_name(void)
@@ -250,7 +271,7 @@ int main(void)
     test_parse_status_rejects();
     test_build_requests();
     test_build_set_state_volume_encoding();
-    test_build_set_state_mute_and_input();
+    test_build_set_state_round_trips_tail();
     test_build_set_state_rejects();
     test_parse_filter_name();
     test_parse_counters();

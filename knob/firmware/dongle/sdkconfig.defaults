@@ -10,3 +10,18 @@ CONFIG_BT_BLE_42_FEATURES_SUPPORTED=y
 CONFIG_BT_GATTC_NOTIF_REG_MAX=16
 # Bluedroid does not fit the default 1 MB app partition.
 CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
+
+# Console on UART0, NOT USB-Serial-JTAG.
+#
+# usb_host_install() seizes the USB PHY that USB-Serial-JTAG shares, so a
+# console on USB-Serial-JTAG dies ~1 s into boot and every fault during the
+# USB phase is invisible. The ESP32-S3-USB-OTG board has a *separate* CP2102N
+# USB-UART bridge wired to UART0 (its own USB connector, its own chip): it is
+# unaffected by the PHY switch, so a console there survives USB host mode and
+# can also auto-reset for flashing. Needs the SiLabs CP210x VCP driver on the
+# host. Keep USB-Serial-JTAG as the secondary console so flashing over the
+# USB_DEV port still logs.
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+CONFIG_ESP_CONSOLE_UART_NUM=0
+CONFIG_ESP_CONSOLE_UART_BAUDRATE=115200
+CONFIG_ESP_CONSOLE_SECONDARY_USB_SERIAL_JTAG=y

@@ -103,32 +103,48 @@ def decode_status(resp):
         ),
         "status_flags": f"0x{resp[6]:02x}" if len(resp) > 6 else None,
         "muted": bool(resp[6] & 0x80) if len(resp) > 6 else None,
+        "startup_volume_db": (
+            int.from_bytes(bytes(resp[21:23]), "little", signed=True) / 100.0
+            if len(resp) > 22 else None
+        ),
     }
+
+
+# A Set State's bytes 7..36 carry PERSISTENT configuration the amp re-applies
+# on every write — the power-on startup volume lives at bytes 21-22. This
+# script used to zero-fill them, which silently reprogrammed the startup
+# volume from -40 dB to 0.0 dB (found 2026-07-15 from the HFD USB capture:
+# HFD round-trips these bytes in all 254 of its Set States). They must be
+# copied from a fresh status read; bytes 37+ are live telemetry and stay zero.
+TAIL_COPY_FIRST = 7
+TAIL_COPY_LAST = 36
 
 
 def set_state(dev, *, input_source=INPUT_NO_CHANGE, preset=None,
               volume_db=None, mute=None):
-    # The Set State command is atomic — it carries ALL fields. For any field
-    # the caller didn't specify, read the current value first so we don't
-    # accidentally clobber it.
-    need_current = preset is None or volume_db is None or mute is None
-    current = get_status(dev) if need_current else None
+    # The Set State command is atomic — it carries ALL fields, including the
+    # persistent tail. ALWAYS read current state first and round-trip it.
+    current = get_status(dev)
+    if not current or current[0] != 0x05:
+        raise RuntimeError("no status response — refusing to Set State "
+                           "(the packet tail must round-trip real state)")
 
     if preset is None:
-        preset = current[2] if current else 1
+        preset = current[2]
     if volume_db is None:
-        vol = (int.from_bytes(bytes(current[3:5]), "little", signed=True)
-               if current else 0)
+        vol = int.from_bytes(bytes(current[3:5]), "little", signed=True)
     else:
         vol = int(round(volume_db * 100))
     if mute is None:
-        mute_byte = (current[6] & 0x80) if current else 0x00
+        mute_byte = current[6] & 0x80
     else:
         mute_byte = 0x80 if mute else 0x00
 
     vol &= 0xffff
-    pkt = pad([0x05, input_source, preset, vol & 0xff, (vol >> 8) & 0xff,
-               0x00, mute_byte])
+    head = [0x05, input_source, preset, vol & 0xff, (vol >> 8) & 0xff,
+            0x00, mute_byte]
+    tail = list(current[TAIL_COPY_FIRST:TAIL_COPY_LAST + 1])
+    pkt = pad(head + tail)
     dev.write(pkt)
     return dev.read(PACKET_LEN, timeout_ms=1000)
 

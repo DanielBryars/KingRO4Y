@@ -11,8 +11,12 @@
  * SAFETY (see "Safe-Opcode Policy" in knob/docs/experiments.md):
  *  - Read opcodes 0x03, 0x04, 0x06, 0x08 are safe.
  *  - 0x05 is Set State: a DESTRUCTIVE ATOMIC write. Every field is applied;
- *    a zero field means "set to zero", not "leave alone". Callers must
- *    round-trip current state and verify with a fresh status read afterwards.
+ *    a zero field means "set to zero", not "leave alone". This includes the
+ *    PERSISTENT fields hidden in bytes 7..36 (startup volume at 21-22!), so a
+ *    Set State must be built from a fresh raw status frame — see
+ *    hypex_build_set_state. Verify with a fresh status read afterwards.
+ *    (Zero-filling the tail is what silently reprogrammed the amp's startup
+ *    volume from -40 dB to 0.0 dB — found 2026-07-15 via the HFD pcap.)
  *  - NEVER send 0x07, 0x09, 0x0a+ — 0x09 hung the amp's USB stack on
  *    2026-05-02 and required a firmware re-flash to recover.
  */
@@ -62,6 +66,11 @@ typedef struct {
     uint8_t preset;                /* byte 2 */
     int16_t volume_db_x100;        /* bytes 3-4 LE: commanded/target volume */
     bool mute;                     /* byte 6 bit 7 */
+    int16_t startup_volume_db_x100; /* bytes 21-22 LE: PERSISTENT power-on
+                                       volume. Rides inside Set State too —
+                                       zero-filling it reprograms the amp to
+                                       boot at 0.0 dB (the 2026-07-15 loud
+                                       incident). */
     uint8_t active_input;          /* byte 50 (empirical; not in vendor PDF) */
     int16_t actual_volume_db_x100; /* bytes 52-53 LE: lags target during ramps */
     bool audio_active;             /* byte 60 bit 6 — GUESS-level decode */
@@ -86,10 +95,22 @@ void hypex_build_get_calibration(uint8_t *buf);   /* 0x06 0x03 (static block) */
 void hypex_build_get_filter_name(uint8_t *buf);   /* 0x03 0x08 */
 void hypex_build_get_counters(uint8_t *buf, uint8_t sub); /* 0x08 NN */
 
-/* Builds a Set State (0x05) packet. Returns false (buffer untouched) if any
- * field is out of range — this function REJECTS rather than clamps, so range
- * policy stays with the caller (see hypex_volume_clamp). */
-bool hypex_build_set_state(uint8_t *buf, const hypex_state_t *s);
+/* Builds a Set State (0x05) packet as a READ-MODIFY-WRITE of status_raw, a
+ * fresh raw 64-byte get-status response (response type 0x05). Bytes 7..36 are
+ * copied through verbatim — they carry persistent configuration the amp
+ * re-applies on every write (VERIFIED: startup volume at 21-22; project
+ * signature at 8-11; unknown-but-round-tripped-by-HFD fields at 24-25 and
+ * 35-36). Bytes 37..63 are the live-telemetry region and are zeroed, exactly
+ * as HFD's own writes do. Only bytes 0-6 (opcode, input, preset, volume,
+ * mute) come from s.
+ *
+ * Returns false (buffer untouched) if any field of s is out of range or if
+ * status_raw is NULL / not a type-0x05 frame — this function REJECTS rather
+ * than clamps, so range policy stays with the caller (hypex_volume_clamp).
+ * There is deliberately NO way to build a Set State without a real status
+ * frame: writing a zero-filled tail reprograms the amp's startup volume. */
+bool hypex_build_set_state(uint8_t *buf, const hypex_state_t *s,
+                           const uint8_t *status_raw);
 
 /* --- Response parsers. Return false if buf is not a well-formed response
  * of the expected type (wrong response-type byte or too short). ------------ */

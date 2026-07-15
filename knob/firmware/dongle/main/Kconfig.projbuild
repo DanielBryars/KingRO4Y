@@ -24,7 +24,47 @@ choice DONGLE_APP_MODE
             or move the console to UART0 (GPIO43/44) with an external
             USB-serial adapter.
 
+    config DONGLE_APP_MODE_USB_LIVE
+        bool "Phase B2: BLE knob -> real amp over USB (ESP32-S3-USB-OTG)"
+        depends on SOC_USB_OTG_SUPPORTED
+        help
+            The whole chain: pairs with the VOL20, drives the real FA503 over
+            USB host. WRITES to the amp (Set State 0x05) under the safety
+            rules in knob/docs/experiments.md — seeded from a real read, never
+            speculative, input never changed, >=100 ms between writes, verified
+            afterwards, and clamped to DONGLE_MAX_VOLUME_DB_X100.
+            The USB-Serial-JTAG console drops when host mode starts; use the
+            LCD and the on-board LEDs.
+
 endchoice
+
+config DONGLE_USB_HOST_START_DELAY_S
+    int "Seconds to wait before starting USB host (flash window)"
+    depends on DONGLE_APP_MODE_USB_PROBE || DONGLE_APP_MODE_USB_LIVE
+    range 0 30
+    default 5
+    help
+        usb_host_install() seizes the USB PHY that the USB-Serial-JTAG console
+        shares, which DESTROYS the COM port a second after boot. Once that
+        happens esptool has no interface left to reset the chip through, so
+        flashing degrades to the BOOT-button dance and a physical replug —
+        the firmware sawing off the branch it is sitting on.
+
+        Holding off for a few seconds leaves the COM port alive long enough
+        for `idf.py flash` to auto-reset into download mode as normal. Costs
+        a few seconds of boot; buys back zero-touch flashing. 0 disables it
+        (only sensible once the firmware is no longer being iterated on).
+
+config DONGLE_MAX_VOLUME_DB_X100
+    int "Volume ceiling the knob may command (dB x 100, e.g. -1000 = -10.00 dB)"
+    depends on DONGLE_APP_MODE_USB_LIVE
+    range -9900 0
+    default -1000
+    help
+        Hard upper limit applied to every volume the dongle commands, on top
+        of the protocol's own -99.00..0.00 dB range. Nothing the knob can do
+        (fast spin, arithmetic bug) may exceed this. Raise it deliberately:
+        0 means the knob can drive the amp to full output.
 
 config DONGLE_ENABLE_DISPLAY
     bool "Enable on-board LCD (ESP32-S3-USB-OTG)"
